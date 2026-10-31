@@ -68,6 +68,38 @@
    "Dictionaries in depth: Methods and nesting",
    "Functions: defining and calling basics",
    "Function arguments: Default and keyword arguments"
+  ],
+  "Java": [
+   "What is Java and how the JVM works",
+   "Setting up Java and your first program",
+   "Variables, data types and type casting",
+   "Operators",
+   "Taking input with Scanner",
+   "if-else and switch Part 1",
+   "if-else and switch Part 2",
+   "Loops Part 1: for and while",
+   "Loops Part 2: do-while and control statements",
+   "Arrays Part 1: declaration and initialization",
+   "Arrays Part 2: enhanced for loop and methods",
+   "Strings and StringBuilder Part 1: immutable strings",
+   "Strings and StringBuilder Part 2: common methods and mutability",
+   "Methods Part 1: definition and return types",
+   "Methods Part 2: overloading and scope",
+   "Classes and objects Part 1: basics and memory reference",
+   "Classes and objects Part 2: creating objects and garbage collection",
+   "Constructors and the this keyword",
+   "static explained: fields and methods",
+   "Encapsulation and access modifiers",
+   "Inheritance Part 1: extends and super",
+   "Inheritance Part 2: method overriding and IS-A",
+   "Polymorphism: overloading and overriding",
+   "Abstraction: abstract classes and interfaces",
+   "Packages and access modifiers in packages",
+   "Exception handling Part 1: try and catch blocks",
+   "Exception handling Part 2: finally and custom exceptions",
+   "Wrapper classes and autoboxing",
+   "Collections framework overview and ArrayList",
+   "LinkedList and HashMap basics"
   ]
  }
 }
