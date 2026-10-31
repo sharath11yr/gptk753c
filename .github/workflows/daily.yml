@@ -1,0 +1,132 @@
+name: Daily video
+
+on:
+  # Every hour (GitHub often starts scheduled runs late or skips some; runs with nothing to
+  # do stop in seconds). A new video is started every 6 hours (4 a day) and
+  # scheduled into the next free slot (2 a day at 12:00 and 18:00 IST, with no practical limit -
+  # see pipeline/plan.py). To stop, put a # in front of the next two lines.
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Make a video even if every slot is already filled"
+        type: boolean
+        default: false
+
+concurrency:
+  group: daily-video        # never run two at once
+  cancel-in-progress: false
+
+permissions:
+  contents: write           # to save state/ (history, resume info) back to the repo
+  actions: write            # to delete old run files (artifacts)
+
+jobs:
+  video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      # A run uses the code from when it was requested; a queued run can be minutes or hours
+      # old. Always work on the latest code and state.
+      - name: Use the latest code and state
+        run: git fetch -q origin main && git reset -q --hard origin/main && git log --oneline -1
+      # Quick check first: stop in seconds if all slots are filled or the 6-hour gap
+      # has not passed (and nothing is waiting to be finished).
+      - name: Anything to do?
+        id: check
+        env:
+          VIDEOS_PER_DAY: ${{ vars.VIDEOS_PER_DAY }}
+          YT_PUBLISH_TIMES: ${{ vars.YT_PUBLISH_TIMES }}
+          BUFFER_DAYS: ${{ vars.BUFFER_DAYS }}
+        run: python3 pipeline/plan.py >> "$GITHUB_OUTPUT" && cat "$GITHUB_OUTPUT"
+      - uses: actions/setup-python@v5
+        if: steps.check.outputs.skip != 'true' || inputs.force
+        with:
+          python-version: "3.12"
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core
+        if: steps.check.outputs.skip != 'true' || inputs.force
+      - run: pip install -r requirements.txt && python -m playwright install --with-deps chromium
+        if: steps.check.outputs.skip != 'true' || inputs.force
+      - name: NotebookLM login
+        if: steps.check.outputs.skip != 'true' || inputs.force
+        env:
+          NOTEBOOKLM_AUTH_JSON: ${{ secrets.NOTEBOOKLM_AUTH_JSON }}
+          NOTEBOOKLM_MASTER_TOKEN: ${{ secrets.NOTEBOOKLM_MASTER_TOKEN }}
+        run: bash tools/notebooklm_auth.sh
+      - name: Make and upload video
+        if: steps.check.outputs.skip != 'true' || inputs.force
+        env:
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          NVIDIA_WRITER_MODEL: ${{ secrets.NVIDIA_WRITER_MODEL }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          YT_PRIVACY: ${{ vars.YT_PRIVACY || 'public' }}
+          YT_PUBLISH_TIMES: ${{ vars.YT_PUBLISH_TIMES }}
+          VIDEOS_PER_DAY: ${{ vars.VIDEOS_PER_DAY }}
+          BUFFER_DAYS: ${{ vars.BUFFER_DAYS }}
+          YT_CATEGORY: ${{ vars.YT_CATEGORY }}
+          WATERMARK_BOX: ${{ vars.WATERMARK_BOX }}
+          CHANNEL_NAME: ${{ vars.CHANNEL_NAME }}
+          SERIES_CHARACTER: ${{ vars.SERIES_CHARACTER }}
+          CONTENT_MODE: ${{ vars.CONTENT_MODE }}
+          WATERMARK_SITE: ${{ vars.WATERMARK_SITE }}
+          THUMBNAIL_AT: ${{ vars.THUMBNAIL_AT }}
+          VIDEO_LANGUAGE: en
+        run: |
+          set -o pipefail
+          python run.py ${{ inputs.force && '--force' || '' }} 2>&1 | tee run.log
+      - name: Save state
+        if: always() && (steps.check.outputs.skip != 'true' || inputs.force)
+        run: |
+          git config user.name "yt-bot"
+          git config user.email "yt-bot@users.noreply.github.com"
+          git add state/ || true
+          git diff --cached --quiet && exit 0
+          git commit -m "Update pipeline state [skip ci]"
+          # The repo may have changed during the run - rebase and retry.
+          for i in 1 2 3 4; do git pull --rebase -q origin main && git push -q && exit 0; sleep $((i*5)); done
+          exit 1
+      # Save this run's log and the watermark-site screenshots to the run-logs branch
+      # (no videos), so problems can be checked without downloading artifacts.
+      - name: Save run log
+        if: always() && (steps.check.outputs.skip != 'true' || inputs.force)
+        run: |
+          mkdir -p /tmp/logs
+          # Hide keys and tokens (error messages can contain request URLs with the API key).
+          sed -E -e 's/((key|token|access_token|refresh_token|client_secret)=)[^&" ]+/\1REDACTED/Ig' \
+            -e 's/AIza[0-9A-Za-z_-]{20,}/REDACTED/g' -e 's/nvapi-[0-9A-Za-z_-]{10,}/REDACTED/g' \
+            -e 's/GOCSPX-[0-9A-Za-z_-]{10,}/REDACTED/g' -e 's#1//0[0-9A-Za-z_-]{20,}#REDACTED#g' \
+            -e 's/ya29\.[0-9A-Za-z._-]{20,}/REDACTED/g' run.log > /tmp/logs/run.log 2>/dev/null || true
+          cp -r output/site_screens /tmp/logs/ 2>/dev/null || true
+          cp output/watermark_check.jpg output/thumbnail.jpg output/metadata.json /tmp/logs/ 2>/dev/null || true
+          ffprobe -v error -show_entries stream=codec_type,width,height,avg_frame_rate -show_entries format=duration \
+            -of compact output/video_raw.mp4 > /tmp/logs/raw_info.txt 2>/dev/null || true
+          cd /tmp/logs && git init -q && git checkout -q -b run-logs
+          git config user.name "yt-bot" && git config user.email "yt-bot@users.noreply.github.com"
+          git add -A && git commit -qm "Run ${{ github.run_id }} log" || exit 0
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" run-logs || true
+      # Only when a run fails: keep the raw video for one day for debugging (logs are on the
+      # run-logs branch). Successful runs keep nothing - videos are on YouTube.
+      - uses: actions/upload-artifact@v4
+        if: failure() && (steps.check.outputs.skip != 'true' || inputs.force)
+        with:
+          name: video-output
+          path: |
+            output/video_raw.mp4
+            output/*.json
+          if-no-files-found: ignore
+          retention-days: 1
+      # Delete old run files so GitHub's Actions storage never fills up.
+      - name: Delete old run files
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cutoff=$(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%SZ)
+          gh api --paginate "repos/${{ github.repository }}/actions/artifacts?per_page=100" \
+            --jq ".artifacts[] | select(.created_at < \"$cutoff\") | .id" |
+            while read -r id; do gh api -X DELETE "repos/${{ github.repository }}/actions/artifacts/$id" && echo "deleted $id"; done || true
