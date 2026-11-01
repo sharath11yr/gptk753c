@@ -190,6 +190,36 @@
    "Virtual Memory - Using disk as an extension of RAM",
    "Page Replacement Algorithms: FIFO (First-In-First-Out)",
    "Page Replacement Algorithms: LRU (Least Recently Used)"
+  ],
+  "Computer Networks": [
+   "What is a Computer Network? An Introduction",
+   "Types of Networks: LAN, MAN, and WAN",
+   "Network Topologies: How Devices Connect",
+   "The OSI Model: The Seven Layers Explained",
+   "The TCP/IP Model: A Practical Alternative",
+   "Physical Layer: Transmission Media and Signals",
+   "Data Link Layer: Framing and Error Detection Part 1",
+   "Data Link Layer: Framing and Error Detection Part 2",
+   "MAC Addresses and How Switches Work",
+   "IP Addresses: The Digital Postal System Part 1",
+   "IP Addresses: The Digital Postal System Part 2 (Public vs Private)",
+   "Subnetting Made Easy: Breaking Down the Network",
+   "Routing and Routers: Directing Traffic Part 1",
+   "Routing and Routers: Directing Traffic Part 2",
+   "ARP: How IP Addresses Find MAC Addresses",
+   "TCP vs UDP: Choosing the Right Protocol Part 1",
+   "TCP vs UDP: Choosing the Right Protocol Part 2",
+   "The TCP Three-Way Handshake: Establishing a Connection",
+   "Flow and Congestion Control: Keeping the Pipe Full Part 1",
+   "Flow and Congestion Control: Keeping the Pipe Full Part 2",
+   "Ports and Sockets: The Endpoints of Communication",
+   "DNS: How a Website Name Becomes an IP Address",
+   "HTTP and HTTPS: The Web's Application Layer",
+   "What Happens When You Type a URL: The Full Journey",
+   "DHCP: Dynamic IP Assignment Made Simple",
+   "NAT: Network Address Translation Explained",
+   "Firewalls and VPNs: Protecting the Network",
+   "Wi-Fi Explained: How Wireless Networks Work"
   ]
  }
 }
