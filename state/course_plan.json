@@ -100,6 +100,37 @@
    "Wrapper classes and autoboxing",
    "Collections framework overview and ArrayList",
    "LinkedList and HashMap basics"
+  ],
+  "Git & GitHub": [
+   "What is Version Control and Why Git",
+   "Installing and Configuring Git (Username and Email)",
+   "Your First Repository: init, add, and commit",
+   "How Git Stores Data: Snapshots and SHA-1 Hashes",
+   "git status: Understanding the Three States",
+   "git log: Viewing Commit History",
+   "git diff: Comparing Changes",
+   "Undoing Changes: Restoring Files in the Working Directory",
+   "Undoing Changes: The git restore Command",
+   "Undoing Commits: git reset (Soft, Mixed, Hard)",
+   "Undoing Commits: git revert (Safe Undo for Public History)",
+   "Branches Explained: Creating, Listing, and Deleting Branches",
+   "Branching Workflow: Switching and Renaming Branches",
+   "Merging Basics: Fast-Forward and Three-Way Merges",
+   "Merge Conflicts: Understanding and Resolving Step-by-Step",
+   "Rebasing vs Merging: The Subtle Difference and Why It Matters",
+   "What is GitHub? Centralised vs Distributed Version Control",
+   "Remotes: Adding and Understanding Remote Repositories",
+   "git push: Uploading Local Commits to Remote",
+   "git pull and git fetch: Downloading Remote Changes",
+   "git clone: Copying a Remote Repository to Local",
+   "Pull Requests and Code Review: The GitHub Flow",
+   "Forks and Open Source Contribution Workflow",
+   ".gitignore: Excluding Files from Version Control",
+   "Stash and Cherry-Pick: Temporary Changes and Selective Commits",
+   "Tags and Releases: Marking Specific Points in History",
+   "GitHub Actions Basics: Automating CI/CD Pipelines",
+   "Common Git Mistakes: Fixing Detached HEAD and Lost Commits",
+   "Git Workflows Used in Companies: Gitflow and Trunk-Based Development"
   ]
  }
 }
