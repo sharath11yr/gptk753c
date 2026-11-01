@@ -163,6 +163,33 @@
    "Concurrency control: Locking mechanisms",
    "Deadlocks: Detection and Prevention",
    "Recovery and Undo/Redo logs"
+  ],
+  "Operating Systems": [
+   "What is an Operating System - Functions and Goals",
+   "Types of Operating Systems - Batch, Time-sharing, Real-time",
+   "System Calls - Interface between User and Kernel",
+   "Processes and Process States - New, Ready, Running, Waiting, Terminated",
+   "Process Control Block (PCB) - The DNA of a Process",
+   "Context Switching - How the CPU changes tasks",
+   "What is a Thread? - User-level vs Kernel-level threads",
+   "Thread States and Benefits - Concurrency and Parallelism",
+   "CPU Scheduling: First-Come First-Served (FCFS)",
+   "CPU Scheduling: Shortest Job First (SJF) and its variants",
+   "CPU Scheduling: Round Robin with Time Quantum",
+   "CPU Scheduling: Priority Scheduling and Aging",
+   "Process Synchronization - Race Conditions and Critical Sections",
+   "Mutex Locks - Simple binary synchronization",
+   "Semaphores - Counting and Binary semaphores explained",
+   "Producer-Consumer Problem - Using Semaphores for Buffering",
+   "Dining Philosophers Problem - Deadlock and Starvation scenarios",
+   "Deadlocks - Conditions for Deadlock and Prevention Strategies",
+   "Deadlock Avoidance - Banker's Algorithm Step-by-Step",
+   "Memory Management Basics - Static vs Dynamic allocation",
+   "Paging - Dividing memory into fixed-size frames",
+   "Segmentation - Dividing memory based on logical units",
+   "Virtual Memory - Using disk as an extension of RAM",
+   "Page Replacement Algorithms: FIFO (First-In-First-Out)",
+   "Page Replacement Algorithms: LRU (Least Recently Used)"
   ]
  }
 }
