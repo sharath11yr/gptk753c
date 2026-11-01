@@ -131,6 +131,38 @@
    "GitHub Actions Basics: Automating CI/CD Pipelines",
    "Common Git Mistakes: Fixing Detached HEAD and Lost Commits",
    "Git Workflows Used in Companies: Gitflow and Trunk-Based Development"
+  ],
+  "DBMS": [
+   "What is a database and a DBMS",
+   "Why not just files: problems DBMS solves",
+   "Data models and the relational model",
+   "Keys: primary, candidate, foreign",
+   "ER diagrams Part 1: Entities and Attributes",
+   "ER diagrams Part 2: Relationships and Cardinality",
+   "From ER diagram to tables Part 1: Mapping Entities",
+   "From ER diagram to tables Part 2: Mapping Relationships",
+   "Relational algebra: Selection and Projection",
+   "Relational algebra: Join, Union and Set Difference",
+   "SQL basics: SELECT and FROM clauses",
+   "SQL basics: WHERE clause and comparison operators",
+   "Filtering with wildcards and logical operators",
+   "Sorting results with ORDER BY and LIMIT",
+   "Aggregate functions: SUM, AVG, COUNT, MIN, MAX",
+   "GROUP BY and HAVING explained",
+   "Joins explained visually: Inner Join",
+   "Joins explained visually: Left, Right and Full Outer Join",
+   "Subqueries: Scalar and Correlated Subqueries",
+   "INSERT, UPDATE, and DELETE statements",
+   "Constraints: NOT NULL, UNIQUE, CHECK",
+   "Functional dependencies and Armstrong's Axioms",
+   "Normalization: 1NF and identifying atomic values",
+   "Normalization: 2NF and removing partial dependencies",
+   "Normalization: 3NF and removing transitive dependencies",
+   "BCNF: Handling overlapping candidate keys",
+   "Transactions and ACID properties",
+   "Concurrency control: Locking mechanisms",
+   "Deadlocks: Detection and Prevention",
+   "Recovery and Undo/Redo logs"
   ]
  }
 }
