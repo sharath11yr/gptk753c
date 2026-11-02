@@ -277,6 +277,30 @@
    "Lesson 23: Support Vector Machines (SVM) Part 2: Kernel Tricks for Non-Linear Data",
    "Lesson 24: Naive Bayes Part 1: The Theorem and the 'Naive' Assumption of Independence",
    "Lesson 25: Naive Bayes Part 2: Multinomial vs Gaussian Naive Bayes for Text and Continuous Data"
+  ],
+  "Generative AI": [
+   "What is Generative AI? Understanding the Basics",
+   "How AI Generates Text: The Intuition of Next-Token Prediction",
+   "Tokens and Embeddings: Turning Words into Numbers",
+   "The Transformer Architecture: The Engine of Modern AI",
+   "Attention Explained Simply: How Transformers Focus on Context",
+   "Multi-Head Attention: Looking at Context from Different Angles",
+   "How Large Language Models Are Trained: Pre-training",
+   "How Large Language Models Are Trained: Fine-Tuning with RLHF",
+   "Fine-Tuning vs Prompting: When to Use Which Approach",
+   "Prompt Engineering Basics: Crafting Effective Inputs",
+   "Advanced Prompt Engineering: Chain-of-Thought and Few-Shot",
+   "RAG: Retrieval Augmented Generation - Bringing in External Knowledge",
+   "Vector Databases: Storing and Searching Embeddings Efficiently",
+   "AI Agents and Tool Use: Making LLMs Do More Than Talk",
+   "How Image Generation Works: The Diffusion Model Process",
+   "How Image Generation Works: From Noise to Clear Images",
+   "Evaluating and Testing LLM Apps: Metrics and Benchmarks",
+   "Hallucinations: Why AI Makes Things Up and How to Fix It",
+   "Reducing Hallucinations: Grounding and Fact-Checking",
+   "Building a Chatbot App Step by Step: From Idea to Deployment",
+   "Responsible and Safe AI: Bias, Ethics, and Safety Alignment",
+   "The Future of Generative AI: Trends and Emerging Technologies"
   ]
  }
 }
