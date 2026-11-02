@@ -301,6 +301,33 @@
    "Building a Chatbot App Step by Step: From Idea to Deployment",
    "Responsible and Safe AI: Bias, Ethics, and Safety Alignment",
    "The Future of Generative AI: Trends and Emerging Technologies"
+  ],
+  "Data Structures & Algorithms": [
+   "Lesson 1: What are Data Structures and Algorithms",
+   "Lesson 2: Time and Space Complexity (Big O)",
+   "Lesson 3: Arrays - Introduction and Operations",
+   "Lesson 4: Arrays - Searching and Sorting",
+   "Lesson 5: Strings - Introduction and Operations",
+   "Lesson 6: Strings - Pattern Matching and Problems",
+   "Lesson 7: Linked Lists - Singly Linked List",
+   "Lesson 8: Linked Lists - Doubly Linked List and Circular LL",
+   "Lesson 9: Stacks - Introduction and Array Implementation",
+   "Lesson 10: Stacks - Linked List Implementation and Problems",
+   "Lesson 11: Queues - Introduction and Array Implementation",
+   "Lesson 12: Queues - Linked List Implementation and Circular Queue",
+   "Lesson 13: Hashing - Fundamentals and Collision Handling",
+   "Lesson 14: Hashing - Open Addressing and Rehashing",
+   "Lesson 15: Recursion - Basics and Direct Recursion",
+   "Lesson 16: Recursion - Backtracking and N-Queens",
+   "Lesson 17: Binary Search - Algorithm and Applications",
+   "Lesson 18: Bubble Sort - Algorithm and Optimization",
+   "Lesson 19: Selection and Insertion Sort",
+   "Lesson 20: Merge Sort - Divide and Conquer",
+   "Lesson 21: Quick Sort - Pivot and Partitioning",
+   "Lesson 22: Trees - Binary Tree Structure and Properties",
+   "Lesson 23: Binary Search Tree - Insertion and Search",
+   "Lesson 24: Heaps - Min Heap and Max Heap Operations",
+   "Lesson 25: Graphs - Representation: Adjacency Matrix and List"
   ]
  }
 }
