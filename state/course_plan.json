@@ -250,6 +250,33 @@
    "Design Patterns Part 3: The Observer Pattern (Event Handling)",
    "Design Patterns Part 4: The Strategy Pattern (Algorithmic Flexibility)",
    "OOP Interview Questions Explained: Core Concepts"
+  ],
+  "Machine Learning": [
+   "What is Machine Learning? - An Intuitive Introduction",
+   "The Main Types of Machine Learning: Supervised vs Unsupervised vs Reinforcement",
+   "The End-to-End Machine Learning Workflow: From Raw Data to Deployment",
+   "Lesson 4: Data Preprocessing Part 1: Handling Missing Values and Outliers",
+   "Lesson 5: Data Preprocessing Part 2: Encoding Categorical Variables and Scaling Features",
+   "Lesson 6: Train, Validation, and Test Sets - Why We Split Data",
+   "Lesson 7: Linear Regression Part 1: The Math of Finding the Best Fit Line",
+   "Lesson 8: Linear Regression Part 2: Cost Function and the Goal of Minimization",
+   "Lesson 9: Gradient Descent Intuition: The Hill Descent Analogy",
+   "Lesson 10: Gradient Descent Algorithm: Step-by-Step Update Rules",
+   "Lesson 11: Logistic Regression Part 1: From Regression to Classification",
+   "Lesson 12: Logistic Regression Part 2: The Sigmoid Function and Probability Output",
+   "Lesson 13: Overfitting and Underfitting - The Bias-Variance Tradeoff Explained",
+   "Lesson 14: Regularization Part 1: L1 (Lasso) Regularization Intuition",
+   "Lesson 15: Regularization Part 2: L2 (Ridge) Regularization and Weight Decay",
+   "Lesson 16: Decision Trees Part 1: How Trees Make Decisions and Recursive Partitioning",
+   "Lesson 17: Decision Trees Part 2: Overfitting in Trees and Pruning Techniques",
+   "Lesson 18: Random Forests Part 1: The Power of Ensemble Learning and Bagging",
+   "Lesson 19: Random Forests Part 2: Feature Importance and Random Subspace Method",
+   "Lesson 20: K-Nearest Neighbors (KNN) Part 1: The Intuition of Distance and Neighbours",
+   "Lesson 21: K-Nearest Neighbors (KNN) Part 2: Choosing K and Distance Metrics",
+   "Lesson 22: Support Vector Machines (SVM) Part 1: Finding the Maximum Margin Hyperplane",
+   "Lesson 23: Support Vector Machines (SVM) Part 2: Kernel Tricks for Non-Linear Data",
+   "Lesson 24: Naive Bayes Part 1: The Theorem and the 'Naive' Assumption of Independence",
+   "Lesson 25: Naive Bayes Part 2: Multinomial vs Gaussian Naive Bayes for Text and Continuous Data"
   ]
  }
 }
