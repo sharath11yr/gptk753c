@@ -220,6 +220,36 @@
    "NAT: Network Address Translation Explained",
    "Firewalls and VPNs: Protecting the Network",
    "Wi-Fi Explained: How Wireless Networks Work"
+  ],
+  "OOP": [
+   "What is Object-Oriented Programming (OOP)? Part 1: The Core Philosophy",
+   "What is Object-Oriented Programming (OOP)? Part 2: Procedural vs OOP",
+   "Classes and Objects Part 1: Blueprint vs Instance",
+   "Classes and Objects Part 2: Creating Classes and Instances",
+   "Classes and Objects Part 3: The 'self' Keyword (Python) / 'this' Keyword (Java)",
+   "Encapsulation Part 1: Hiding Data with Access Modifiers",
+   "Encapsulation Part 2: Getters and Setters",
+   "Abstraction Part 1: Abstract Classes vs Interfaces",
+   "Abstraction Part 2: Implementing Abstraction (Real-world example)",
+   "Inheritance Part 1: The 'is-a' Relationship and Base Classes",
+   "Inheritance Part 2: Method Overriding and Runtime Polymorphism",
+   "Inheritance Part 3: The 'has-a' Relationship and Super() Calls",
+   "Polymorphism Part 1: Compile-time Polymorphism (Function Overloading)",
+   "Polymorphism Part 2: Runtime Polymorphism (Function Overriding)",
+   "Constructors and Destructors Part 1: Initializing Objects",
+   "Constructors and Destructors Part 2: Cleanup and Garbage Collection",
+   "Interfaces vs Abstract Classes Part 1: Defining Contracts",
+   "Interfaces vs Abstract Classes Part 2: When to use which?",
+   "Composition vs Inheritance Part 1: The Trade-offs",
+   "Composition vs Inheritance Part 2: Favor Composition Over Inheritance",
+   "SOLID Principles Part 1: Single Responsibility and Open/Closed",
+   "SOLID Principles Part 2: Liskov Substitution and Interface Segregation",
+   "SOLID Principles Part 3: Dependency Inversion",
+   "Design Patterns Part 1: The Singleton Pattern (Global State)",
+   "Design Patterns Part 2: The Factory Pattern (Object Creation)",
+   "Design Patterns Part 3: The Observer Pattern (Event Handling)",
+   "Design Patterns Part 4: The Strategy Pattern (Algorithmic Flexibility)",
+   "OOP Interview Questions Explained: Core Concepts"
   ]
  }
 }
