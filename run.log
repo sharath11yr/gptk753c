@@ -1,0 +1,106 @@
+2026-11-07 09:01:58,852 INFO Already scheduled: ['2026-11-07T12:00:00+05:30', '2026-11-07T18:00:00+05:30', '2026-11-08T12:00:00+05:30', '2026-11-08T18:00:00+05:30', '2026-11-09T12:00:00+05:30', '2026-11-09T18:00:00+05:30', '2026-11-10T12:00:00+05:30', '2026-11-10T18:00:00+05:30', '2026-11-11T12:00:00+05:30', '2026-11-11T18:00:00+05:30', '2026-11-12T12:00:00+05:30', '2026-11-12T18:00:00+05:30', '2026-11-13T12:00:00+05:30', '2026-11-13T18:00:00+05:30']
+2026-11-07 09:01:58,855 INFO Next lesson: Machine Learning #3 - The End-to-End Machine Learning Workflow: From Raw Data to Deployment
+2026-11-07 09:02:21,040 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-07 09:02:42,167 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-07 09:03:20,318 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-07 09:03:20,318 INFO Review fix: Phase 5 description states 'We show it the answers, it guesses, we tell it if it was wrong, and it adjusts.' This describes supervised learning but is inaccurate for unsupervised learning. However, since Phase 5 is Model Training and the context is general ML workflow, the description should clarify that training typically involves labeled data for supervised learning, or objectives like clustering/reconstruction for unsupervised learning, rather than a generic 'guess and correct' loop.
+2026-11-07 09:03:20,318 INFO Review fix: The Linear Regression example states 'The model learns that every additional square foot adds roughly $200 to the price, and each bedroom adds $50,000.' This is a specific numerical example inserted into a general explanation. It is better to keep the example generic or remove the specific dollar amounts to avoid implying those are universal constants.
+2026-11-07 09:03:20,318 INFO Review fix: The Gradient Descent analogy states 'Imagine you are on a hill in the dark. You want to get to the bottom. You take a small step in the direction where the ground slopes downhill.' This is a simplification that can be misleading. Gradient descent moves in the direction of the *negative* gradient (downhill). The analogy should explicitly state moving opposite to the slope direction to reduce error.
+2026-11-07 09:03:20,318 INFO Review fix: The script states 'The memory usage depends on the size of the dataset; larger datasets require more RAM to hold the numbers during computation.' While generally true, this is an oversimplification. Memory usage depends on the algorithm, batch size, and whether data is loaded lazily. Stating it as a hard rule can confuse students about streaming or out-of-core processing.
+2026-11-07 09:03:20,318 INFO Review fix: The 3-point recap states 'Second, data preprocessing and feature engineering are where the real work happens. Cleaning data and creating good features often matters more than choosing a fancy algorithm.' This is a valuable insight, but framing it as a definitive rule ('matters more') can be misleading. The importance depends on the dataset and problem; sometimes algorithm choice is critical. It should be qualified as 'often' or 'in many cases'.
+2026-11-07 09:03:20,318 INFO Review fix: The teaser for the next lesson says 'In lesson four, we will roll up our sleeves and dive into Data Preprocessing Part 1: Handling Missing Values and Outliers.' The script for Lesson 3 previously introduced Phase 3 as 'Data Preprocessing.' Introducing 'Part 1' implies a sub-lesson structure that may not be consistent with the overall course structure, or it risks splitting a topic prematurely.
+2026-11-07 09:03:23,266 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-07 09:03:23,403 INFO YouTube title: End-to-End Machine Learning Workflow | Machine Learning Course #3
+2026-11-07 09:03:24,545 INFO Created notebook 8548abd1-f4b9-4a1b-bd1b-cf96fdfa82e9
+2026-11-07 09:03:26,677 INFO Script added as source
+2026-11-07 09:03:28,546 INFO Started cinematic video generation (task 582b50c5-c22d-4140-9f14-c701dea10150)
+2026-11-07 09:03:28,547 INFO Waiting for cinematic video (can take 30+ minutes)
+2026-11-07 09:30:51,291 INFO Downloaded cinematic video to output/video_raw.mp4
+2026-11-07 09:30:53,592 INFO Started NotebookLM Short (task 9ff5e589-e790-4a80-b2de-efd3ac1f5aec)
+2026-11-07 09:52:03,873 INFO Downloaded NotebookLM Short to output/short_raw.mp4
+2026-11-07 09:52:07,203 INFO Video selected on https://notebooklmremover.com/en, waiting for processing
+2026-11-07 09:52:08,864 INFO Chose site mode 'Quality Priority (Original FPS, Slow)'
+2026-11-07 09:52:09,868 INFO Clicking '🚀 Start Removing Watermark'
+2026-11-07 09:52:23,208 INFO Watermark removal: 1%
+2026-11-07 09:52:28,214 INFO Watermark removal: 4%
+2026-11-07 09:52:33,220 INFO Watermark removal: 7%
+2026-11-07 09:52:38,226 INFO Watermark removal: 9%
+2026-11-07 09:52:43,231 INFO Watermark removal: 12%
+2026-11-07 09:52:48,236 INFO Watermark removal: 15%
+2026-11-07 09:52:53,242 INFO Watermark removal: 18%
+2026-11-07 09:52:58,247 INFO Watermark removal: 21%
+2026-11-07 09:53:03,253 INFO Watermark removal: 23%
+2026-11-07 09:53:08,259 INFO Watermark removal: 26%
+2026-11-07 09:53:13,265 INFO Watermark removal: 29%
+2026-11-07 09:53:18,488 INFO Watermark removal: 31%
+2026-11-07 09:53:23,494 INFO Watermark removal: 34%
+2026-11-07 09:53:28,500 INFO Watermark removal: 37%
+2026-11-07 09:53:33,516 INFO Watermark removal: 40%
+2026-11-07 09:53:38,523 INFO Watermark removal: 43%
+2026-11-07 09:53:43,529 INFO Watermark removal: 45%
+2026-11-07 09:53:48,534 INFO Watermark removal: 48%
+2026-11-07 09:53:53,540 INFO Watermark removal: 51%
+2026-11-07 09:53:58,546 INFO Watermark removal: 54%
+2026-11-07 09:54:03,551 INFO Watermark removal: 57%
+2026-11-07 09:54:08,557 INFO Watermark removal: 60%
+2026-11-07 09:54:13,562 INFO Watermark removal: 63%
+2026-11-07 09:54:18,821 INFO Watermark removal: 66%
+2026-11-07 09:54:23,827 INFO Watermark removal: 69%
+2026-11-07 09:54:28,833 INFO Watermark removal: 72%
+2026-11-07 09:54:33,838 INFO Watermark removal: 74%
+2026-11-07 09:54:38,844 INFO Watermark removal: 77%
+2026-11-07 09:54:43,850 INFO Watermark removal: 80%
+2026-11-07 09:54:48,856 INFO Watermark removal: 83%
+2026-11-07 09:54:53,862 INFO Watermark removal: 86%
+2026-11-07 09:54:58,867 INFO Watermark removal: 89%
+2026-11-07 09:55:03,874 INFO Watermark removal: 92%
+2026-11-07 09:55:08,880 INFO Watermark removal: 94%
+2026-11-07 09:55:13,886 INFO Watermark removal: 97%
+2026-11-07 09:55:19,105 INFO Clicking 'Download Clean Video'
+2026-11-07 09:55:27,483 INFO Downloaded clean video after 197s
+2026-11-07 09:55:27,637 INFO Website result: {'width': 1280, 'height': 720, 'fps': 30.0, 'duration': 393.369252, 'has_audio': True} (original {'width': 1280, 'height': 720, 'fps': 30.0, 'duration': 396.434286, 'has_audio': True})
+2026-11-07 09:55:27,681 INFO Adding channel name watermark: GetYr_CSE
+2026-11-07 09:56:59,785 INFO Added intro + video_final_main + outro
+2026-11-07 09:56:59,785 INFO Edited video saved to output/video_final.mp4
+2026-11-07 09:56:59,892 INFO Thumbnail candidate at 0.5s: detail 5.7
+2026-11-07 09:57:00,001 INFO Thumbnail candidate at 1.0s: detail 6.3
+2026-11-07 09:57:00,110 INFO Thumbnail candidate at 1.5s: detail 6.7
+2026-11-07 09:57:00,222 INFO Thumbnail candidate at 2.0s: detail 7.0
+2026-11-07 09:57:00,344 INFO Thumbnail candidate at 2.5s: detail 7.2
+2026-11-07 09:57:00,470 INFO Thumbnail candidate at 3.0s: detail 7.2
+2026-11-07 09:57:00,604 INFO Thumbnail candidate at 3.5s: detail 7.3
+2026-11-07 09:57:00,744 INFO Thumbnail candidate at 4.0s: detail 7.4
+2026-11-07 09:57:00,899 INFO Thumbnail candidate at 5.0s: detail 2.8
+2026-11-07 09:57:00,935 INFO Thumbnail taken from the video at 4.0s -> output/thumbnail.jpg
+2026-11-07 09:57:03,490 INFO Upload 32%
+2026-11-07 09:57:04,368 INFO Upload 65%
+2026-11-07 09:57:05,286 INFO Upload 97%
+2026-11-07 09:57:05,740 INFO Uploaded: https://youtu.be/cCKbOuSrvbY (scheduled to go public at 2026-11-14 12:00 IST)
+2026-11-07 09:57:09,608 INFO Thumbnail set
+2026-11-07 09:57:10,291 INFO Added to playlist: Machine Learning Course - Beginner to Advanced
+2026-11-07 09:57:12,937 INFO Video selected on https://notebooklmremover.com/en, waiting for processing
+2026-11-07 09:57:14,552 INFO Chose site mode 'Quality Priority (Original FPS, Slow)'
+2026-11-07 09:57:15,555 INFO Clicking '🚀 Start Removing Watermark'
+2026-11-07 09:57:18,583 INFO Watermark removal: 0%
+2026-11-07 09:57:23,911 INFO Watermark removal: 10%
+2026-11-07 09:57:28,916 INFO Watermark removal: 18%
+2026-11-07 09:57:33,923 INFO Watermark removal: 27%
+2026-11-07 09:57:38,929 INFO Watermark removal: 35%
+2026-11-07 09:57:43,935 INFO Watermark removal: 45%
+2026-11-07 09:57:48,942 INFO Watermark removal: 54%
+2026-11-07 09:57:53,948 INFO Watermark removal: 63%
+2026-11-07 09:57:58,953 INFO Watermark removal: 71%
+2026-11-07 09:58:03,959 INFO Watermark removal: 80%
+2026-11-07 09:58:08,964 INFO Watermark removal: 89%
+2026-11-07 09:58:13,969 INFO Clicking 'Download Clean Video'
+2026-11-07 09:58:22,444 INFO Downloaded clean video after 66s
+2026-11-07 09:58:22,628 INFO Website result: {'width': 720, 'height': 1280, 'fps': 30.0, 'duration': 80.875102, 'has_audio': True} (original {'width': 720, 'height': 1280, 'fps': 30.0, 'duration': 83.916916, 'has_audio': True})
+2026-11-07 09:58:35,992 INFO Using NotebookLM's Short (watermark removed)
+2026-11-07 09:58:37,721 INFO Upload 94%
+2026-11-07 09:58:38,163 INFO Uploaded: https://youtu.be/I134OBMaOnU (scheduled to go public at 2026-11-14 12:00 IST)
+2026-11-07 09:58:38,164 INFO Short uploaded: https://youtu.be/I134OBMaOnU
+2026-11-07 09:58:41,449 INFO Reel queued for 2026-11-07T09:58:41.449479+00:00
+2026-11-07 09:59:33,703 INFO Instagram Reel posted (id 18017663567753257)
+2026-11-07 09:59:42,636 INFO Facebook Reel posted (id 3736257913191503)
+2026-11-07 09:59:43,915 INFO Done: End-to-End Machine Learning Workflow | Machine Learning Course #3
+2026-11-07 09:59:45,494 INFO Deleted old NotebookLM notebook 8548abd1-f4b9-4a1b-bd1b-cf96fdfa82e9
