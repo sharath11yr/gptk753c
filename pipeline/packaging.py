@@ -32,6 +32,8 @@ def search_suggestions(seed: str, limit: int = 12) -> list[str]:
 
 
 def _seed(script: dict) -> str:
+    if script.get("search_phrase"):
+        return script["search_phrase"]
     if script.get("course"):
         return f"{script['course']} {script['lesson']}"
     if script.get("ece_topic"):
@@ -45,7 +47,10 @@ def make_metadata(script: dict) -> dict:
     """Title, description, tags and the title-screen text, based on the research."""
     research = script.get("research", {})
     headlines = "\n".join(f"- {h}" for h in research.get("headlines", [])[:12])
-    if script.get("course"):
+    if script.get("search_topic"):
+        from pipeline import searchtopics
+        meta = searchtopics.make_metadata(script)
+    elif script.get("course"):
         from pipeline import courses
         meta = courses.make_metadata(script)
     elif script.get("ece_topic"):
