@@ -113,7 +113,7 @@ def add_to_playlist(video_id: str, title: str) -> None:
     if not playlist_id:
         playlist_id = youtube.playlists().insert(part="snippet,status", body={
             "snippet": {"title": title,
-                        "description": f"{title}: the complete course, lesson by lesson."},
+                        "description": f"{title} - watch in order, every video builds on the last."},
             "status": {"privacyStatus": "public"}}).execute()["id"]
         log.info("Created playlist: %s", title)
     youtube.playlistItems().insert(part="snippet", body={"snippet": {

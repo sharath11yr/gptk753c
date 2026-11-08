@@ -183,7 +183,27 @@ def create_script() -> dict:
     return result
 
 
+PLAYLIST_FILE = Path("state/search_playlists.json")
+
+
+def _playlists() -> list[str]:
+    return json.loads(PLAYLIST_FILE.read_text()) if PLAYLIST_FILE.exists() else []
+
+
 def make_metadata(script: dict) -> dict:
+    meta = _package(script)
+    name = (meta.get("playlist") or "").strip()[:60]
+    if name:
+        if name not in _playlists():
+            PLAYLIST_FILE.parent.mkdir(parents=True, exist_ok=True)
+            PLAYLIST_FILE.write_text(json.dumps(_playlists() + [name], indent=1))
+        meta["playlist"] = name
+    else:
+        meta.pop("playlist", None)
+    return meta
+
+
+def _package(script: dict) -> dict:
     return llm.chat_json(f"""You are the packaging lead of a professional YouTube channel
 about {_domain()["about"]}. Package this video so it ranks in search and gets clicked.
 
@@ -202,7 +222,10 @@ Write:
   question for viewers to answer in the comments. No links, no hashtags.
 - hashtags: 3 relevant hashtags.
 - tags: 15 search tags people really type, most important first.
+- playlist: a short series name (2-4 words) this video belongs to, so related videos
+  autoplay one after another, e.g. "Kali Linux", "Ethical Hacking", "Python", "AI Tools",
+  "Arduino Projects", "How Phones Work". Reuse one of these if it fits: {", ".join(_playlists()) or "none yet"}.
 
 Return JSON: {{"title": "...", "cover_text": "...", "short_hook": "...", "description": "...",
-"hashtags": ["#..."], "tags": ["..."]}}""", temperature=0.5, max_tokens=2000,
+"hashtags": ["#..."], "tags": ["..."], "playlist": "..."}}""", temperature=0.5, max_tokens=2000,
                           prefer=llm.WRITER_MODEL)
