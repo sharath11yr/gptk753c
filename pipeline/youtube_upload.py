@@ -116,7 +116,15 @@ def add_to_playlist(video_id: str, title: str) -> None:
                         "description": f"{title} - watch in order, every video builds on the last."},
             "status": {"privacyStatus": "public"}}).execute()["id"]
         log.info("Created playlist: %s", title)
-    youtube.playlistItems().insert(part="snippet", body={"snippet": {
-        "playlistId": playlist_id,
-        "resourceId": {"kind": "youtube#video", "videoId": video_id}}}).execute()
+    import time
+    for attempt in range(4):  # YouTube sometimes answers 409 "service unavailable": retry
+        try:
+            youtube.playlistItems().insert(part="snippet", body={"snippet": {
+                "playlistId": playlist_id,
+                "resourceId": {"kind": "youtube#video", "videoId": video_id}}}).execute()
+            break
+        except Exception:
+            if attempt == 3:
+                raise
+            time.sleep(20 * (attempt + 1))
     log.info("Added to playlist: %s", title)
