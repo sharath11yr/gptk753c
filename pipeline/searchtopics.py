@@ -168,18 +168,19 @@ now, with a popularity score:
 Already made (do not repeat, not even reworded): {"; ".join(_made_before()[-80:]) or "none"}
 Already on the channel: {"; ".join(t[:60] for t in channel_videos()["titles"][:120]) or "none"}
 
-OUR PROVEN WINNERS (most-viewed videos on this channel - this audience is mostly students
-searching for syllabus / exam / tool-tutorial topics):
+OUR MOST-VIEWED VIDEOS (a hint about who watches us and which title style works - NOT a
+limit on topics):
 {chr(10).join(f"- {t} ({n} views)" for n, t in channel_videos()["winners"]) or "- none yet"}
-Strongly prefer topics like the winners: the next part of the same subject, a closely related
-syllabus topic, or the tool/concept students study right after it. Generic "how everyday
-gadget X works" topics get almost no views on this channel - avoid them unless the search
-score is very high.
+Choose mainly by SEARCH DEMAND: the topic millions of people are actively searching for
+right now in our field (highest score above, plus your own knowledge of the biggest evergreen
+YouTube searches in this field). Prefer searches with huge demand where a clear, complete,
+well-animated answer can win - tutorials, "what is X", "how X works", courses, roadmaps,
+installs, exam topics. Use our most-viewed videos only to break ties.
 
 The video MUST be about {d["about"]} - nothing outside this field (no history, no general
 science, no entertainment).
 
-Pick the ONE best next video: high search demand from students, beginner-friendly but with
+Pick the ONE best next video: the highest search demand, beginner-friendly but with
 depth, evergreen enough to get views for months, and something a 8-10 minute animated
 explainer can cover really well. {d["safety"]}
 
