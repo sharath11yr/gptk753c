@@ -80,6 +80,7 @@ jobs:
           CHANNEL_NAME: ${{ vars.CHANNEL_NAME }}
           SERIES_CHARACTER: ${{ vars.SERIES_CHARACTER }}
           CONTENT_MODE: ${{ vars.CONTENT_MODE }}
+          MIN_SEARCH_VIEWS: ${{ vars.MIN_SEARCH_VIEWS }}
           WATERMARK_SITE: ${{ vars.WATERMARK_SITE }}
           THUMBNAIL_AT: ${{ vars.THUMBNAIL_AT }}
           VIDEO_LANGUAGE: en

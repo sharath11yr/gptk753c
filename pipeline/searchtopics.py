@@ -139,8 +139,13 @@ def _words(s: str) -> set[str]:
     return {w for w in re.findall(r"[a-z0-9+#]+", s.lower()) if len(w) > 2}
 
 
+_CANDS: list = []
+
+
 def candidates() -> list[tuple[str, float]]:
     """Live search phrases with a popularity score (higher = searched more)."""
+    if _CANDS:
+        return _CANDS
     scores: dict[str, float] = {}
     for seed in _domain()["seeds"]:
         for rank, phrase in enumerate(search_suggestions(seed, limit=10)):
@@ -152,11 +157,91 @@ def candidates() -> list[tuple[str, float]]:
         if len(w) < 2 or any(len(w & d) >= max(2, len(w) - 1) for d in done):
             continue  # too vague, or already made
         out.append((phrase, score))
-    return sorted(out, key=lambda x: -x[1])[:60]
+    _CANDS.extend(sorted(out, key=lambda x: -x[1])[:60])
+    return _CANDS
+
+
+LOW_DEMAND_FILE = Path("state/low_demand.json")
+
+
+def search_demand(phrase: str) -> int | None:
+    """How big the audience for a search is. YouTube doesn't publish search counts, so we use
+    the next best proof: the median views of the top 10 YouTube results for that phrase.
+    Many people search it -> the top results have many views. None = could not check."""
+    key = os.getenv("YOUTUBE_API_KEY")
+    if not key:
+        return _demand_from_page(phrase)
+    import httpx
+    try:
+        r = httpx.get("https://www.googleapis.com/youtube/v3/search", timeout=30, params={
+            "part": "id", "q": phrase, "type": "video", "maxResults": 10,
+            "relevanceLanguage": "en", "key": key})
+        r.raise_for_status()
+        ids = [i["id"]["videoId"] for i in r.json().get("items", [])]
+        if not ids:
+            return 0
+        r = httpx.get("https://www.googleapis.com/youtube/v3/videos", timeout=30, params={
+            "part": "statistics", "id": ",".join(ids), "key": key})
+        r.raise_for_status()
+        views = sorted(int(v["statistics"].get("viewCount", 0)) for v in r.json()["items"])
+        return views[len(views) // 2] if views else 0
+    except Exception as exc:
+        log.warning("Could not check search demand for '%s': %s", phrase, exc)
+        return None
+
+
+def _demand_from_page(phrase: str) -> int | None:
+    """Same measure without an API key: read the view counts on YouTube's public search page."""
+    import httpx
+    try:
+        r = httpx.get("https://www.youtube.com/results", timeout=30, follow_redirects=True,
+                      params={"search_query": phrase, "sp": "EgIQAQ%3D%3D", "hl": "en", "gl": "US"},
+                      headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                               "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+                               "Accept-Language": "en-US,en;q=0.9"},
+                      cookies={"CONSENT": "YES+1", "SOCS": "CAI"})
+        r.raise_for_status()
+        counts = [int(n.replace(",", "")) for n in re.findall(
+            r'"viewCountText":\{"simpleText":"([\d,]+) views"', r.text)][:10]
+        if not counts:
+            log.warning("No view counts on the YouTube search page for '%s'", phrase)
+            return None
+        counts.sort()
+        return counts[len(counts) // 2]
+    except Exception as exc:
+        log.warning("Could not read the YouTube search page for '%s': %s", phrase, exc)
+        return None
+
+
+def _low_demand() -> list[str]:
+    return json.loads(LOW_DEMAND_FILE.read_text()) if LOW_DEMAND_FILE.exists() else []
 
 
 def pick_topic() -> dict:
-    cands = candidates()
+    """Pick a topic with proven big search demand. Topics whose top YouTube results have a
+    median below MIN_SEARCH_VIEWS (default 50,000) are skipped and never suggested again."""
+    need = int(os.getenv("MIN_SEARCH_VIEWS") or 50000)
+    rejected: list[str] = []
+    for attempt in range(6):
+        r = _pick_once(rejected + _low_demand()[-60:])
+        demand = search_demand(r.get("search_phrase") or r.get("topic", ""))
+        if demand is None:  # can't measure (no key / quota): don't block the channel
+            log.warning("Search demand unknown - using the pick")
+            return r
+        log.info("Search demand for '%s': median %s views of the top 10 results (need %s)",
+                 r.get("search_phrase"), f"{demand:,}", f"{need:,}")
+        if demand >= need:
+            r["search_demand"] = demand
+            return r
+        rejected.append(r.get("search_phrase") or r.get("topic", ""))
+        LOW_DEMAND_FILE.parent.mkdir(parents=True, exist_ok=True)
+        LOW_DEMAND_FILE.write_text(json.dumps(_low_demand() + rejected[-1:], indent=1))
+    raise RuntimeError(f"No topic with enough search demand found this run (tried: {'; '.join(rejected)}) - "
+                       "trying again next hour")
+
+
+def _pick_once(avoid: list[str]) -> dict:
+    cands = [c for c in candidates() if c[0] not in avoid]
     d = _domain()
     listing = "\n".join(f"- {p} (score {s:.0f})" for p, s in cands) or (
         "- (live data unavailable: use your knowledge of the most-searched YouTube topics in this field)")
@@ -166,6 +251,7 @@ now, with a popularity score:
 {listing}
 
 Already made (do not repeat, not even reworded): {"; ".join(_made_before()[-80:]) or "none"}
+Too few searches - never pick these or anything similar: {"; ".join(avoid) or "none"}
 Already on the channel: {"; ".join(t[:60] for t in channel_videos()["titles"][:120]) or "none"}
 
 OUR MOST-VIEWED VIDEOS (a hint about who watches us and which title style works - NOT a
