@@ -29,7 +29,10 @@ DOMAINS = {
                   "how to become ethical hacker", "bug bounty", "tryhackme", "hack the box",
                   "password cracking", "phishing", "wifi hacking", "osint", "ctf for beginners",
                   "linux for hackers", "vpn", "is my phone hacked", "cybersecurity jobs",
-                  "comptia security+", "ceh", "ransomware", "dark web", "sql injection"],
+                  "comptia security+", "ceh", "ransomware", "dark web", "sql injection",
+                  "hashcat", "hydra", "john the ripper", "nmap tutorial", "metasploit tutorial",
+                  "sqlmap", "aircrack-ng", "gobuster", "burp suite tutorial", "wireshark tutorial",
+                  "kali linux tools", "password attacks", "cyber security course"],
         "safety": "Teach only legal, ethical use on your own lab or with permission. Never "
                   "give steps to attack real people or systems; focus on how it works and "
                   "how to defend.",
@@ -41,7 +44,10 @@ DOMAINS = {
                   "chatgpt", "ai agents", "machine learning", "how to get a job as software engineer",
                   "git and github", "sql", "linux commands", "system design", "c programming",
                   "best programming language", "how computers work", "how ai works",
-                  "placement preparation", "projects for resume", "vs code"],
+                  "placement preparation", "projects for resume", "vs code",
+                  "python tutorial", "python for beginners", "python course", "java tutorial",
+                  "java course", "c programming tutorial", "dsa course", "oops concepts",
+                  "sql tutorial", "operating system", "computer networks", "dbms"],
         "safety": "",
     },
     "ece": {
@@ -51,7 +57,12 @@ DOMAINS = {
                   "how solar panel works", "electric car battery", "semiconductor",
                   "how chips are made", "pcb design", "transistor", "inverter",
                   "electronics projects", "ece projects", "vlsi", "embedded systems",
-                  "how wifi works", "how batteries work", "motor"],
+                  "how wifi works", "how batteries work", "motor",
+                  "filters in electronics", "rectifier", "clipper circuit", "clamper circuit",
+                  "zener diode", "diode", "voltage regulator", "bjt transistor", "mosfet",
+                  "op amp", "oscillator", "amplifier", "analog electronics",
+                  "digital electronics", "logic gates", "flip flop", "multiplexer",
+                  "network theory", "signals and systems", "power electronics"],
         "safety": "Include electrical safety where relevant.",
     },
 }
@@ -86,6 +97,44 @@ def mark_used(topic: str) -> None:
     USED_FILE.write_text(json.dumps(used() + [topic], indent=1, ensure_ascii=False))
 
 
+_CHANNEL: dict = {}
+
+
+def channel_videos() -> dict:
+    """The channel's real long videos from YouTube: {"titles": [...], "winners": [(views, title)]}.
+    Winners = most-viewed videos; new topics follow what this audience already watches."""
+    if _CHANNEL:
+        return _CHANNEL
+    titles, winners = [], []
+    try:
+        from pipeline.youtube_upload import _client
+        yt = _client()
+        up = yt.channels().list(part="contentDetails", mine=True).execute()["items"][0][
+            "contentDetails"]["relatedPlaylists"]["uploads"]
+        ids, tok = [], None
+        while len(ids) < 200:
+            r = yt.playlistItems().list(part="contentDetails", playlistId=up, maxResults=50,
+                                        pageToken=tok).execute()
+            ids += [i["contentDetails"]["videoId"] for i in r["items"]]
+            tok = r.get("nextPageToken")
+            if not tok:
+                break
+        for i in range(0, len(ids), 50):
+            for v in yt.videos().list(part="snippet,statistics,contentDetails",
+                                      id=",".join(ids[i:i + 50])).execute()["items"]:
+                t = v["snippet"]["title"]
+                titles.append(t)
+                if "M" in v["contentDetails"]["duration"] or "H" in v["contentDetails"]["duration"]:
+                    if "#shorts" not in t.lower():
+                        winners.append((int(v["statistics"].get("viewCount", 0)), t))
+        winners = [w for w in sorted(winners, reverse=True)[:12] if w[0] >= 20]
+        log.info("Channel winners: %s", "; ".join(f"{t[:50]} ({n})" for n, t in winners[:6]))
+    except Exception as exc:
+        log.warning("Could not read the channel's videos: %s", exc)
+    _CHANNEL.update({"titles": titles, "winners": winners})
+    return _CHANNEL
+
+
 def _words(s: str) -> set[str]:
     return {w for w in re.findall(r"[a-z0-9+#]+", s.lower()) if len(w) > 2}
 
@@ -96,7 +145,7 @@ def candidates() -> list[tuple[str, float]]:
     for seed in _domain()["seeds"]:
         for rank, phrase in enumerate(search_suggestions(seed, limit=10)):
             scores[phrase] = scores.get(phrase, 0) + (10 - rank)
-    done = [_words(u) for u in _made_before()]
+    done = [_words(u) for u in _made_before() + channel_videos()["titles"]]
     out = []
     for phrase, score in scores.items():
         w = _words(phrase)
@@ -117,11 +166,20 @@ now, with a popularity score:
 {listing}
 
 Already made (do not repeat, not even reworded): {"; ".join(_made_before()[-80:]) or "none"}
+Already on the channel: {"; ".join(t[:60] for t in channel_videos()["titles"][:120]) or "none"}
+
+OUR PROVEN WINNERS (most-viewed videos on this channel - this audience is mostly students
+searching for syllabus / exam / tool-tutorial topics):
+{chr(10).join(f"- {t} ({n} views)" for n, t in channel_videos()["winners"]) or "- none yet"}
+Strongly prefer topics like the winners: the next part of the same subject, a closely related
+syllabus topic, or the tool/concept students study right after it. Generic "how everyday
+gadget X works" topics get almost no views on this channel - avoid them unless the search
+score is very high.
 
 The video MUST be about {d["about"]} - nothing outside this field (no history, no general
 science, no entertainment).
 
-Pick the ONE best next video: high search demand, broad audience, beginner-friendly but with
+Pick the ONE best next video: high search demand from students, beginner-friendly but with
 depth, evergreen enough to get views for months, and something a 8-10 minute animated
 explainer can cover really well. {d["safety"]}
 
@@ -241,9 +299,10 @@ SCRIPT:
 {script["script"][:6000]}
 
 Write:
-- title: 45-65 characters, contains the search phrase (or its natural form) near the start,
-  plus an honest curiosity hook. Professional tone like Fireship, Veritasium, NetworkChuck.
-  No filler such as "Explained Simply", "for Students", "for Beginners", no emojis.
+- title: 50-90 characters, the search phrase (or its natural form) at the start, then
+  " | " and the subject/series, like this channel's most-viewed titles:
+  {"; ".join(t for _, t in channel_videos()["winners"][:5]) or "What Is X? | How It Actually Works | Subject"}
+  Honest, clear, may end with one fitting emoji. No clickbait that the video doesn't deliver.
 - cover_text: 2-4 bold words for the thumbnail/title screen.
 - short_hook: one gripping sentence (max 12 words) for the vertical Short.
 - description: 1) two sentences that naturally contain the search phrase and close
