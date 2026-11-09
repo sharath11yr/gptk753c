@@ -118,6 +118,9 @@ now, with a popularity score:
 
 Already made (do not repeat, not even reworded): {"; ".join(_made_before()[-80:]) or "none"}
 
+The video MUST be about {d["about"]} - nothing outside this field (no history, no general
+science, no entertainment).
+
 Pick the ONE best next video: high search demand, broad audience, beginner-friendly but with
 depth, evergreen enough to get views for months, and something a 8-10 minute animated
 explainer can cover really well. {d["safety"]}
