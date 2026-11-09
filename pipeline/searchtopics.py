@@ -96,7 +96,7 @@ def candidates() -> list[tuple[str, float]]:
     for seed in _domain()["seeds"]:
         for rank, phrase in enumerate(search_suggestions(seed, limit=10)):
             scores[phrase] = scores.get(phrase, 0) + (10 - rank)
-    done = [_words(u) for u in used()]
+    done = [_words(u) for u in _made_before()]
     out = []
     for phrase, score in scores.items():
         w = _words(phrase)
@@ -116,7 +116,7 @@ monetization (watch hours). These are phrases people are typing into YouTube sea
 now, with a popularity score:
 {listing}
 
-Already made (do not repeat): {"; ".join(used()[-40:]) or "none"}
+Already made (do not repeat, not even reworded): {"; ".join(_made_before()[-80:]) or "none"}
 
 Pick the ONE best next video: high search demand, broad audience, beginner-friendly but with
 depth, evergreen enough to get views for months, and something a 8-10 minute animated
@@ -152,7 +152,21 @@ emojis.
 
 Return JSON: {{"title": "<working title>", "script": "<the full narration>"}}""",
                            SYSTEM, temperature=0.5, max_tokens=6000, prefer=llm.WRITER_MODEL)
-    if len(result.get("script", "").split()) < 600:
+    for _ in range(2):  # too short: expand it instead of giving up
+        words = len(result.get("script", "").split())
+        if words >= 900:
+            break
+        log.info("Script has %d words - expanding", words)
+        longer = llm.chat_json(f"""Expand this narration to 1100-1300 words: more depth, more
+real examples, more step-by-step detail and teasers. Keep the hook, structure and accuracy.
+
+{result.get("script", "")}
+
+Return JSON: {{"title": "<working title>", "script": "<the full narration>"}}""",
+                               SYSTEM, temperature=0.5, max_tokens=6000, prefer=llm.WRITER_MODEL)
+        if len(longer.get("script", "").split()) > words:
+            result = longer
+    if len(result.get("script", "").split()) < 500:
         raise RuntimeError("Script too short")
     try:
         r = llm.chat_json(f"""You are a strict expert reviewer of {d["about"]}. Check every
@@ -173,8 +187,20 @@ Return JSON: {{"errors_found": ["..."], "script": "<the corrected script>"}}""",
     return result
 
 
+def _made_before() -> list[str]:
+    """Everything this channel already covered (search topics + older topic lists)."""
+    out = list(used())
+    for f in ("state/used_topics.json",):
+        try:
+            out += json.loads(Path(f).read_text())
+        except Exception:
+            pass
+    return out
+
+
 def create_script() -> dict:
     pick = pick_topic()
+    mark_used(pick["topic"])  # remembered at once, so a failed run never repeats it
     result = write_script(pick)
     result.update({"topic": pick["topic"], "search_topic": pick["topic"],
                    "search_phrase": pick.get("search_phrase", pick["topic"]),
