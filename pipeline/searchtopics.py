@@ -191,9 +191,10 @@ def search_demand(phrase: str) -> int | None:
     """How big the audience for a search is. YouTube doesn't publish search counts, so we use
     the next best proof: the median views of the top 10 YouTube results for that phrase.
     Many people search it -> the top results have many views. None = could not check."""
+    found = _demand_from_page(phrase)  # free; keeps the API key's daily quota for other jobs
     key = os.getenv("YOUTUBE_API_KEY")
-    if not key:
-        return _demand_from_page(phrase)
+    if found is not None or not key:
+        return found
     import httpx
     try:
         r = httpx.get("https://www.googleapis.com/youtube/v3/search", timeout=30, params={
