@@ -346,7 +346,7 @@ the narration must be the real steps:
 - No long history or theory - one short line of context at most.
 """ if is_tutorial(pick) else "")
     def draft() -> dict:
-        return llm.chat_json(f"""Write the narration for a YouTube video.{howto}
+        return llm.chat_json(f"""Write the narration for a YouTube video.{howto}{viewer_lessons()}
     Topic: {pick["topic"]}
     People search: "{pick["search_phrase"]}"
     Angle: {pick.get("angle", "")}
@@ -405,6 +405,7 @@ Return JSON: {{"title": "<working title>", "script": "<the full narration>"}}"""
             r = llm.chat_json(f"""You are a strict senior professor and practising engineer in
 {d["about"]}, reviewing a script before it is published to thousands of students. A viewer
 already caught a wrong capacitor orientation in an earlier video - be that careful.
+{viewer_lessons()}
 Check EVERYTHING: every fact, number, unit, formula, definition, command, code line, step,
 and every description of how parts are connected (component orientation and polarity,
 diode/capacitor/battery direction, transistor pins, current direction, wiring, signal flow).
@@ -429,6 +430,19 @@ Return JSON: {{"errors_found": ["<each mistake you fixed>"], "script": "<the cor
         except Exception as exc:
             log.warning("Fact-check %d failed, keeping the script: %s", review, exc)
     return result
+
+
+def viewer_lessons() -> str:
+    """Mistakes real viewers caught in our earlier videos (tools/comments.py saves them)."""
+    try:
+        items = json.loads(Path("state/viewer_feedback.json").read_text())
+    except Exception:
+        return ""
+    rules = list(dict.fromkeys(i["lesson"] for i in items if i.get("lesson")))[-25:]
+    if not rules:
+        return ""
+    return ("\nMISTAKES VIEWERS CAUGHT IN OUR EARLIER VIDEOS - never repeat any of these:\n"
+            + "\n".join(f"- {r}" for r in rules) + "\n")
 
 
 def on_topic(pick: dict, script: str) -> bool:
