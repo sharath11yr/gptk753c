@@ -1,0 +1,31 @@
+Linux Commands for Beginners
+search: linux commands cheat sheet
+tutorial: True
+
+Welcome. You are about to master the Linux terminal in just ten minutes. Here is the surprising fact: most developers fear the terminal, but the top 1% of engineers use fewer than ten commands daily. By the end of this video, you will have a visual cheat sheet of the most-used commands, and you will know exactly how to type them. Let's begin.
+
+First, what you need. A computer running Linux, or the Windows Subsystem for Linux, also called WSL, or a Mac with the Terminal app open. You do not need root access for the basics we are covering today. If you are on Windows, open PowerShell and type: wsl --install. Press Enter. You will see a progress bar, and then a prompt asking to restart your computer. Do that. When it reboots, a Linux kernel will be installed automatically. If you are on Mac, open Terminal. You are ready.
+
+Step 1: Update your system. This is the very first command every beginner should type. Type: sudo apt update. Press Enter. You will be asked for your password. Type it in—nothing will appear on screen, that is normal. Press Enter again. Wait for the download progress bars to finish. Then type: sudo apt upgrade -y. Press Enter. Wait for the download progress bars to finish. You will see a summary saying '0 upgraded, 0 newly installed.' That means it worked.
+
+Step 2: Create a new directory. Type: mkdir my_project. Press Enter. Type: cd my_project. Press Enter. Type: ls. Press Enter. You should see no output or a prompt indicating the directory contents are empty. That is your first navigation.
+
+Here is the part most people get wrong. They type cd without a path. If you type cd and press Enter, the shell defaults to your home directory. To navigate up one level, type cd .. and press Enter. Type pwd to see where you are. You should see a path similar to '/home/your_username'.
+
+Step 3: Touch a file. Type: touch index.html. Press Enter. Type: ls -l. Press Enter. You should see 'index.html' appear with a size of zero bytes and a timestamp. The -l flag stands for 'long list'. It shows you details.
+
+Step 4: Copy and move files. Type: cp index.html index_backup.html. Press Enter. Type: ls. You will see both files. Now, type: mv index.html www/. Press Enter. Type: ls. You will see index_backup.html still in the main folder, but index.html is now inside the www folder. That is move.
+
+Step 5: Remove files. Type: rm -i index_backup.html. Press Enter. The command will prompt you to confirm deletion. Type y and press Enter to proceed. Type: ls. The file is gone. Note: Using 'rm -i' prompts for confirmation; it does not delete silently. If you ever need to force-delete, type: rm -rf, but be extremely careful as this permanently and irreversibly deletes everything in the path. Beware: rm -rf force-deletes everything. Only use it if you are sure.
+
+Step 6: Create a text file with content. Type: nano greet.txt. Press Enter. You will enter the nano editor. Type: Hello world. Press Enter. Press Ctrl+O, then Enter to save. Press Ctrl+X to exit. Type: cat greet.txt. Press Enter. You should see 'Hello world' printed on the screen. Cat outputs the file content to the terminal.
+
+Step 7: Check disk space. Type: df -h. Press Enter. You will see a table with columns for Filesystem, Size, Used, Avail, Use%, and Mounted on. The -h makes it 'human readable', so sizes are in MB or GB, not raw bytes. You should see your root partition and its free space.
+
+Common mistakes. Myth number one: you need to memorize every flag. You do not. Just learn -l for long list, -h for human readable, and -R for recursive. Myth two: rm -rf is safe. It is not. It force-deletes everything. Only use it if you are sure. Pro tip: use the tab key. Type cd my and press Tab. It will auto-complete to my_project. This saves time and prevents typos.
+
+Recap. You learned how to update your system, create and navigate directories, copy, move, and remove files, edit a text file, and check disk space. You now have the core commands every developer needs.
+
+Final Check: Type: ls. Press Enter. You should see the 'my_project' directory (or similar) in your current location. If you see it, you have successfully set up your first project folder. If not, repeat the steps above.
+
+If you found this cheat sheet useful, hit the like button and subscribe for more quick tutorials. In the next video, we will cover file permissions and how to run scripts. Until then, keep typing.
