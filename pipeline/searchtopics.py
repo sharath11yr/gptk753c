@@ -77,7 +77,14 @@ VISUAL_STYLE = (
     "Animate the whole video as a premium, modern explainer: smooth motion graphics, "
     "animated diagrams that build step by step, realistic screens and terminals where "
     "relevant, cutaways and zoom-ins, clear labels and arrows. Every scene moves - no still "
-    "slides. On-screen text only for the title and short labels. No logos or brand names."
+    "slides. On-screen text only for the title and short labels. No logos or brand names. "
+    "TECHNICAL ACCURACY COMES FIRST: every circuit, symbol and diagram must be exactly as "
+    "the source describes it - standard component symbols, correct polarity (electrolytic "
+    "capacitor + side to the higher voltage, diode arrow pointing in the direction of "
+    "conventional current, battery + and - correct), correct transistor pins, correct current "
+    "and signal direction, correct wiring, and commands/code shown exactly as written in the "
+    "source. Never invent a circuit or a connection. If a detail is not stated in the source, "
+    "show a simple labelled block diagram instead of a detailed schematic."
 )
 
 
@@ -322,7 +329,9 @@ def write_script(pick: dict) -> dict:
     4. Common mistakes / myths, and pro tips.
     5. Short recap, then one line inviting viewers to subscribe for the next video.
 
-    Rules: 100% accurate; if unsure, leave it out. Simple, confident English for viewers in
+    Rules: 100% accurate; if unsure, leave it out. Whenever you describe a circuit or setup,
+say exactly how each part is connected (which way a diode or capacitor faces, which pin goes
+where, which way the current flows), because the animation is drawn from your words. Simple, confident English for viewers in
     India and the US. {d["safety"]} No brand promotion, no scene directions, no [brackets], no
     emojis.
 
@@ -358,22 +367,33 @@ Return JSON: {{"title": "<working title>", "script": "<the full narration>"}}"""
         raise RuntimeError("Script too short")
     if not on_topic(pick, result["script"]):
         raise RuntimeError(f"Script is not about '{pick['topic']}' - not making this video")
-    try:
-        r = llm.chat_json(f"""You are a strict expert reviewer of {d["about"]}. Check every
-claim, command, number and step in this script; fix anything wrong or misleading. Keep the
-length and spoken style. {d["safety"]}
+    # Two independent expert reviews: the second one checks the corrected script again.
+    for review in (1, 2):
+        try:
+            r = llm.chat_json(f"""You are a strict senior professor and practising engineer in
+{d["about"]}, reviewing a script before it is published to thousands of students. A viewer
+already caught a wrong capacitor orientation in an earlier video - be that careful.
+Check EVERYTHING: every fact, number, unit, formula, definition, command, code line, step,
+and every description of how parts are connected (component orientation and polarity,
+diode/capacitor/battery direction, transistor pins, current direction, wiring, signal flow).
+Fix anything wrong, misleading or vague, and make every connection explicit and correct.
+Keep the length, topic and spoken style. {d["safety"]}
 
 SCRIPT:
 {result["script"]}
 
-Return JSON: {{"errors_found": ["..."], "script": "<the corrected script>"}}""",
-                          SYSTEM, temperature=0.2, max_tokens=6000, prefer=llm.WRITER_MODEL)
-        for e in r.get("errors_found", [])[:15]:
-            log.info("Fact-check fix: %s", e)
-        if len(r.get("script", "").split()) >= 600 and on_topic(pick, r["script"]):
-            result["script"] = r["script"]
-    except Exception as exc:
-        log.warning("Fact-check failed, keeping the script: %s", exc)
+Return JSON: {{"errors_found": ["<each mistake you fixed>"], "script": "<the corrected script>"}}""",
+                              SYSTEM, temperature=0.1, max_tokens=6000, prefer=llm.WRITER_MODEL)
+            errors = r.get("errors_found") or []
+            for e in errors[:15]:
+                log.info("Fact-check %d fix: %s", review, e)
+            if len(r.get("script", "").split()) >= 600 and on_topic(pick, r["script"]):
+                result["script"] = r["script"]
+            if not errors:
+                log.info("Fact-check %d: no mistakes found", review)
+                break
+        except Exception as exc:
+            log.warning("Fact-check %d failed, keeping the script: %s", review, exc)
     return result
 
 
