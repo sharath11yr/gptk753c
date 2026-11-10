@@ -250,6 +250,9 @@ def pick_topic() -> dict:
     """Pick a topic with proven big search demand. Topics whose top YouTube results have a
     median below MIN_SEARCH_VIEWS (default 50,000) are skipped and never suggested again."""
     need = int(os.getenv("MIN_SEARCH_VIEWS") or 50000)
+    # Too big is also bad: when the top results all have millions of views, giant channels
+    # own that search and a small channel never shows up (python tutorial: 8M -> we got 4 views).
+    cap = int(os.getenv("MAX_SEARCH_VIEWS") or 1000000)
     rejected: list[str] = []
     for attempt in range(6):
         r = _pick_once(rejected + _low_demand()[-60:])
@@ -262,9 +265,9 @@ def pick_topic() -> dict:
         if demand is None:  # can't measure (no key / quota): don't block the channel
             log.warning("Search demand unknown - using the pick")
             return r
-        log.info("Search demand for '%s': median %s views of the top 10 results (need %s)",
-                 r.get("search_phrase"), f"{demand:,}", f"{need:,}")
-        if demand >= need:
+        log.info("Search demand for '%s': median %s views of the top 10 results (want %s-%s)",
+                 r.get("search_phrase"), f"{demand:,}", f"{need:,}", f"{cap:,}")
+        if need <= demand <= cap:
             r["search_demand"] = demand
             return r
         rejected.append(r.get("search_phrase") or r.get("topic", ""))
@@ -285,7 +288,7 @@ now, with a popularity score:
 {listing}
 
 Already made (do not repeat, not even reworded): {"; ".join(_made_before()[-80:]) or "none"}
-Too few searches - never pick these or anything similar: {"; ".join(avoid) or "none"}
+Rejected (too few searches, too crowded, or already made) - never pick these or anything similar: {"; ".join(avoid) or "none"}
 Already on the channel: {"; ".join(t[:60] for t in channel_videos()["titles"][:120]) or "none"}
 
 OUR MOST-VIEWED VIDEOS (a hint about who watches us and which title style works - NOT a
@@ -300,7 +303,10 @@ installs, exam topics. Use our most-viewed videos only to break ties.
 The video MUST be about {d["about"]} - nothing outside this field (no history, no general
 science, no entertainment).
 
-Pick the ONE best next video: the highest search demand, beginner-friendly but with
+Pick the ONE best next video: strong search demand that a small channel can still win -
+a specific, clearly-worded search (e.g. "full wave bridge rectifier working", "nmap scan
+types", "python list comprehension") rather than a huge generic one ("python tutorial")
+that giant channels own. Beginner-friendly but with
 depth, evergreen enough to get views for months, and something a 8-10 minute animated
 explainer can cover really well. {d["safety"]}
 
