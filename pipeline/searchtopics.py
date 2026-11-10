@@ -213,6 +213,28 @@ def _demand_from_page(phrase: str) -> int | None:
         return None
 
 
+_STOP = {"the", "and", "for", "how", "what", "why", "with", "your", "you", "are", "does",
+         "work", "works", "explained", "tutorial", "beginners", "beginner", "guide", "complete",
+         "full", "course", "simple", "simply", "step", "from", "into", "that", "this", "best",
+         "2024", "2025", "2026", "part", "basics", "introduction", "learn", "real", "method"}
+
+
+def _key(s: str) -> set[str]:
+    return _words(s) - _STOP
+
+
+def already_made(pick: dict) -> str | None:
+    """The existing topic/video this pick repeats, or None. Checked in code, not left to the AI."""
+    new = _key(pick.get("topic", "")) | _key(pick.get("search_phrase", ""))
+    if not new:
+        return None
+    for old in _made_before() + channel_videos()["titles"]:
+        o = _key(old)
+        if o and len(new & o) >= max(2, int(0.6 * min(len(new), len(o)))):
+            return old
+    return None
+
+
 def _low_demand() -> list[str]:
     return json.loads(LOW_DEMAND_FILE.read_text()) if LOW_DEMAND_FILE.exists() else []
 
@@ -224,6 +246,11 @@ def pick_topic() -> dict:
     rejected: list[str] = []
     for attempt in range(6):
         r = _pick_once(rejected + _low_demand()[-60:])
+        dup = already_made(r)
+        if dup:
+            log.info("Skipping '%s': the channel already has '%s'", r.get("topic"), dup)
+            rejected.append(r.get("search_phrase") or r.get("topic", ""))
+            continue
         demand = search_demand(r.get("search_phrase") or r.get("topic", ""))
         if demand is None:  # can't measure (no key / quota): don't block the channel
             log.warning("Search demand unknown - using the pick")
@@ -236,7 +263,7 @@ def pick_topic() -> dict:
         rejected.append(r.get("search_phrase") or r.get("topic", ""))
         LOW_DEMAND_FILE.parent.mkdir(parents=True, exist_ok=True)
         LOW_DEMAND_FILE.write_text(json.dumps(_low_demand() + rejected[-1:], indent=1))
-    raise RuntimeError(f"No topic with enough search demand found this run (tried: {'; '.join(rejected)}) - "
+    raise RuntimeError(f"No new topic with enough search demand found this run (tried: {'; '.join(rejected)}) - "
                        "trying again next hour")
 
 
@@ -279,43 +306,58 @@ search phrase it targets>", "angle": "<the hook/angle that makes people click an
 
 def write_script(pick: dict) -> dict:
     d = _domain()
-    result = llm.chat_json(f"""Write the narration for a YouTube video.
-Topic: {pick["topic"]}
-People search: "{pick["search_phrase"]}"
-Angle: {pick.get("angle", "")}
+    def draft() -> dict:
+        return llm.chat_json(f"""Write the narration for a YouTube video.
+    Topic: {pick["topic"]}
+    People search: "{pick["search_phrase"]}"
+    Angle: {pick.get("angle", "")}
 
-Spoken narration only, 1100-1300 words (about 9 minutes):
-1. Hook (first 15 seconds): answer why this matters right now, with a surprising fact or a
-   question, and promise exactly what the viewer gets by the end.
-2. Deliver exactly what the searcher wants, step by step, in depth, with correct details,
-   real examples and an everyday analogy for the hard part.
-3. Keep tension: every 60-90 seconds tease the next part ("but here's the part most people
-   get wrong...").
-4. Common mistakes / myths, and pro tips.
-5. Short recap, then one line inviting viewers to subscribe for the next video.
+    Spoken narration only, 1100-1300 words (about 9 minutes):
+    1. Hook (first 15 seconds): answer why this matters right now, with a surprising fact or a
+       question, and promise exactly what the viewer gets by the end.
+    2. Deliver exactly what the searcher wants, step by step, in depth, with correct details,
+       real examples and an everyday analogy for the hard part.
+    3. Keep tension: every 60-90 seconds tease the next part ("but here's the part most people
+       get wrong...").
+    4. Common mistakes / myths, and pro tips.
+    5. Short recap, then one line inviting viewers to subscribe for the next video.
 
-Rules: 100% accurate; if unsure, leave it out. Simple, confident English for viewers in
-India and the US. {d["safety"]} No brand promotion, no scene directions, no [brackets], no
-emojis.
+    Rules: 100% accurate; if unsure, leave it out. Simple, confident English for viewers in
+    India and the US. {d["safety"]} No brand promotion, no scene directions, no [brackets], no
+    emojis.
 
-Return JSON: {{"title": "<working title>", "script": "<the full narration>"}}""",
-                           SYSTEM, temperature=0.5, max_tokens=6000, prefer=llm.WRITER_MODEL)
+    Return JSON: {{"title": "<working title>", "script": "<the full narration>"}}""",
+                               SYSTEM, temperature=0.5, max_tokens=6000, prefer=llm.WRITER_MODEL)
+
+    result = {}
+    for _ in range(3):  # an empty or off-topic answer is thrown away and written again
+        result = draft()
+        if len(result.get("script", "").split()) >= 300 and on_topic(pick, result["script"]):
+            break
+        log.warning("Draft unusable (%d words, on topic: %s) - writing it again",
+                    len(result.get("script", "").split()), on_topic(pick, result.get("script", "")))
+    else:
+        raise RuntimeError(f"Could not get a usable script about '{pick['topic']}'")
     for _ in range(2):  # too short: expand it instead of giving up
         words = len(result.get("script", "").split())
         if words >= 900:
             break
         log.info("Script has %d words - expanding", words)
-        longer = llm.chat_json(f"""Expand this narration to 1100-1300 words: more depth, more
+        longer = llm.chat_json(f"""This narration is about: {pick["topic"]} (people search
+"{pick["search_phrase"]}"). Stay on exactly this topic.
+Expand it to 1100-1300 words: more depth, more
 real examples, more step-by-step detail and teasers. Keep the hook, structure and accuracy.
 
 {result.get("script", "")}
 
 Return JSON: {{"title": "<working title>", "script": "<the full narration>"}}""",
                                SYSTEM, temperature=0.5, max_tokens=6000, prefer=llm.WRITER_MODEL)
-        if len(longer.get("script", "").split()) > words:
+        if len(longer.get("script", "").split()) > words and on_topic(pick, longer["script"]):
             result = longer
     if len(result.get("script", "").split()) < 500:
         raise RuntimeError("Script too short")
+    if not on_topic(pick, result["script"]):
+        raise RuntimeError(f"Script is not about '{pick['topic']}' - not making this video")
     try:
         r = llm.chat_json(f"""You are a strict expert reviewer of {d["about"]}. Check every
 claim, command, number and step in this script; fix anything wrong or misleading. Keep the
@@ -328,11 +370,22 @@ Return JSON: {{"errors_found": ["..."], "script": "<the corrected script>"}}""",
                           SYSTEM, temperature=0.2, max_tokens=6000, prefer=llm.WRITER_MODEL)
         for e in r.get("errors_found", [])[:15]:
             log.info("Fact-check fix: %s", e)
-        if len(r.get("script", "").split()) >= 600:
+        if len(r.get("script", "").split()) >= 600 and on_topic(pick, r["script"]):
             result["script"] = r["script"]
     except Exception as exc:
         log.warning("Fact-check failed, keeping the script: %s", exc)
     return result
+
+
+def on_topic(pick: dict, script: str) -> bool:
+    """True when the script is really about the picked topic: most of the topic's key words
+    appear in it. Stops a wandering AI answer (e.g. a pyramid story) from becoming a video."""
+    key = _key(pick.get("topic", "")) | _key(pick.get("search_phrase", ""))
+    if not key or not script:
+        return bool(script)
+    text = _words(script)
+    hits = {w for w in key if w in text or (len(w) > 4 and any(t.startswith(w[:5]) for t in text))}
+    return len(hits) >= max(1, (len(key) + 1) // 2)
 
 
 def _made_before() -> list[str]:
