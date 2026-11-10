@@ -1,0 +1,246 @@
+SQL Interview Questions and Answers
+search: sql interview questions and answers
+tutorial: False
+
+You are sitting in an interview room, or on a Zoom call, and the interviewer asks: 'Tell me about Indexes.' You nod, you smile, you talk about B-Trees for a minute. Then they smile back and say: 'Great, but what happens when you have a LIKE \'%abc\' query on that same index? What actually happens to the performance?' If you just stared blankly, you are not alone. Most candidates prepare for the theory, but fail when the interviewer pushes past the textbook. Hi, I'm [Name], and welcome to a video that doesn't just list questions. We are going to dissect the ten SQL interview questions that catch people off guard, and by the end, you will know exactly how to answer them, step-by-step, with the commands you can actually run.
+
+[HOOK & ROADMAP]
+
+Why does this matter right now? Because SQL interviews are getting harder. A recent study of tech hiring showed that 70% of candidates fail not because they don't know SQL, but because they can't explain what happens under the hood when they write a simple query. I'm promising you this: by the end of this video, you will have the exact answers to the ten most surprising SQL questions, complete with the commands, the logic, and a final check so you can verify your understanding immediately. No fluff, no theory that goes nowhere. Let's get started.
+
+[PART 1: THE BASICS REIMAGINED]
+
+Question one: 'Write a query to find the second highest salary from the Employee table.' This is a classic. Most people try to use complex subqueries immediately. But here is the step-by-step, the way a hiring manager actually wants to see it.
+
+We have an Employee table. It has an ID, a Name, and a Salary. If you want the second highest, you cannot just sort and take the top, because that gives you the highest. You have to push the highest one down.
+
+The most efficient way, using standard SQL, involves the LIMIT and OFFSET keywords. Type this out: SELECT Salary FROM Employee ORDER BY Salary DESC LIMIT 1 OFFSET 0;
+
+Let's break that down. ORDER BY Salary DESC sorts the salaries from highest to lowest. LIMIT 1 says, 'I only want one row.' OFFSET 0 says, 'Skip zero rows.' So, the very first row that pops up is the highest... wait, no. To get the second highest, we skip the first row. The correct syntax for the *second* highest is: SELECT Salary FROM Employee ORDER BY Salary DESC LIMIT 1 OFFSET 1;
+
+Let's break that down again. ORDER BY Salary DESC sorts the salaries from highest to lowest. LIMIT 1 says, 'I only want one row.' OFFSET 1 says, 'Skip the first row.' So, you skip the highest salary, and the very next row that pops up is the second highest.
+
+Now, a very common mistake I see is people using ROW_NUMBER or RANK without understanding the difference. If you use RANK, and two people have the exact same top salary, RANK will give both of them rank one, and the next person will be rank three. If you use ROW_NUMBER, it assigns a sequential number regardless of ties. For this specific question, if you want to handle ties—meaning if two people tie for first, who is the second highest?—you might prefer DENSE_RANK. But for a simple 'second highest' where ties don't matter or you just want the next distinct value, LIMIT and OFFSET is the cleanest, most readable answer. Here is your final check: Run that query on any database. If you have salaries 100, 90, 80, it returns 90. If you have 100, 100, 90, it returns 100. Got it? Good. Moving on.
+
+[TEASE]
+
+But here is the part most people get wrong on this question. I've seen candidates write the query, and when I ask, 'What if there is no second highest salary?'—maybe there is only one employee in the table—their query crashes. We will talk about how to handle that edge case in the next part, but for now, let's look at a question about joining tables.
+
+[PART 2: JOINS AND THE TRAP]
+
+Question two: 'What is the difference between INNER JOIN and LEFT JOIN?' This seems simple, right? But in an interview, if you just say 'one keeps matching rows and one keeps all from the left,' you might lose points if they ask for an example.
+
+Let's visualize this. Imagine you have two tables. Table A is 'Customers.' Table B is 'Orders.'
+
+An INNER JOIN between Customers and Orders only returns rows where there is a match in both tables. If Customer X has not placed any orders, Customer X disappears from the result. It's like a strict filter.
+
+A LEFT JOIN, however, returns ALL rows from the left table (Customers), and the matching rows from the right table (Orders). If Customer X has no orders, they still appear in the result, but the columns from the Orders table will be NULL.
+
+Here is the command to demonstrate a LEFT JOIN.
+
+SELECT Customers.Name, Orders.OrderDate
+FROM Customers
+LEFT JOIN Orders ON Customers.ID = Orders.CustomerID;
+
+See? Even customers with no orders show up, with a NULL date. This is the key distinction. The LEFT JOIN preserves the left table's data.
+
+A common mistake? Thinking LEFT JOIN is always 'slower' or 'better.' It's not. It depends on your data. If you want only customers who have orders, use INNER. If you want a report of all customers, even those who haven't bought anything, use LEFT. Here is your pro tip: If you need to find customers who have NO orders, you actually add a WHERE clause after the LEFT JOIN. Type this: WHERE Orders.OrderID IS NULL. This filters the results to show only the customers where the OrderID from the right table is missing. That is a pro move.
+
+[TEASE]
+
+But wait, there is a visual trap with JOINs that catches people off guard. If you have three tables, the order in which you write the JOINs changes the result entirely. I'll show you how to handle that chain correctly after this quick break.
+
+[PART 3: AGGREGATION AND THE HIDDEN GROUP]
+
+Question three: 'How do you find the average salary per department?' This tests your knowledge of the GROUP BY clause.
+
+You have an Employee table with DepartmentID and Salary. You want the average salary for each department.
+
+The command is straightforward:
+
+SELECT DepartmentID, AVG(Salary) AS AvgSalary
+FROM Employee
+GROUP BY DepartmentID;
+
+Now, here is the trap. If you forget the GROUP BY clause, the database doesn't know you want averages for groups. It might return an error, or it might return the average of the entire table, which is useless.
+
+But the real mistake candidates make is forgetting about non-aggregated columns. If you write: SELECT DepartmentID, EmployeeName, AVG(Salary) FROM Employee GROUP BY DepartmentID; some databases will throw an error because EmployeeName is not in the GROUP BY clause and not inside an aggregate function. The database doesn't know which 'EmployeeName' to pick for that department.
+
+The fix? If you need EmployeeName, you usually have to use a subquery or a window function. But for a simple average per department, sticking to the GROUP BY on the ID is the safest, most accurate path. Here is your check: Run the query. Does it return one row per department with the correct average? Perfect.
+
+[TEASE]
+
+We are moving into the dangerous territory of subqueries now. Question four is often the moment where the interview shifts from 'basic' to 'challenging.'
+
+[PART 4: SUBQUERIES AND PERFORMANCE]
+
+Question four: 'Write a query to find employees who earn more than the average salary.' This is a classic subquery question.
+
+Most people write this in two steps. First, find the average. Then, compare.
+
+But you can do it in a single line using a subquery in the WHERE clause.
+
+Type this:
+
+SELECT Name, Salary
+FROM Employee
+WHERE Salary > (SELECT AVG(Salary) FROM Employee);
+
+See that inner part in parentheses? That is the subquery. It calculates the average salary of the entire table first. Then, the outer query runs and checks each employee's salary against that number.
+
+Now, the mistake? Using a subquery when a JOIN is more efficient, or vice versa. But for this specific question, the subquery is the most readable and often the expected answer.
+
+However, there is a performance trap. If the Employee table has millions of rows, that subquery runs once, but the comparison happens for every single row. In massive datasets, a JOIN with a derived table might be faster. But in an interview setting, unless they ask about performance optimization, the subquery above is the correct, expected response. Here is your final check: Does the result show only the names and salaries of people who beat the average? Yes? Great.
+
+[PART 5: THE NULL TRAP]
+
+Question five: 'What happens when you use NULL in a WHERE clause?' This is the most dangerous question in SQL because it trips up even experienced developers.
+
+People often write: SELECT * FROM Employee WHERE Salary = NULL;
+
+And they expect it to find employees with no salary. It won't. In SQL, NULL is not a value; it is a marker for 'missing data.' You cannot use the equals operator to check for it.
+
+To check for NULL, you must use the IS NULL or IS NOT NULL operators.
+
+Type this to find employees with no salary assigned:
+
+SELECT * FROM Employee WHERE Salary IS NULL;
+
+And to find those who have a salary:
+
+SELECT * FROM Employee WHERE Salary IS NOT NULL;
+
+The mistake here is using = NULL. That condition always evaluates to unknown, and the row is filtered out. If you want to find employees who have a salary of zero, you write Salary = 0. But if the salary column is just empty or unassigned, it is NULL, and you must use IS NULL. Here is your pro tip: If you are combining conditions, remember that NULL combined with anything using AND or OR often results in NULL, which is treated as false. Always handle NULL checks explicitly at the start of your WHERE clause if you are looking for missing data.
+
+[TEASE]
+
+We have covered sorting, joining, averaging, and the dreaded NULL. But questions six and seven often involve set operations—combining results from different tables. That is where most people stumble on syntax.
+
+[PART 6: UNION VS. UNION ALL]
+
+Question six: 'What is the difference between UNION and UNION ALL?'
+
+This tests if you understand duplicates and schema compatibility.
+
+UNION combines the result sets of two or more SELECT statements. Here is the crucial rule: It removes duplicate rows. It also requires that the number of columns and their data types in all the SELECT statements are the same.
+
+UNION ALL does exactly the same thing, but it does NOT remove duplicates. It simply stacks the results on top of each other.
+
+Why would you use one over the other? If you know your data has no duplicates, or if duplicates are meaningful and you want to keep them, use UNION ALL. It is faster because the database doesn't have to do the extra work of checking for and removing duplicates.
+
+Here is the syntax for UNION:
+
+SELECT Column FROM Table1
+UNION
+SELECT Column FROM Table2;
+
+And for UNION ALL:
+
+SELECT Column FROM Table1
+UNION ALL
+SELECT Column FROM Table2;
+
+The mistake? Trying to use UNION ALL when you need distinct results, or using UNION when you have duplicates and want to keep them, resulting in slower performance than necessary. Here is your check: Run a UNION. Do you see fewer rows than the sum of the two tables? If yes, UNION is working.
+
+[PART 7: THE VIEW PERSPECTIVE]
+
+Question seven: 'What is a View, and why would you use one?'
+
+A View is essentially a saved query. It is a virtual table based on the result-set of an SQL statement.
+
+Think of it like this: Imagine you have a complex query that joins three tables, filters by date, and calculates percentages. Every time you want to see that data, you don't want to type that whole long block of code again. You create a View.
+
+The command is:
+
+CREATE VIEW ActiveCustomers AS
+SELECT CustomerID, Name
+FROM Customers
+WHERE Country = 'USA' AND LastLogin > '2023-01-01';
+
+Now, you can just type: SELECT * FROM ActiveCustomers;
+
+And it runs that complex logic instantly. The View doesn't store data itself; it just stores the query. Every time you query the View, the database runs the underlying command against the real tables.
+
+The common mistake? Thinking a View is a physical table that takes up storage space. It doesn't. It's just a shortcut. Another mistake? Trying to update data directly through a View that involves complex joins or aggregations, which often fails depending on the database system. For simple filters and selects, Views are incredibly powerful. Here is your final check: Can you select from your View without error? Yes? You nailed it.
+
+[PART 8: INDEXES UNDER THE HOOD]
+
+Question eight: 'Explain how an Index works.' This is often asked to see if you understand performance.
+
+An Index in SQL is like the index at the back of a book. If you want to find the word 'Database,' you don't read every page from page one. You go to the index, find 'Database,' and it tells you the page number.
+
+In a database, if you have a million rows in a table, and you want to find a specific ID, without an index, the database has to look at every single row—this is a Table Scan. It's slow.
+
+With an Index on that ID column, the database uses a data structure, usually a B-Tree, to find the row instantly.
+
+To create an index, you type:
+
+CREATE INDEX idx_employee_name ON Employee(Name);
+
+Now, a critical mistake candidates make is indexing every column. Bad idea. Indexes speed up reads, but they slow down writes. Every time you INSERT, UPDATE, or DELETE data, the database has to update the index as well. If you index too many columns, your insert speeds will crawl.
+
+The pro tip? Index columns that are frequently used in WHERE clauses, JOIN conditions, or as Primary Keys. Leave rarely searched columns alone. Here is your check: If you run a query that searches by Name, and it runs instantly, your index is working.
+
+[PART 9: TRANSACTIONS AND ACID]
+
+Question nine: 'What are the ACID properties of a transaction?'
+
+This is a theory question, but I will give you the practical application.
+
+ACID stands for Atomicity, Consistency, Isolation, and Durability.
+
+Atomicity means all or nothing. If you are transferring money from Account A to Account B, and the system crashes after deducting from A but before adding to B, that's a failure. The transaction is rolled back.
+
+Consistency ensures the database moves from one valid state to another, maintaining rules like constraints.
+
+Isolation means that concurrent transactions happen in such a way that they don't interfere with each other. You don't want two people transferring money at the same time and seeing intermediate balances.
+
+Durability means once a transaction is committed, it stays that way, even if the power goes out immediately after.
+
+To demonstrate this practically, we use the BEGIN TRANSACTION, COMMIT, and ROLLBACK commands.
+
+Type this to start a hypothetical transfer:
+
+BEGIN TRANSACTION;
+UPDATE Accounts SET Balance = Balance - 100 WHERE ID = 'A';
+-- Simulate an error here
+ROLLBACK;
+-- The changes are undone.
+
+OR, if everything is fine:
+COMMIT;
+-- The changes are permanent.
+
+The mistake? Forgetting to use transactions for critical operations. If you are moving money or updating related tables, always wrap it in a transaction. If you don't, a crash means partial data, and your database becomes inconsistent. Here is your pro tip: Always test your ROLLBACK by intentionally causing an error after the UPDATE to see if the first change reverts.
+
+[PART 10: THE FINAL CURVEBALL]
+
+Question ten: 'Write a query to find the Nth highest salary.' This is the ultimate test of your SQL flexibility.
+
+There are a few ways to do this. The most robust way, handling ties and varying N values, uses a Common Table Expression, or CTE.
+
+Type this out:
+
+WITH RankedSalaries AS (
+SELECT Salary, DENSE_RANK() OVER (ORDER BY Salary DESC) as Rank
+FROM Employee
+)
+SELECT Salary FROM RankedSalaries WHERE Rank = 3;
+
+Let's break this down. We are using a CTE, which is a temporary result set that you can reference within a SELECT, INSERT, UPDATE, or DELETE statement.
+
+Inside, we use DENSE_RANK. Remember our earlier discussion about RANK vs. ROW_NUMBER? DENSE_RANK is like RANK, but it doesn't leave gaps. If two people are tied for first, they both get Rank 1, and the next person gets Rank 2. There is no Rank 3 missing.
+
+We order by Salary DESC. Then, in the outer query, we just filter for the Rank we want. If you want the 5th highest, you just change the 3 to a 5.
+
+The mistake? Using ROW_NUMBER when you want to handle ties, or using RANK when you want no gaps. DENSE_RANK is usually the safest bet for 'Nth highest' interview questions because it handles the logic people expect without confusing gaps.
+
+Here is your final check: If you have salaries 100, 100, 90, 80, and you want the 2nd highest, this query returns 100. If you wanted the 3rd highest, it returns 90. Perfect.
+
+[RECAP & CALL TO ACTION]
+
+Let's recap what we covered today. We started with finding the second highest salary using LIMIT and OFFSET. We distinguished INNER from LEFT JOINs, and showed how to find customers with no orders. We tackled GROUP BY traps and NULL values, making sure you never use the equals sign with NULL again. We mastered UNION and UNION ALL, understanding the performance trade-offs. We created Views to simplify complex queries. We dived into how Indexes work like a book's index, and why you shouldn't over-index. We broke down the ACID properties of transactions, and finally, we used a CTE with DENSE_RANK to find the Nth highest salary.
+
+You now have the exact commands, the logic, and the pro tips to ace these questions in your next interview. No more guessing. No more freezing up when they ask 'what happens if...'
+
+If you found this breakdown helpful, smash that like button it helps the algorithm, and subscribe for more deep-dives into technical interviews. We have a video coming up on Python debugging tricks, so hit that subscribe button and ring the bell so you don't miss it. I'll see you in the next one. Goodbye!
