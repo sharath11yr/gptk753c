@@ -88,6 +88,22 @@ VISUAL_STYLE = (
 )
 
 
+TUTORIAL_STYLE = (
+    "THIS IS A STEP-BY-STEP TUTORIAL: the viewer must be able to follow along and finish the "
+    "task. Show EVERY step from the source, in the same order, each as its own scene, with the "
+    "exact command, menu path, button or setting written clearly on screen (realistic "
+    "terminal / settings screens). Never skip, merge or summarise steps, and never replace the "
+    "steps with background or history. Keep each command on screen long enough to copy."
+)
+_HOWTO = re.compile(r"\b(how to|install|setup|set up|configure|tutorial|step by step|"
+                    r"fix|enable|download|commands?|guide)\b", re.I)
+
+
+def is_tutorial(pick: dict) -> bool:
+    """The searcher wants to DO something (install, set up, use a tool), not just understand it."""
+    return bool(_HOWTO.search(f'{pick.get("search_phrase", "")} {pick.get("topic", "")}'))
+
+
 def _domain() -> dict:
     return DOMAINS[os.getenv("SEARCH_DOMAIN") or DEFAULT_DOMAIN]
 
@@ -319,8 +335,18 @@ search phrase it targets>", "angle": "<the hook/angle that makes people click an
 
 def write_script(pick: dict) -> dict:
     d = _domain()
+    howto = ("""
+THIS IS A HOW-TO / TUTORIAL SEARCH. The viewer wants to actually do it, so at least 70% of
+the narration must be the real steps:
+- What you need first (requirements, versions, hardware).
+- Numbered steps in exact order: "Step 1: ...". For each step give the exact command (spoken
+  clearly, e.g. "type: wsl --install"), the exact menu path or button, and what you should
+  see when it worked.
+- How to check it worked at the end, and fixes for the 2-3 most common errors.
+- No long history or theory - one short line of context at most.
+""" if is_tutorial(pick) else "")
     def draft() -> dict:
-        return llm.chat_json(f"""Write the narration for a YouTube video.
+        return llm.chat_json(f"""Write the narration for a YouTube video.{howto}
     Topic: {pick["topic"]}
     People search: "{pick["search_phrase"]}"
     Angle: {pick.get("angle", "")}
@@ -383,6 +409,8 @@ Check EVERYTHING: every fact, number, unit, formula, definition, command, code l
 and every description of how parts are connected (component orientation and polarity,
 diode/capacitor/battery direction, transistor pins, current direction, wiring, signal flow).
 Fix anything wrong, misleading or vague, and make every connection explicit and correct.
+Also check the script fully delivers what someone searching "{pick.get("search_phrase", "")}"
+wants. {"It is a tutorial: every step must be there, numbered, in the right order, with the exact commands / menu paths and a final check - add any missing step." if is_tutorial(pick) else ""}
 Keep the length, topic and spoken style. {d["safety"]}
 
 SCRIPT:
@@ -429,9 +457,18 @@ def create_script() -> dict:
     pick = pick_topic()
     mark_used(pick["topic"])  # remembered at once, so a failed run never repeats it
     result = write_script(pick)
+    try:  # keep the script, so a viewer complaint can be checked against what we wrote
+        Path("state/scripts").mkdir(parents=True, exist_ok=True)
+        slug = re.sub(r"[^a-z0-9]+", "-", pick["topic"].lower())[:60].strip("-")
+        Path(f"state/scripts/{dt.date.today().isoformat()}-{slug}.txt").write_text(
+            f'{pick["topic"]}\nsearch: {pick.get("search_phrase")}\ntutorial: {is_tutorial(pick)}\n\n'
+            + result["script"])
+    except Exception as exc:
+        log.warning("Could not save the script: %s", exc)
     result.update({"topic": pick["topic"], "search_topic": pick["topic"],
                    "search_phrase": pick.get("search_phrase", pick["topic"]),
-                   "visual_style": VISUAL_STYLE, "sources": [], "research": {},
+                   "visual_style": VISUAL_STYLE + (" " + TUTORIAL_STYLE if is_tutorial(pick) else ""),
+                   "sources": [], "research": {},
                    "date": dt.date.today().isoformat()})
     return result
 
