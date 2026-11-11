@@ -1,0 +1,35 @@
+Linux Commands for Ethical Hacking and Cybersecurity Basics
+search: linux commands for ethical hacking
+tutorial: True
+
+Imagine you're locked out of a digital fortress. Every year, over 30,000 websites are defaced, and the first thing a penetration tester does is open a terminal. If you're searching for 'Linux commands for ethical hacking,' you're in the right place. By the end of this video, you will know the exact top 10 commands hackers use, how to type them, and how to practice them safely right now. Let's get started.
+
+Step 1: Update and upgrade your system. This is the foundation. Open your terminal and type: sudo apt update && sudo apt upgrade -y. Press Enter. You will see a list of packages downloading and a progress bar. Once it finishes, you are running the latest, most secure versions.
+
+Step 2: Install Nmap. The network scanner. Type: sudo apt install nmap -y. Press Enter. When prompted, type 'Y' and press Enter again. You will see 'Nmap installed.' This command discovers live hosts on a network.
+
+Step 3: Scan your own local network. Type: nmap 192.168.1.0/24. Press Enter. You will see a list of IP addresses, open ports, and service versions. This is how hackers map a target. By identifying live hosts, you can see who is online before launching any further analysis.
+
+Step 4: Use Wireshark to capture traffic. Type: sudo apt install wireshark -y. Press Enter. Select 'Yes' when asked about the user group. Open Wireshark from your menu. Start capturing packets. You will see real-time data flowing—IP addresses, protocols, and packet sizes. This is the digital equivalent of wiretapping, allowing you to see unencrypted data moving across the network.
+
+Step 5: Find your external IP. Type: curl -s ifconfig.me. Press Enter. You will see a string of numbers. This is your public fingerprint on the internet. Understanding your own external IP is the first step in understanding how you appear to the outside world.
+
+Step 6: Check open ports on your machine. Type: ss -tuln. Press Enter. You will see a table of Local Addresses and state (LISTEN). This shows which services are currently listening for connections. If you see port 22 open, for example, that means SSH is running, which is a common target for brute force attacks.
+
+Step 7: Search for files recursively. Type: grep -ri "password" /etc/. Press Enter. You will see any files containing that word, ignoring case. This is essential for finding configuration files that administrators modify.
+
+Step 8: Make a script executable. Type: chmod +x script.sh. Press Enter. You will see no output if successful. Verify the change worked by typing: ls -l script.sh. You will see an 'x' in the permissions column. This grants the script execute access.
+
+Step 9: Use curl to test a website. Type: curl -I http://example.com. Press Enter. You will see HTTP headers—status codes and server types. This is used to gather information about the target server. The '-I' flag specifically requests only the headers.
+
+Step 10: Search for known vulnerabilities. Type: searchsploit -c apache. Press Enter. You will see a list of exploits with URLs and descriptions for Apache. This is a database of public security research. It allows you to see if a vulnerability is publicly known, which is essential for understanding the threat landscape and defensive patching.
+
+How do you check if it worked? Simply open your terminal and type the command you just learned. If you see output resembling what I just described, you have successfully installed and executed the command.
+
+Now, let's talk about the two biggest mistakes beginners make. Myth number one: people think typing 'sudo' gives them permanent access. In reality, sudo only lasts for a few minutes, typically 5 to 15 minutes depending on the distribution settings. If you walk away from your keyboard, you will be locked out and have to type your password again. Myth two: beginners often run Nmap on networks they don't own. This is illegal under laws like the Computer Fraud and Abuse Act in the US. Always use these commands on your own lab environment or with explicit, written permission from the system owner.
+
+Pro tip: Create a practice lab. Install VirtualBox or VMware, download a Kali Linux ISO, and snapshot the machine. You can experiment with it and reset it to a clean state without consequences. This sandboxing is how professionals learn without risking their careers or legal trouble.
+
+Let's recap. We covered updating your system to ensure you have the latest security patches, scanning networks with Nmap to discover live hosts, capturing traffic with Wireshark to analyze packets, finding your external IP to understand your footprint, checking open ports with ss to see listening services, searching for files with grep to find configuration files, changing permissions with chmod to grant execute access, testing websites with curl to fingerprint servers, and searching for exploits with searchsploit to understand known vulnerabilities. You now have the top 10 commands every ethical hacker must know.
+
+If you found this tutorial helpful and want to master the command line for cybersecurity, hit that subscribe button and ring the bell for more tutorials. See you in the next video.
