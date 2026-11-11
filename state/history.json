@@ -244,5 +244,11 @@
     "topic": "SQL Interview Questions and Answers",
     "title": "What Happens When You LIKE '%abc'? The SQL Interview Question That Stumps 70%",
     "youtube_id": "d6i2ZaagWlI"
+  },
+  {
+    "date": "2026-11-11",
+    "topic": "DBMS Normalization explained with real-world examples",
+    "title": "DBMS Normalization: The 40% Bug Trap & How 1NF, 2NF & 3NF Actually Work",
+    "youtube_id": "xjBivoX3UTE"
   }
 ]
