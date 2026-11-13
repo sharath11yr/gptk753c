@@ -298,5 +298,11 @@
     "topic": "How computers work from scratch",
     "title": "How Computers Work: The Magic School Bus Guide to Binary & Circuits",
     "youtube_id": "0UceLham-kw"
+  },
+  {
+    "date": "2026-11-13",
+    "topic": "How to use VS Code debugger effectively",
+    "title": "VS Code Debugger: 3 Tricks to Stop Guessing & Fix Bugs Fast",
+    "youtube_id": "wj4rE21h1-o"
   }
 ]
