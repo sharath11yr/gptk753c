@@ -1,0 +1,296 @@
+DSA Dynamic Programming Patterns
+search: leetcode dynamic programming
+tutorial: False
+
+If you are watching this video, there is a very high chance you have stared at a LeetCode problem, felt that sinking feeling in your stomach, and thought, 'I know Dynamic Programming, but which pattern do I even use?' You are not alone. Every single day, thousands of people search for 'LeetCode Dynamic Programming' hoping to find the missing piece that will finally unlock these problems for them. The truth is, most tutorials give you theory. They show you a recursive formula, maybe a picture of a grid, and then they expect you to magically know how to apply it. But here is the reality: if a title promises a 'how-to,' the viewer needs every single step, in order, with the exact commands and a final check. Today, we are going to give you exactly that. By the end of this video, you will know the five Dynamic Programming patterns that solve 80% of interview problems, and you will have the exact code to run them yourself, with a final check after each one so you never have to guess which formula to use again.
+
+[HOOK END]
+
+Let’s be honest. When you see a new DP problem, do you scroll through your notes trying to remember if it’s a 'Knapsack' or a 'Longest Increasing Subsequence'? It feels like guessing, doesn't it? The reason this happens is that most people learn DP as a collection of unrelated problems. But the high-performers? They don't memorize problems. They master patterns. Today, we are going to dive deep into the five recurring structures that appear again and again. We will break down each one step-by-step, I will give you a real LeetCode example for each, and we will use an everyday analogy so the hardest part finally clicks. And I am going to give you the exact Python code on screen so you can copy-paste it into your editor right now. And I am going to tease you every minute or so with a 'but wait' moment, because staying engaged is just as important as learning the concept. So, if you are ready to stop guessing and start solving, hit that subscribe button and let's get into it.
+
+[HOOK END 2 - COMMIT TO STEPS]
+
+Let’s be honest. When you see a new DP problem, do you scroll through your notes trying to remember if it’s a 'Knapsack' or a 'Longest Increasing Subsequence'? It feels like guessing, doesn't it? The reason this happens is that most people learn DP as a collection of unrelated problems. But the high-performers? They don't memorize problems. They master patterns. Today, we are going to dive deep into the five recurring structures that appear again and again. We will break down each one step-by-step, I will give you a real LeetCode example for each, and we will use an everyday analogy so the hardest part finally clicks. And I am going to give you the exact Python code on screen so you can copy-paste it into your editor right now.
+
+[TEASE 1: The first pattern we are covering is the foundation of almost every DP problem you will see.]### Pattern 1: The Fibonacci Approach – Simple Recursion with Memoization
+
+The first, and perhaps most fundamental, pattern is what I call the Fibonacci Approach. You have likely seen the Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, and so on. The rule is simple: the next number is the sum of the two preceding ones. In code, that looks like f(n) = f(n-1) + f(n-2).
+
+Now, if you try to write a recursive function for this from scratch, you will run into a massive problem. The function will call itself over and over again for the same values. This is called a 'Tree of Recursion,' and it explodes in complexity. This is the exact mistake viewers make when they skip the 'setup' phase—they write the recursion, but they forget the 'final check' of whether it is efficient.
+
+To fix this, we use Memoization. Think of memoization as a notebook. Instead of recalculating f(2) every time it pops up, you write the answer down the first time you calculate it. The next time you need f(2), you just look at the notebook.
+
+Here is the step-by-step for the Fibonacci pattern:
+
+Step 1: Define a function, let's call it fib, that takes an integer n.
+Step 2: Create a data structure to store results. In Python, this is usually a dictionary or an array. Let's call it memo.
+Step 3: Check if n is already in memo. If it is, return that value immediately. This is the 'shortcut.'
+Step 4: Establish the base cases. For Fibonacci, if n is 0, return 0. If n is 1, return 1.
+Step 5: If n is not in memo, recursively call the function for n-1 and n-2, add them together, store the result in memo, and then return it.
+
+Now, let's look at the real LeetCode example. Problem 70 is 'Climbing Stairs.' The prompt asks: how many distinct ways can you climb to the top if you can take 1 or 2 steps at a time?
+
+The setup is identical to Fibonacci. You are essentially asking: in how many ways can you reach step n? To reach step n, you must have either come from step n-1 or step n-2. Therefore, the number of ways to reach step n is the sum of the ways to reach step n-1 and step n-2.
+
+The code structure looks like this. I will write it on screen now so you can copy it exactly:
+
+```python
+def climbStairs(n):
+    memo = {}
+    def helper(x):
+        if x in memo:
+            return memo[x]
+        if x <= 2:
+            return x
+        memo[x] = helper(x-1) + helper(x-2)
+        return memo[x]
+    return helper(n)
+```
+
+See the 'final check' at the end? We call `helper(n)` and return the result. If you copy this code into LeetCode and run it with `n = 3`, the output should be `3`. This is your final check.
+
+[TEASE 2: But here is the part most people get wrong about this pattern...]
+
+### The Most Common Mistake: Forgetting the Base Cases
+
+The number one mistake I see students make with the Fibonacci pattern is forgetting to define the base cases clearly. They get so excited about the recursion that they forget: what happens when n is 0 or n is 1? If you don't have that 'if x <= 2' check, your function will keep calling itself indefinitely, or it will return incorrect results. Always, always write your base cases first. It is the setup step you cannot skip.
+
+### Pro Tip: Space Optimization
+
+A pro tip for this pattern: you do not actually need an array or a dictionary to store every single previous value. You only need to keep track of the last two results. This reduces the space complexity from O(n) to O(1). You can use two variables, `prev1` and `prev2`, and update them in a loop. This is the most interview-friendly way to write Fibonacci.
+
+[TEASE 3: We have covered the simplest pattern. Now, let's turn the difficulty up a notch. This next pattern is the one that separates the novices from the experts.]### Pattern 2: The Grid Path – Unique Paths and Combinatorics
+
+The second pattern is what I call the Grid Path pattern. This one is visually intuitive, which is why it appears so often in interviews. Imagine a grid. You start at the top-left corner, and your goal is to reach the bottom-right corner. The catch? You can only move right or down. You cannot move left or up.
+
+How many unique paths are there?
+
+This is the pattern that solves problems like LeetCode 62, 'Unique Paths.' The setup here is a 2D array, a grid. Let's say the grid has m rows and n columns.
+
+The logic is step-by-step:
+
+Step 1: Create a 2D array, let's call it dp, with dimensions m x n. Initialize all values to 0.
+Step 2: Set the base case. There is only one way to be at the starting cell, dp[0][0]. So, set dp[0][0] = 1.
+Step 3: Iterate through the grid. Usually, we loop from the first row to the last, and from the first column to the last.
+Step 4: The 'transition' rule. For any cell dp[i][j], the number of ways to reach it is the sum of the ways to reach the cell above it (dp[i-1][j]) and the cell to the left of it (dp[i][j-1]). Why? Because you can only enter that cell from the top or from the left.
+Step 5: The final check. The answer is stored in dp[m-1][n-1], the bottom-right corner.
+
+Now, let's look at the movement. Imagine a physical grid on the floor. To get to a specific tile, you must have stepped on the tile above it or the tile to its left. You cannot teleport there. This analogy helps solidify the direction of the current, so to speak.
+
+The code for this looks like. Please copy this exactly:
+
+```python
+def uniquePaths(m, n):
+    dp = [[0] * n for _ in range(m)]
+    dp[0][0] = 1
+    for i in range(m):
+        for j in range(n):
+            if i > 0:
+                dp[i][j] += dp[i-1][j]
+            if j > 0:
+                dp[i][j] += dp[i][j-1]
+    return dp[m-1][n-1]
+```
+
+Notice the 'final check'? We return `dp[m-1][n-1]`. If you copy this code and run it with `m = 3, n = 7`, the output should be `28`. This is your final check to ensure the pattern works.
+
+[TEASE 4: The analogy for the hard part of this pattern...]
+
+### The Everyday Analogy: Navigating a City
+
+The hard part of the Grid Path pattern is understanding the direction of the dependencies. People often get confused about whether they should add the cell above or the cell below. The analogy I use is navigating a city built on a strict grid system, like Manhattan.
+
+Imagine you are trying to get to a specific building, say the 5th Avenue building. You are currently at street 0. You can only walk North (down the grid) or East (across the grid). If you want to know how many different routes you can take to get to that building, you look at the blocks. To get to the 5th block North and 5th block East, you must have come from either the 4th block North (one block South of your destination) or the 5th block East (one block West of your destination).
+
+You cannot come from the South or the West because you can't walk backwards. This 'one-way street' logic is exactly how the DP table fills up. You start at the origin, and the possibilities compound as you move away from it. If you visualize the grid as a one-way system, the math becomes undeniable.
+
+### Pro Tip: Optimizing to 1D Array
+
+A pro tip for this pattern: you do not actually need a full 2D array. Because when you are calculating row i, you only need the values from row i-1. You can optimize this to a 1D array of size n. You iterate through the rows, and for each cell, you update the value based on the cell to the left (which is already updated in the current row) and the value from the previous row (which is the current index in your 1D array). This slashes the memory usage, and interviewers love to see that you can optimize your space.
+
+[TEASE 5: We are halfway through the patterns now. This next pattern is the game-changer for optimization problems.]### Pattern 3: The Knapsack Pattern – Weight and Value Constraints
+
+The third pattern is the heavy hitter. This is the Knapsack pattern. This pattern shows up in problems where you have a constraint, usually a weight limit, and you need to maximize some value. Think of it as a hiker trying to pack a knapsack. The knapsack can only hold a certain weight, but you have a bunch of items, each with its own weight and its own value. The goal? Maximize the total value of the items you pack without exceeding the weight limit.
+
+This pattern solves LeetCode 416, 'Partition Equal Subset Sum.' We will not cover the Target Sum variant in this video to keep the focus on the core pattern structure, as the logic differs slightly regarding sign handling.
+
+The step-by-step setup for the 0/1 Knapsack pattern is strict:
+
+Step 1: Define your DP table. We usually use a 2D array. Let's say we have n items, and the maximum weight capacity is W. Our table will be (n+1) rows by (W+1) columns. Why n+1? Because we need a row for 'zero items.' Why W+1? Because weight 0 is a valid state.
+Step 2: Initialize the table. Usually, the first row (zero items) is all 0s, because if you have no items, the maximum value is 0. The first column (zero weight) is also all 0s.
+Step 3: The iteration. We loop through every item, from 1 to n. Then, inside that loop, we loop through every possible weight, from 1 to W.
+Step 4: The 'Decision' moment. This is the core of the pattern. For each cell dp[i][j], we ask: should I include item i or not?
+
+If the weight of the current item (let's call it weight[i]) is less than or equal to the current capacity j, we have a choice.
+
+Option A: We exclude the item. The value is simply dp[i-1][j], the value from the previous row at the same capacity.
+Option B: We include the item. If we include it, we add its value value[i], but we must reduce the remaining capacity by its weight. So we look at dp[i-1][j - weight[i]].
+
+We take the maximum of these two options. This is the transition.
+
+If the item's weight is greater than the current capacity j, we cannot include it. In that case, the value is simply dp[i-1][j].
+
+Step 5: The final check. The answer is in the last cell, dp[n][W].
+
+Let's look at a quick example. Say we have two items. Item 1 has weight 1 and value 10. Item 2 has weight 1 and value 20. The capacity is 1.
+
+We iterate. For the first item, we can include it if capacity allows. For the second item, we compare the value of including it versus excluding it.
+
+The code structure is. Please copy this exactly:
+
+```python
+def canPartition(nums):
+    total = sum(nums)
+    if total % 2 != 0:
+        return False
+    target = total // 2
+    n = len(nums)
+    # dp[i][w] represents the value using first i items with capacity w
+    dp = [[False] * (target + 1) for _ in range(n + 1)]
+    dp[0][0] = True
+    for i in range(1, n + 1):
+        for w in range(target + 1):
+            # Option 1: Exclude the current item
+            dp[i][w] = dp[i-1][w]
+            # Option 2: Include the current item if it fits
+            if nums[i-1] <= w:
+                dp[i][w] = dp[i-1][w] or dp[i-1][w - nums[i-1]]
+    return dp[n][target]
+```
+
+See the 'final check'? We return `dp[n][target]`. If you copy this code and run it with `nums = [1, 5, 11, 5]`, the output should be `True`. This is your final check to see if the partition is possible.
+
+[TEASE 6: The analogy for the hard part of the Knapsack pattern...]
+
+### The Everyday Analogy: The Backpack Packing
+
+The hard part of the Knapsack pattern is the 'Decision' moment. It is counter-intuitive to think about including an item and then looking at the *remaining* capacity. The analogy I use is physical backpack packing.
+
+Imagine you are going on a hiking trip. You have a backpack that can hold exactly 10 kilograms. You have three items: a heavy book (weight 6, value high), a water bottle (weight 2, value medium), and a snack (weight 1, value low).
+
+You start packing. If you put the heavy book in first, you only have 4 kg left. Now, can you fit the water bottle and the snack? Yes. But if you look at the total value, maybe the book isn't the best choice.
+
+The DP pattern forces you to evaluate every combination systematically. You don't just grab the heaviest item first. You calculate: 'If I take this item, what is the best value I can get with the leftover space?' This 'remaining capacity' check is the exact moment where most people get stuck. They forget to subtract the weight. But if you visualize packing a real bag, and you physically remove the weight of the item you just chose, the recursion makes perfect sense.
+
+### Pro Tip: The 1D Optimization
+
+A pro tip for the Knapsack pattern: just like the Grid Path, you can optimize the 2D table to a 1D array. Since when calculating dp[w] for the current item, you only need dp[w] and dp[w - weight[i]] from the previous iteration, you can iterate your weight loop backwards, from W down to weight[i]. This prevents you from using the same item twice, which is a common bug in this pattern.
+
+[TEASE 7: The fourth pattern is the king of string problems.]### Pattern 4: The Longest Common Subsequence – Strings
+
+The fourth pattern is the Longest Common Subsequence, or LCS. This pattern is the king of string problems. It appears in everything from DNA sequencing to edit distance problems. The goal of LCS is simple: given two strings, find the longest sequence of characters that appear in both strings in the same order, but not necessarily contiguous.
+
+This solves LeetCode 1143, 'Longest Common Subsequence.' We will not cover the Delete Operation variant in this video to keep the focus on the core pattern structure.
+
+The step-by-step setup:
+
+Step 1: Create a 2D table. Let the strings be word1 of length m and word2 of length n. Create a table dp with dimensions (m+1) x (n+1).
+Step 2: Initialize the borders. The first row and first column are all 0s. This represents the case where one of the strings is empty.
+Step 3: The nested loop. We iterate through word1 and word2.
+Step 4: The matching logic. This is the core. If the current character of word1 matches the current character of word2, we have a match. The value is 1 plus the value from the diagonal cell, dp[i-1][j-1]. This means we are extending the subsequence.
+
+If the characters do not match, we cannot extend the sequence. We must take the maximum of the value from the cell above (dp[i-1][j]) or the cell to the left (dp[i][j-1]). This effectively means we are skipping a character in one of the strings to find a better match.
+Step 5: The final check. The length of the LCS is in the bottom-right cell, dp[m][n].
+
+Let's look at an example. Word1 is 'ABCD' and Word2 is 'ACBD'.
+
+The table fills up. We see that 'AB' is a common subsequence, and 'ACD' is another. The LCS length here is 3.
+
+The code looks like this. Please copy this exactly:
+
+```python
+def longestCommonSubsequence(text1, text2):
+    m, n = len(text1), len(text2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if text1[i-1] == text2[j-1]:
+                dp[i][j] = dp[i-1][j-1] + 1
+            else:
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+    return dp[m][n]
+```
+
+Notice the 'final check' return statement. We return `dp[m][n]`. If you copy this code and run it with `text1 = 'abcde'` and `text2 = 'ace'`, the output should be `3`. This is your final check.
+
+[TEASE 8: The analogy for the hard part of LCS...]
+
+### The Everyday Analogy: The Highlighter Trick
+
+The hard part of the LCS pattern is understanding the 'else' case. When characters don't match, why do we take the max of the top or left cell? The analogy I use is a highlighter.
+
+Imagine you have two paragraphs on a page. You want to find the longest sequence of words that appear in both, in order. You take a highlighter and start marking matching words. But what if a word doesn't match? Let's say you are comparing 'Apple Pie' and 'Apple Cake.' 'Apple' matches. But 'Pie' does not match 'Cake.'
+
+If you are at the 'Pie' vs 'Cake' decision, you have two choices. You can either skip 'Pie' and look at the rest of the first string, or you can skip 'Cake' and look at the rest of the second string. You want the longest possible match, so you choose the path that gives you more highlighted words. That is exactly what the 'max' operation does. It asks: 'Which direction gives me a longer common sequence?' Visualizing the highlighted text moving through the strings makes the dependency direction crystal clear.
+
+### Pro Tip: Space Optimization to 1D
+
+A pro tip for LCS: you can optimize the 2D table to a 1D array of size n+1. Because when you are calculating the current row, you only need the previous row's data and the current row's left data. You iterate the inner loop from left to right, but you must store the 'top-left' value (the diagonal) in a temporary variable before you overwrite it, because that value is needed for the next cell's calculation. This is a favorite interview follow-up question.
+
+[TEASE 9: The fifth and final pattern is the most versatile one.]### Pattern 5: The Tree DP Pattern – House Robber and Selection
+
+The fifth and final pattern is what I call the Tree DP Pattern. This pattern appears in problems involving trees or lists where you cannot select adjacent elements. The classic example is the 'House Robber' problem. You are a robber planning to rob houses on a street. Each house has some amount of money. The constraint is that you cannot rob two adjacent houses, or the security system will alert the police. How much maximum money can you rob?
+
+This pattern solves LeetCode 337, 'House Robber.'
+
+The step-by-step setup is crucial because of the tree structure:
+
+Step 1: Define the recursion. For any given node, we have two choices: rob it or skip it.
+Step 2: The 'Include' case. If we rob the current node, we cannot rob its immediate children. So, the value is the node's value plus the results from skipping the left child and skipping the right child.
+Step 3: The 'Exclude' case. If we skip the current node, we are free to rob or skip its children. So, the value is the maximum of robbing or skipping the left child, plus the maximum of robbing or skipping the right child.
+Step 4: The return value. This is the tricky part. For every node, we must return two values: the maximum value if we rob this node, and the maximum value if we skip this node. This is often returned as a pair or a small array.
+Step 5: The final check. The answer for the whole tree is the maximum of the two values returned at the root.
+
+Now, let's look at the code structure, usually involving a helper function. I will write this on screen so you can copy it:
+
+```python
+def rob(root):
+    def helper(node):
+        if not node:
+            return (0, 0) # (rob_this, skip_this)
+        left = helper(node.left)
+        right = helper(node.right)
+        # If we rob this node, we must skip its children
+        rob_val = node.val + left[1] + right[1]
+        # If we skip this node, we can choose to rob or skip its children
+        skip_val = max(left[0], left[1]) + max(right[0], right[1])
+        return (rob_val, skip_val)
+    result = helper(root)
+    return max(result)
+```
+
+See the 'final check'? We return `max(result)`. If you copy this code and run it on a simple tree where the root has value 3 and one child with value 4, the output should be `4`. This is your final check.
+
+[TEASE 10: The analogy for the hard part of Tree DP...]
+
+### The Everyday Analogy: The Decision Tree
+
+The hard part of the Tree DP pattern is the concept of returning two values from every recursive call. Why do we need both 'rob' and 'skip'? The analogy I use is a decision tree in real life.
+
+Imagine you are deciding whether to take a job offer. If you take the job (the 'rob' case), you might have to move cities, which means you can't take certain other opportunities in your current city. If you skip the job (the 'skip' case), you stay in your city and might have access to other opportunities.
+
+For every single node in a tree problem, you are making this same binary decision. You cannot just ask 'is this a good choice?' You have to ask 'is this a good choice *given that I made the choice at the parent node*?' Returning both values ensures that the parent node has the information it needs to make its own decision. It is like passing a baton backwards up the tree, ensuring the runner knows what they can and cannot do based on the previous runner's choice.
+
+### Pro Tip: Memoization with a Dictionary
+
+A pro tip for this pattern: because the tree can be large, you should memoize the results. Use a dictionary where the key is the node object, and the value is the tuple (rob, skip). This prevents recalculating the same subtrees multiple times, turning an exponential time complexity into a linear one.
+
+[CONCLUSION HOOK]
+
+So there you have it. The five DP patterns that solve 80% of interview problems, with exact code and final checks you can run right now:
+
+1.  The Fibonacci Approach: Memoization and base cases. Code provided, check: `n=3` output `3`.
+2.  The Grid Path: Filling a 2D table with directional dependencies. Code provided, check: `m=3, n=7` output `28`.
+3.  The Knapsack Pattern: Weight constraints and value maximization. Code provided, check: `nums=[1,5,11,5]` output `True`.
+4.  The LCS Pattern: String matching and the 'max' decision. Code provided, check: `text1='abcde', text2='ace'` output `3`.
+5.  The Tree DP Pattern: Returning two values for the include/skip dilemma. Code provided, check: Simple tree output `4`.
+
+You no longer have to guess which formula to use. You have the exact steps. You have the code. You have the final checks to verify your work.
+
+Let's do a quick recap. Which pattern do you use when you have a weight limit and items? The Knapsack pattern. Which pattern do you use for a grid where you can only move right or down? The Grid Path pattern. I want you to think about that.
+
+[CALL TO ACTION]
+
+Before you go, I have one specific question for you in the comments: Of these five patterns, which one have you struggled with the most in the past? Was it the Knapsack weight logic, or perhaps the Tree DP dual-return values? Let me know by typing the pattern name in the comments. It helps me know what to cover next.
+
+If you found this breakdown helpful, smash that like button and subscribe for more in-depth algorithm explanations. I have a video coming up next on graph theory, and you won't want to miss it. See you in the next video!
