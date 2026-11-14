@@ -1,0 +1,166 @@
+2026-11-14 10:04:22,811 INFO Already scheduled: ['2026-11-09T12:00:00+05:30', '2026-11-09T15:00:00+05:30', '2026-11-09T18:00:00+05:30', '2026-11-10T12:00:00+05:30', '2026-11-10T15:00:00+05:30', '2026-11-10T18:00:00+05:30', '2026-11-11T12:00:00+05:30', '2026-11-11T18:00:00+05:30', '2026-11-12T12:00:00+05:30', '2026-11-12T18:00:00+05:30', '2026-11-13T12:00:00+05:30', '2026-11-13T18:00:00+05:30', '2026-11-14T12:00:00+05:30', '2026-11-14T18:00:00+05:30', '2026-11-15T12:00:00+05:30', '2026-11-15T18:00:00+05:30', '2026-11-16T12:00:00+05:30']
+2026-11-14 10:04:26,955 INFO Channel winners: Introduction to Python Programming | What It Is, H (169)
+2026-11-14 10:04:29,705 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:04:29,713 INFO Search-led topic: How AI works behind the scenes (targets 'how ai works behind the scenes')
+2026-11-14 10:04:30,206 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:04:30,207 INFO Skipping 'How AI works behind the scenes': the channel already has 'How AI Works for Beginners'
+2026-11-14 10:04:31,521 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:04:31,529 INFO Search-led topic: Python Projects for Beginners (targets 'python cowboy')
+2026-11-14 10:04:32,022 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:04:32,022 INFO Skipping 'Python Projects for Beginners': the channel already has 'Python Introduction for Beginners | Learn Python Programming from Scratch | GetYr_CSE'
+2026-11-14 10:04:33,566 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:04:33,574 INFO Search-led topic: JavaScript Crash Course for Absolute Beginners (targets 'javascript crash course')
+2026-11-14 10:04:33,856 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:04:34,580 INFO Search demand for 'javascript crash course': median 4,687,535 views of the top 10 results (want 50,000-1,000,000)
+2026-11-14 10:04:35,979 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:04:35,986 INFO Search-led topic: SQL tutorial for data analyst (targets 'sql tutorial for data analyst')
+2026-11-14 10:04:36,389 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:04:36,389 INFO Skipping 'SQL tutorial for data analyst': the channel already has 'SQL Tutorial for Beginners in Hindi'
+2026-11-14 10:04:37,699 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:04:37,707 INFO Search-led topic: How to Install and Setup VS Code for Beginners (targets 'vs code tutorial')
+2026-11-14 10:04:38,319 INFO Search demand for 'vs code tutorial': median 1,150,336 views of the top 10 results (want 50,000-1,000,000)
+2026-11-14 10:04:39,579 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:04:39,587 INFO Search-led topic: How ChatGPT actually works behind the scenes (targets 'chatgpt work')
+2026-11-14 10:04:40,167 INFO Search demand for 'chatgpt work': median 190,074 views of the top 10 results (want 50,000-1,000,000)
+2026-11-14 10:05:04,164 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:05:34,278 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:05:34,278 INFO Fact-check 1 fix: Step 1: The description of tokenization is vague and potentially misleading. It claims tokens are not random and represent meaning in a 'high-dimensional space' without clarifying that this is a mathematical abstraction, not a physical space. It also fails to define what a token actually is quantitatively.
+2026-11-14 10:05:34,278 INFO Fact-check 1 fix: Step 2: The embedding description is metaphorical and lacks technical precision. It describes a 'map' and 'coordinates' without explaining that embeddings are high-dimensional vectors of floating-point numbers trained via optimization. The explanation of 'bank' is good but the overall description lacks the 'exact commands/final check' rigor required for a 'how-to' style educational video.
+2026-11-14 10:05:34,278 INFO Fact-check 1 fix: Step 3: The attention mechanism description, while conceptually correct, is dangerously vague. It does not explain how attention scores are calculated (dot products, scaling, softmax). It does not mention that attention is computed between query, key, and value matrices. This is a critical omission for a video claiming to be 'accurate and in depth'.
+2026-11-14 10:05:34,278 INFO Fact-check 1 fix: Step 4: The Transformer Blocks description is reductive. Describing them as 'filters' or 'polishing a stone' is metaphorical and vague. It fails to mention the specific components within a block: Layer Normalization, Residual Connections, Multi-Head Attention, and Feed-Forward Networks. The number '96' is a hyperparameter, not a architectural constant, and stating it as a fixed fact is misleading.
+2026-11-14 10:05:34,278 INFO Fact-check 1 fix: Step 5: The prediction and sampling section contains a significant factual inaccuracy. It states the AI 'picks the most likely next word' and then introduces 'sampling' as a way to pick 'the second or third most likely word'. In standard inference (like greedy decoding), the AI picks the absolute top choice. 'Sampling' (like top-k or nucleus sampling) is a separate technique used to introduce diversity, but the script presents it as the primary mechanism for selecting the 'most likely' word, which is technically incorrect. The 'stop token' logic is also implied but not explicitly defined as a generation stop condition.
+2026-11-14 10:05:34,278 INFO Fact-check 1 fix: Myths and Pro Tips: The statement 'It predicts what a typical answer looks like' is vague. The pro tip about 'system instructions' changing how the attention mechanism works is misleading. Attention mechanisms are mathematical operations; prompt engineering guides the input, but does not 'change how the attention mechanism works' in a structural sense. This implies a level of control or architectural understanding that isn't accurate.
+2026-11-14 10:05:34,278 INFO Fact-check 1 fix: The script violates the 'how to / install / setup' promise check. While not a technical install, the viewer searching 'chatgpt work' wants a concrete, step-by-step mechanical understanding. The script is too high-level and poetic ('magic', 'sleek chat box', 'polishing a stone'). It needs to be more explicit about the math and less reliant on metaphors.
+2026-11-14 10:05:58,865 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:05:58,865 INFO Fact-check 2 fix: Step 1: The description of tokenization is vague and does not show the exact process or commands as required by the channel's strict style guide for 'how-to' content. It lacks a final check or explicit demonstration of how text is converted to IDs.
+2026-11-14 10:05:58,865 INFO Fact-check 2 fix: Step 2: The explanation of the embedding layer contains a misleading analogy. The statement 'words with similar meanings are located close to each other according to a mathematical distance metric' is vague. The script must explicitly state that embeddings are high-dimensional vectors of floating-point numbers trained via backpropagation to capture semantic relationships, and clarify that the 'distance' is Euclidean distance in the vector space.
+2026-11-14 10:05:58,865 INFO Fact-check 2 fix: Step 3: The 'Self-Attention' section contains a critical mathematical error regarding the Softmax function. The script states: 'We then apply a scaling factor and a Softmax function to convert these scores into probabilities that sum to one.' This is incorrect. Softmax converts scores to probabilities, but the probabilities for a single word do not sum to one; the sum of probabilities across the entire vocabulary sums to one. The description of the dot product and attention mechanism is otherwise acceptable, but this specific factual error regarding probability normalization must be fixed.
+2026-11-14 10:05:58,865 INFO Fact-check 2 fix: Step 4: The description of the Feed-Forward Network is misleading. The script states: 'It is repeated—typically around 96 times for a large model like GPT-4.' This is factually incorrect. The Feed-Forward Network is applied once per Transformer block. The total number of layers (attention + feed-forward) in GPT-4 is approximately 96, but the Feed-Forward network itself is not repeated 96 times independently; it is stacked within the blocks. This needs correction to maintain professor-level accuracy.
+2026-11-14 10:05:58,865 INFO Fact-check 2 fix: Step 5: The description of 'Greedy Decoding' and sampling is technically inaccurate. The script states: 'In a process often called greedy decoding, the AI typically selects the single most probable word.' While Greedy Decoding exists, modern ChatGPT implementations typically use Temperature sampling or Top-p/nucleus sampling for better results. The description of 'top-p' and 'top-k' sampling following greedy decoding is logically inconsistent. The script must clarify that the process is either Greedy Decoding (max probability) OR sampling methods like Top-p/Top-k, not a sequence of both as written.
+2026-11-14 10:06:01,423 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:06:01,506 INFO People search for: chatgpt work; chatgpt work vs claude cowork; chatgpt workspace agents; chatgpt workflow; chatgpt workout plan; chatgpt work mode
+2026-11-14 10:06:02,108 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-14 10:06:02,108 INFO Title polished: ChatGPT Work: How It Turns Text Into Answers | AI Architecture Explained -> How ChatGPT Turns Text Into Answers: The Hidden Architecture
+2026-11-14 10:06:02,108 INFO YouTube title: How ChatGPT Turns Text Into Answers: The Hidden Architecture
+2026-11-14 10:06:03,178 INFO Created notebook b47bb7eb-312c-4fbd-8df7-1be942a88158
+2026-11-14 10:06:04,941 INFO Script added as source
+2026-11-14 10:06:06,607 INFO Started cinematic video generation (task 6b33877a-cca6-496a-a22f-0dad8625a99e)
+2026-11-14 10:06:06,608 INFO Waiting for cinematic video (can take 30+ minutes)
+2026-11-14 10:29:21,683 INFO Downloaded cinematic video to output/video_raw.mp4
+2026-11-14 10:29:23,446 INFO Started NotebookLM Short (task dd4ed760-1cff-4f66-841d-8045d6506749)
+2026-11-14 10:40:02,788 INFO Downloaded NotebookLM Short to output/short_raw.mp4
+2026-11-14 10:40:06,566 INFO Video selected on https://notebooklmremover.com/en, waiting for processing
+2026-11-14 10:40:08,280 INFO Chose site mode 'Quality Priority (Original FPS, Slow)'
+2026-11-14 10:40:09,284 INFO Clicking '🚀 Start Removing Watermark'
+2026-11-14 10:40:37,689 INFO Watermark removal: 1%
+2026-11-14 10:40:42,695 INFO Watermark removal: 3%
+2026-11-14 10:40:47,703 INFO Watermark removal: 4%
+2026-11-14 10:40:57,717 INFO Watermark removal: 5%
+2026-11-14 10:41:02,723 INFO Watermark removal: 6%
+2026-11-14 10:41:07,728 INFO Watermark removal: 8%
+2026-11-14 10:41:12,735 INFO Watermark removal: 10%
+2026-11-14 10:41:18,077 INFO Watermark removal: 11%
+2026-11-14 10:41:23,083 INFO Watermark removal: 13%
+2026-11-14 10:41:28,089 INFO Watermark removal: 15%
+2026-11-14 10:41:33,094 INFO Watermark removal: 17%
+2026-11-14 10:41:38,100 INFO Watermark removal: 19%
+2026-11-14 10:41:43,106 INFO Watermark removal: 21%
+2026-11-14 10:41:48,112 INFO Watermark removal: 23%
+2026-11-14 10:41:53,118 INFO Watermark removal: 25%
+2026-11-14 10:41:58,151 INFO Watermark removal: 27%
+2026-11-14 10:42:03,158 INFO Watermark removal: 29%
+2026-11-14 10:42:08,163 INFO Watermark removal: 30%
+2026-11-14 10:42:13,169 INFO Watermark removal: 32%
+2026-11-14 10:42:18,528 INFO Watermark removal: 33%
+2026-11-14 10:42:23,535 INFO Watermark removal: 34%
+2026-11-14 10:42:28,542 INFO Watermark removal: 35%
+2026-11-14 10:42:33,548 INFO Watermark removal: 36%
+2026-11-14 10:42:38,554 INFO Watermark removal: 38%
+2026-11-14 10:42:43,561 INFO Watermark removal: 40%
+2026-11-14 10:42:48,568 INFO Watermark removal: 42%
+2026-11-14 10:42:53,573 INFO Watermark removal: 44%
+2026-11-14 10:42:58,580 INFO Watermark removal: 46%
+2026-11-14 10:43:03,585 INFO Watermark removal: 48%
+2026-11-14 10:43:08,591 INFO Watermark removal: 50%
+2026-11-14 10:43:13,598 INFO Watermark removal: 51%
+2026-11-14 10:43:18,925 INFO Watermark removal: 52%
+2026-11-14 10:43:23,932 INFO Watermark removal: 53%
+2026-11-14 10:43:28,937 INFO Watermark removal: 54%
+2026-11-14 10:43:33,943 INFO Watermark removal: 56%
+2026-11-14 10:43:38,949 INFO Watermark removal: 58%
+2026-11-14 10:43:43,955 INFO Watermark removal: 60%
+2026-11-14 10:43:48,961 INFO Watermark removal: 61%
+2026-11-14 10:43:53,966 INFO Watermark removal: 62%
+2026-11-14 10:43:58,972 INFO Watermark removal: 63%
+2026-11-14 10:44:03,978 INFO Watermark removal: 65%
+2026-11-14 10:44:08,984 INFO Watermark removal: 66%
+2026-11-14 10:44:13,990 INFO Watermark removal: 68%
+2026-11-14 10:44:19,356 INFO Watermark removal: 70%
+2026-11-14 10:44:24,362 INFO Watermark removal: 71%
+2026-11-14 10:44:29,368 INFO Watermark removal: 73%
+2026-11-14 10:44:34,374 INFO Watermark removal: 75%
+2026-11-14 10:44:39,380 INFO Watermark removal: 77%
+2026-11-14 10:44:44,386 INFO Watermark removal: 78%
+2026-11-14 10:44:49,391 INFO Watermark removal: 79%
+2026-11-14 10:44:59,403 INFO Watermark removal: 81%
+2026-11-14 10:45:04,408 INFO Watermark removal: 82%
+2026-11-14 10:45:09,414 INFO Watermark removal: 84%
+2026-11-14 10:45:14,776 INFO Watermark removal: 86%
+2026-11-14 10:45:19,781 INFO Watermark removal: 88%
+2026-11-14 10:45:24,787 INFO Watermark removal: 89%
+2026-11-14 10:45:29,793 INFO Watermark removal: 91%
+2026-11-14 10:45:34,798 INFO Watermark removal: 93%
+2026-11-14 10:45:39,805 INFO Watermark removal: 95%
+2026-11-14 10:45:44,810 INFO Watermark removal: 96%
+2026-11-14 10:45:54,823 INFO Watermark removal: 98%
+2026-11-14 10:45:59,829 INFO Watermark removal: 99%
+2026-11-14 10:46:04,833 INFO Clicking 'Download Clean Video'
+2026-11-14 10:46:12,922 INFO Downloaded clean video after 363s
+2026-11-14 10:46:13,148 INFO Website result: {'width': 1280, 'height': 720, 'fps': 30.0, 'duration': 370.985215, 'has_audio': True} (original {'width': 1280, 'height': 720, 'fps': 30.0, 'duration': 374.027029, 'has_audio': True})
+2026-11-14 10:46:13,219 INFO Adding channel name watermark: GetYr_CSE
+2026-11-14 10:49:12,546 INFO Added intro + video_final_main + outro
+2026-11-14 10:49:12,546 INFO Edited video saved to output/video_final.mp4
+2026-11-14 10:49:12,811 INFO Thumbnail candidate at 0.5s: detail 30.5
+2026-11-14 10:49:13,080 INFO Thumbnail candidate at 1.0s: detail 30.6
+2026-11-14 10:49:13,359 INFO Thumbnail candidate at 1.5s: detail 30.6
+2026-11-14 10:49:13,655 INFO Thumbnail candidate at 2.0s: detail 30.6
+2026-11-14 10:49:13,963 INFO Thumbnail candidate at 2.5s: detail 30.6
+2026-11-14 10:49:14,276 INFO Thumbnail candidate at 3.0s: detail 30.6
+2026-11-14 10:49:14,530 INFO Thumbnail candidate at 3.5s: detail 62.1
+2026-11-14 10:49:14,794 INFO Thumbnail candidate at 4.0s: detail 62.1
+2026-11-14 10:49:15,080 INFO Thumbnail candidate at 5.0s: detail 62.1
+2026-11-14 10:49:15,136 INFO Thumbnail taken from the video at 4.0s -> output/thumbnail.jpg
+2026-11-14 10:49:16,413 INFO Upload 15%
+2026-11-14 10:49:16,740 INFO Upload 30%
+2026-11-14 10:49:17,251 INFO Upload 45%
+2026-11-14 10:49:17,874 INFO Upload 60%
+2026-11-14 10:49:18,190 INFO Upload 75%
+2026-11-14 10:49:18,522 INFO Upload 90%
+2026-11-14 10:49:19,136 INFO Uploaded: https://youtu.be/DbhrUTkK59o (public)
+2026-11-14 10:49:24,069 INFO Thumbnail set
+2026-11-14 10:49:24,787 INFO Added to playlist: Programming Fundamentals
+2026-11-14 10:49:28,177 INFO Video selected on https://notebooklmremover.com/en, waiting for processing
+2026-11-14 10:49:29,876 INFO Chose site mode 'Quality Priority (Original FPS, Slow)'
+2026-11-14 10:49:30,880 INFO Clicking '🚀 Start Removing Watermark'
+2026-11-14 10:49:39,304 INFO Watermark removal: 6%
+2026-11-14 10:49:44,310 INFO Watermark removal: 13%
+2026-11-14 10:49:49,317 INFO Watermark removal: 22%
+2026-11-14 10:49:54,322 INFO Watermark removal: 29%
+2026-11-14 10:49:59,331 INFO Watermark removal: 37%
+2026-11-14 10:50:04,336 INFO Watermark removal: 43%
+2026-11-14 10:50:09,342 INFO Watermark removal: 51%
+2026-11-14 10:50:14,349 INFO Watermark removal: 58%
+2026-11-14 10:50:19,355 INFO Watermark removal: 66%
+2026-11-14 10:50:24,361 INFO Watermark removal: 74%
+2026-11-14 10:50:29,368 INFO Watermark removal: 81%
+2026-11-14 10:50:34,376 INFO Watermark removal: 88%
+2026-11-14 10:50:39,736 INFO Clicking 'Download Clean Video'
+2026-11-14 10:50:47,801 INFO Downloaded clean video after 76s
+2026-11-14 10:50:47,996 INFO Website result: {'width': 720, 'height': 1280, 'fps': 30.0, 'duration': 70.054603, 'has_audio': True} (original {'width': 720, 'height': 1280, 'fps': 30.0, 'duration': 73.096417, 'has_audio': True})
+2026-11-14 10:51:07,082 INFO Using NotebookLM's Short (watermark removed)
+2026-11-14 10:51:08,996 INFO Uploaded: https://youtu.be/LgVRHe5cNNk (public)
+2026-11-14 10:51:08,996 INFO Short uploaded: https://youtu.be/LgVRHe5cNNk
+2026-11-14 10:52:25,328 WARNING Instagram direct upload failed: Instagram upload failed (400): {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}} - trying the public-link method
+2026-11-14 10:53:31,118 INFO Instagram Reel posted via link (id 17981184503918630)
+2026-11-14 10:53:32,513 INFO Done: How ChatGPT Turns Text Into Answers: The Hidden Architecture
+2026-11-14 10:53:33,791 INFO Deleted old NotebookLM notebook b47bb7eb-312c-4fbd-8df7-1be942a88158
