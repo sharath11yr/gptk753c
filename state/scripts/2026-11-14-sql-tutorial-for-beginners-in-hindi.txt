@@ -1,0 +1,31 @@
+SQL Tutorial for Beginners in Hindi
+search: sql tutorial for beginners in telugu
+tutorial: True
+
+Tera computer agar English medium se hai aur aap SQL seekhna chahte ho Hindi mein, ye video bas liye gayi hai. India mein developers ki number badh rahi hai aur database querying skill zaroori hai. Is video ke end tak aap basics samajh jayenge aur practical command laga paayenge. Shuru karte hain.
+
+Step 1: Setup. Sabse pehle aapko SQL software chahiye. Windows users ke liye, PowerShell ya Command Prompt kholiye aur ye command type karein: 'choco install mysql'. Ye command MySQL server automatically download aur install ho jayega. Mac users ke liye, terminal kholiye aur 'brew install mysql@8.0' type karein. Linux users ke liye, 'sudo apt update' aur phir 'sudo apt install mysql-server' type karein. Command chalne par aapko installation confirm karni chahiye, ya toh success message mile ya service start ho jaye. Baad mein, 'sudo mysql_secure_installation' type karein aur prompts follow karein secure karne ke liye.
+
+Step 2: Pehla command. Ab aapko database banana hai. Terminal kholiye aur ye command type karein: 'mysql -u root -p'. Aapko password daalne ke liye prompt milega. Ab 'CREATE DATABASE my_first_db;' type karein aur Enter dabayein. Dekhiye, command execute hone par message milega: 'Query OK, 1 row affected'. Yeh poora hua hai ki aapne database banaya.
+
+Step 3: Table banana. Database select karne ke liye 'USE my_first_db;' type karein. Ab table banane ke liye ye command type karein: 'CREATE TABLE users (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), age INT);'. Command execute hone par 'Query OK' milega. Yeh batata hai ki table ban gayi hai aur structure define ki gayi.
+
+Step 4: Data daalna. Ab database mein values daalne ka time hai. Type karein: 'INSERT INTO users (name, age) VALUES ('Amit', 25);'. Command execute hone par aapko '1 row(s) affected' dikhega. Yeh batata hai ki data successfully daal diya gaya.
+
+Step 5: Data dekhna. Ab jo daala hai, usko dikhne ke liye 'SELECT * FROM users;' type karein. Screen par aapko table dikhegi jismein id, name aur age ki columns honge aur usmein 'Amit' aur '25' ka data milega. Yeh check karna bahut important hai ki aapka data save hai ya nahi.
+
+Step 6: Data update karna. Agar aap age badalna chahte hain, toh command karein: 'UPDATE users SET age = 26 WHERE id = 1;'. Command chalne par message milega: '2 row(s) updated'. Yeh dikhata hai ki command ka effect pada (Note: Using id is safer than name for updates).
+
+Step 7: Data delete karna. Agar aap kisi entry ko hatana chahte hain, toh 'DELETE FROM users WHERE id = 1;' type karein. Command execute hone par '1 row(s) deleted' milega. Ab aap poora process repeat kar sakte hain.
+
+Check karna: End mein, 'mysql -u root -e "SELECT NAME FROM SYS.DATABASES;"' type karein. Ye command saare databases ka list dikhayega. Agar list aayi, toh aapka setup perfect hai.
+
+Common mistakes: Pehle command 'mysql' ya 'sqlcmd' yaad rahe. Doosri galti ye hai ki table banana bhul jana (Step 3). Baar baar 'USE' ya 'INSERT' command bhulna. Fix: Always check the prompt for 'Query OK' after every command.
+
+Pro tip: Hindi medium se padhne wale students ke liye, commands English mein hote hain par aap uski spelling Hindi mein yaad rakh sakte hain. Practice karo.
+
+Recap: Humne seekha ki setup karna, database banana, table banana, data daalna, dekhna, update karna aur delete karna. Ye 7 steps aapko basic SQL operation karna sikhayenge.
+
+Question: Agar aap pehle se SQL seekh chuke hain, toh aapko 'INSERT' ya 'SELECT' command me se koi ek batayein jo aap sabse zyada use karte hain? Comment mein likhiyen.
+
+Agar aapko ye video achhi lagi, toh like karein aur subscribe karein for more tutorials in Hindi. Next video mein hum jaayenge advanced queries ki taraf.
