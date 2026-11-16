@@ -1,0 +1,43 @@
+Linux Commands Cheat Sheet
+search: linux commands cheat sheet
+tutorial: True
+
+Welcome. You are here because you type commands, but you spend too much time guessing the syntax. What if I told you that mastering just ten commands gives you control over 90% of your system tasks? In the next ten minutes, I will give you a visual cheat sheet of the essential Linux terminal commands. We will cover navigation, file management, permissions, and process control. By the end, you will never google a command again. Let's get started.
+
+First, you need a terminal. On Linux, press Ctrl+Alt+T. On Windows with WSL, open your distro terminal. On a Mac, open Terminal from Applications. You need a basic understanding of the file system structure. Think of the terminal as a map; we are navigating folders. Ready? Let's move.
+
+Step 1: Check your current location. Type: pwd and press Enter. You should see a path starting with a forward slash. This stands for 'print working directory'. It tells you exactly where you are starting from.
+
+Step 2: List the contents of this directory. Type: ls and press Enter. You should see the files and folders in your home directory. The 'ls' command lists contents. If you want to see hidden files, type: ls -a and press Enter. Hidden files usually start with a dot.
+
+Here is the everyday analogy: Imagine you are in a giant library. 'pwd' tells you the aisle number. 'ls' shows you the books on the shelf. Now, let's move to a specific folder.
+
+Step 3: Change directories. Type: cd Documents and press Enter. You have moved into the Documents folder. To go back one level, type: cd .. and press Enter. To go to the root directory, the very top, type: cd / and press Enter. You will now be at the base of the system.
+
+Step 4: Create a new folder. Type: mkdir TestFolder and press Enter. Type: ls to verify it appeared. 'mkdir' makes a new directory. If you try to make a folder inside a folder that doesn't exist, you will get an error. We will learn to create parent folders later.
+
+Step 5: Copy files. This is a crucial command. Type: cp file.txt ./Documents/ and press Enter. This copies 'file.txt' into the Documents folder. To copy a folder and its contents, use the recursive flag. Type: cp -r Pictures ./Documents/ and press Enter. The '-r' flag means recursive. You should see the folder transfer. \*Note: Ensure the file 'file.txt' or folder 'Pictures' exists in your current working directory before running these commands, or provide the full absolute path."
+
+Step 6: Move or rename files. Type: mv oldname.txt newname.txt and press Enter. This renames 'oldname.txt' to 'newname.txt'. If you type: mv file.txt ./tmp/ and press Enter, you move the file to the temporary directory. 'mv' is powerful; it moves the file from its original location. There is no 'undo' in the terminal, so be careful.
+
+Step 7: Remove files and folders. To delete a file, type: rm filename.txt and press Enter. To delete a folder and everything inside it, type: rm -r foldername and press Enter. The '-r' flag is required for directories. \*Warning: This command is permanent and irreversible. Use caution, especially with the '-r' flag, as you cannot recover the data easily.
+
+Step 8: Create a text file quickly. Type: touch newfile.txt and press Enter. This creates an empty file. You can then edit the file using your preferred text editor. For example, type: nano newfile.txt and press Enter. This opens a simple text editor. Type 'Hello World' and press Ctrl+O. You will be prompted to enter a filename; type newfile.txt and press Enter to save. Then press Ctrl+X to exit. 'touch' is the fastest way to initialize a file.
+
+Step 9: Check file permissions. Type: ls -l and press Enter. You will see a string of characters like '-rwxr-xr-x'. The first character is the file type. 'd' means directory, '-' means file. The next three triplets are for the owner, the group, and others. 'r' is read, 'w' is write, 'x' is execute. If you see 'x' on a script file that also has a shebang line (e.g., #!/usr/bin/env python3) at the top, you can run it as a program. If the file is a text file without a shebang, you can still run it using 'python3 filename.py'. *Note: The 'x' permission is the essential first step to allow execution, but the shebang line determines the interpreter.*
+
+Step 10: Search for a file. Type: find . -name "*.txt" and press Enter. This searches the current directory and all subdirectories for any file ending in .txt. If you know part of the name, type: find . -name "report" and press Enter. This saves you from scrolling through hundreds of files. \*Final Check: Verify the files listed are the ones you were looking for.
+
+You now have a cheat sheet of the most used commands. But there is one part that confuses beginners every time: permissions.
+
+Most people struggle with 'permission denied' errors. Here is the pro tip: Use 'chmod' to change permissions. To give yourself execute permission on a script, type: chmod +x script.sh and press Enter. The '+' adds permission, 'x' is execute. If you need to give read permission to others, type: chmod o+r filename and press Enter. 'o' stands for others.
+
+Here is the fix for the most common error: If you type a command and get 'command not found', you likely forgot to install the package. On Debian/Ubuntu, type: sudo apt install command-name and press Enter. On Fedora, type: sudo dnf install command-name. You will be asked for your password. Type it in; it will not show characters on screen. Press Enter.
+
+Another common mistake is using 'rm' without the '-r' flag on a folder. The command will fail. Remember: 'rm' for files, 'rm -r' for folders.
+
+Let's do a quick recap. We learned 'pwd' to find location, 'ls' to list files, 'cd' to navigate, 'mkdir' to make folders, 'cp' to copy, 'mv' to move or rename, 'rm' to remove, 'touch' to create files, 'ls -l' to check permissions, 'chmod' to change permissions, and 'find' to search. You now have the essential map to the Linux terminal.
+
+Here is the question for the comments: Which of these three commands do you use most often: 'cp' for copying, 'mv' for moving, or 'rm' for deleting? Tell me the letter in the comments. It helps me know what to cover next.
+
+If you found this cheat sheet helpful, make sure you subscribe for more quick tutorials on Linux and coding. I will see you in the next video.
