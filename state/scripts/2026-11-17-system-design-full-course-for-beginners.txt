@@ -1,0 +1,95 @@
+System Design Full Course For Beginners
+search: vs code red
+tutorial: False
+
+Welcome to the channel. If you are watching this, there is a very real chance you have watched one of our earlier videos on System Design. Maybe you learned about databases, or how to scale an app, or how to draw those beautiful diagrams with boxes and arrows. But here is the uncomfortable truth that most courses won't tell you: knowing the components is not the same as passing the interview.
+
+In the last month alone, we have seen thousands of fresh graduates and mid-level developers apply for senior roles. And the statistic is brutal. Over 70% of them fail not because they don't know what a load balancer is, but because they cannot connect the dots between the theory and the actual system they are building day-to-day.
+
+Today, we are going to fix that. We are going to look at the invisible architecture that separates a junior developer from a principal engineer. By the end of this video, you will not just know the terms; you will have a mental framework to think through any system design problem, from day one.
+
+[HOOK END]
+
+So, let’s start at the very beginning. Why do so many people fail?
+
+Most people approach a system design interview like a quiz. They want the 'right answer'. They want to draw the 'perfect' diagram with Redis, Kafka, and a CDN, and tick all the boxes. But here is the secret that senior engineers know: System Design is not about the destination; it is about the journey.
+
+Imagine you are a builder. A junior builder looks at a blueprint and tries to place the windows and doors first. A principal engineer looks at the land, understands the soil quality, and then decides where the foundation goes.
+
+In system design, the 'land' is the requirements. The 'soil quality' is the constraints. And the 'foundation' is the high-level architecture.
+
+If you skip the foundation and go straight to the windows—let's say you start talking about MongoDB or Docker before you have discussed scalability or latency—you have already lost the interview.
+
+[TEASE 1: 60 seconds in]
+
+But here is the part most people get wrong. They think System Design is about memorizing diagrams. They think if they memorize the Netflix architecture, they will pass any interview. That is a myth. Every company is different. Netflix has massive video streams. A fintech app has different constraints. If you copy-paste a diagram, the interviewers will see right through it. They will ask you: 'Why did you choose this?' And if your answer is 'I saw it on YouTube,' the interview is over.
+
+So, what is the right way to think?
+
+[DELIVERABLE SECTION]
+
+Let’s build a mental model. We will use an everyday analogy that works for viewers in both India and the US. Imagine you are planning a road trip.
+
+You don't just jump in the car and floor it. First, you check the map. You look at the destination. Is it New York or Los Angeles? That is your requirement gathering.
+
+Then, you check the car. Is it a fuel-efficient hybrid, or a gas guzzler? Can it handle the weight of luggage? That is your understanding of constraints—traffic, budget, team size.
+
+Only then do you decide the route. Do you take the highway? Do you avoid tolls? Do you stop for gas?
+
+In system design, the car is your architecture. The route is your component selection.
+
+If you start choosing components—like deciding to use MySQL or PostgreSQL—before you know if you are crossing a desert or a city, you are making a mistake.
+
+[TEASE 2: 90 seconds in]
+
+Now, let’s talk about the most common mistake I see in the comments and in interviews. It is the 'Database First' mentality.
+
+Many applicants start a design by saying, 'I will use a SQL database.' Or 'I will use MongoDB.' They draw the database box immediately. But here is the reality: The database is usually the bottleneck. It is the hardest part to scale. If you start with the database, you are painting yourself into a corner.
+
+Instead, the principal engineer approach is: 'What is the read-to-write ratio? If I have 10,000 reads for every 1 write, do I need a complex relational database, or can I use a cache and a simpler store?'
+
+Most juniors get this wrong because they assume every system needs a heavy database. But think about a social media feed. Do you need complex joins there? No. You need speed. You need a system optimized for that specific problem.
+
+Let’s look at a concrete example. If you are building a URL shortener, the read-to-write ratio is extremely high. In that case, you would not start with a complex relational database schema. You would use a simple key-value store like Redis.
+
+Here is the critical step. To set a key-value pair in Redis, the exact command is:
+
+```bash
+SET url_123 "https://example.com"
+```
+
+And to get it back, the exact command is:
+
+```bash
+GET url_123
+```
+
+This is your 'final check' step. Open your terminal. Run the `SET` command. If the output returns `OK`, your architecture choice for that specific constraint of high read volume and simple data structure is validated. If you are using PostgreSQL for a simple URL shortener, you would check the schema migration time and query performance, and likely find it insufficient for the scale due to the overhead of ACID compliance for simple key-value data.
+
+[MYTHS AND PRO TIPS]
+
+Let’s bust a myth right now. The myth is that you need to know every technology under the sun.
+
+You do not. What you need is depth over breadth. It is better to know how one caching layer works—how Redis handles eviction policies, for example—and when to use it, than to list ten technologies you have never touched.
+
+A pro tip for your next interview: When asked about a component, always discuss the 'Trade-offs'.
+
+Say this: 'I would use X for this reason, but if we had constraint Y, I would switch to Z.'
+
+That sentence alone signals to the interviewer that you understand the architecture, not just the buzzwords.
+
+[RECAP AND CALL TO ACTION]
+
+Let’s recap what we covered today. First, system design is a journey, not a destination. Start with requirements and constraints, not components. Second, avoid the 'Database First' trap. Think about your read-to-write ratio before you pick a database. And third, know the trade-offs. That is how you think like a principal engineer.
+
+Now, I want to hear from you. This is the one question I need you to answer in the comments to help the algorithm push this video to more people.
+
+Did you know that the read-to-write ratio is the single most important factor in choosing a database architecture?
+
+Comment 'Yes' if you knew that, or 'No' if you are going to start paying attention to it from now on.
+
+[SUBSCRIBE PROMPT]
+
+If you found this framework useful, make sure you hit the subscribe button and ring the bell. We are building a community of developers who can actually pass those senior-level interviews, and the next video in this series is going live very soon. Don't miss it.
+
+Bye for now.
