@@ -156,7 +156,7 @@ QUEUE = [
     "Compiler Design", "Theory of Computation", "Software Engineering", "DevOps and CI/CD",
     "Android Development", "Blockchain", "Big Data", "Discrete Mathematics", "Rust", "Go",
 ]
-ACTIVE_COURSES = 10       # courses that take turns at the same time
+ACTIVE_COURSES = 1        # one focused playlist at a time
 COURSE_LESSONS_MAX = 120  # a course is "complete" after this many lessons (a queued one starts)
 PLAN_FILE = Path("state/course_plan.json")
 

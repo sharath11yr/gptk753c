@@ -1,5 +1,8 @@
 {
  "active": [
+  "Data Structures & Algorithms"
+ ],
+ "queue": [
   "Python",
   "Java",
   "Git & GitHub",
@@ -9,9 +12,6 @@
   "OOP",
   "Machine Learning",
   "Generative AI",
-  "Data Structures & Algorithms"
- ],
- "queue": [
   "C Programming",
   "C++",
   "JavaScript",
