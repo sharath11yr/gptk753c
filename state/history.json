@@ -430,5 +430,11 @@
     "topic": "Data Structures & Algorithms: Lesson 6: Strings - Pattern Matching and Problems",
     "title": "Pattern Matching: How Google Actually Finds Anything",
     "youtube_id": "AEEEkzjNeSM"
+  },
+  {
+    "date": "2026-11-18",
+    "topic": "Data Structures & Algorithms: Lesson 7: Linked Lists - Singly Linked List",
+    "title": "Why Arrays Shift: The Singly Linked List Alternative",
+    "youtube_id": "fcTAgw2deBc"
   }
 ]
