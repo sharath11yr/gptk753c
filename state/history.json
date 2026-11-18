@@ -436,5 +436,11 @@
     "topic": "Data Structures & Algorithms: Lesson 7: Linked Lists - Singly Linked List",
     "title": "Why Arrays Shift: The Singly Linked List Alternative",
     "youtube_id": "fcTAgw2deBc"
+  },
+  {
+    "date": "2026-11-19",
+    "topic": "Data Structures & Algorithms: Lesson 8: Linked Lists - Doubly Linked List and Circular LL",
+    "title": "Why We Need Doubly Linked Lists: The Backwards Navigation Problem",
+    "youtube_id": "B8WDpoTbT64"
   }
 ]
