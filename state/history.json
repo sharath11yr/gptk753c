@@ -424,5 +424,11 @@
     "topic": "Data Structures & Algorithms: Lesson 5: Strings - Introduction and Operations",
     "title": "Why String Operations Crash Apps: The Hidden Cost",
     "youtube_id": "XwKYz_4YyQo"
+  },
+  {
+    "date": "2026-11-18",
+    "topic": "Data Structures & Algorithms: Lesson 6: Strings - Pattern Matching and Problems",
+    "title": "Pattern Matching: How Google Actually Finds Anything",
+    "youtube_id": "AEEEkzjNeSM"
   }
 ]
