@@ -454,5 +454,11 @@
     "topic": "Data Structures & Algorithms: Lesson 10: Stacks - Linked List Implementation and Problems",
     "title": "Why Stacks Need Linked Lists: The Dynamic Size Problem",
     "youtube_id": "U47IBfsnEoo"
+  },
+  {
+    "date": "2026-11-19",
+    "topic": "Data Structures & Algorithms: Lesson 11: Queues - Introduction and Array Implementation",
+    "title": "The Queue Problem: Why Stacks Fail at Ticket Lines",
+    "youtube_id": "5auG2hFhXK4"
   }
 ]
