@@ -442,5 +442,11 @@
     "topic": "Data Structures & Algorithms: Lesson 8: Linked Lists - Doubly Linked List and Circular LL",
     "title": "Why We Need Doubly Linked Lists: The Backwards Navigation Problem",
     "youtube_id": "B8WDpoTbT64"
+  },
+  {
+    "date": "2026-11-19",
+    "topic": "Data Structures & Algorithms: Lesson 9: Stacks - Introduction and Array Implementation",
+    "title": "The Last In First Out Rule: Why Stacks Work",
+    "youtube_id": "rQ4mptMxlGY"
   }
 ]
