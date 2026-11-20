@@ -484,5 +484,11 @@
     "topic": "Data Structures & Algorithms: Lesson 15: Recursion - Basics and Direct Recursion",
     "title": "How Recursion Actually Works: The Domino Effect Behind the Code",
     "youtube_id": "Qk8khFgEXIw"
+  },
+  {
+    "date": "2026-11-21",
+    "topic": "Data Structures & Algorithms: Lesson 16: Recursion - Backtracking and N-Queens",
+    "title": "How Computers Solve the N-Queens Puzzle: Backtracking Algorithm",
+    "youtube_id": "H9BDtvLSGmA"
   }
 ]
