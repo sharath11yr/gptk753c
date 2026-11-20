@@ -466,5 +466,11 @@
     "topic": "Data Structures & Algorithms: Lesson 12: Queues - Linked List Implementation and Circular Queue",
     "title": "How Linked Lists FIX the Queue Memory Problem (Circular Queue) | Data Structures",
     "youtube_id": "6qCbAJ5AhI0"
+  },
+  {
+    "date": "2026-11-20",
+    "topic": "Data Structures & Algorithms: Lesson 13: Hashing - Fundamentals and Collision Handling",
+    "title": "How Hashing Actually Works: The Magic Behind Instant Search",
+    "youtube_id": "oBEs3JiMzio"
   }
 ]
