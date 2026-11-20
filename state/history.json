@@ -478,5 +478,11 @@
     "topic": "Data Structures & Algorithms: Lesson 14: Hashing - Open Addressing and Rehashing",
     "title": "Open Addressing vs Chaining: The Parking Lot Problem",
     "youtube_id": "FgHjF3BBkr4"
+  },
+  {
+    "date": "2026-11-20",
+    "topic": "Data Structures & Algorithms: Lesson 15: Recursion - Basics and Direct Recursion",
+    "title": "How Recursion Actually Works: The Domino Effect Behind the Code",
+    "youtube_id": "Qk8khFgEXIw"
   }
 ]
