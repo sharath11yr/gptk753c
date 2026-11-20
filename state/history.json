@@ -472,5 +472,11 @@
     "topic": "Data Structures & Algorithms: Lesson 13: Hashing - Fundamentals and Collision Handling",
     "title": "How Hashing Actually Works: The Magic Behind Instant Search",
     "youtube_id": "oBEs3JiMzio"
+  },
+  {
+    "date": "2026-11-20",
+    "topic": "Data Structures & Algorithms: Lesson 14: Hashing - Open Addressing and Rehashing",
+    "title": "Open Addressing vs Chaining: The Parking Lot Problem",
+    "youtube_id": "FgHjF3BBkr4"
   }
 ]
