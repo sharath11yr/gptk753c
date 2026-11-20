@@ -460,5 +460,11 @@
     "topic": "Data Structures & Algorithms: Lesson 11: Queues - Introduction and Array Implementation",
     "title": "The Queue Problem: Why Stacks Fail at Ticket Lines",
     "youtube_id": "5auG2hFhXK4"
+  },
+  {
+    "date": "2026-11-20",
+    "topic": "Data Structures & Algorithms: Lesson 12: Queues - Linked List Implementation and Circular Queue",
+    "title": "How Linked Lists FIX the Queue Memory Problem (Circular Queue) | Data Structures",
+    "youtube_id": "6qCbAJ5AhI0"
   }
 ]
