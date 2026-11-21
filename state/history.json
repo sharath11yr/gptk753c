@@ -496,5 +496,11 @@
     "topic": "Data Structures & Algorithms: Lesson 17: Binary Search - Algorithm and Applications",
     "title": "Binary Search: Why Linear Search Fails on 1 Million Items",
     "youtube_id": "PA92Q7gS74w"
+  },
+  {
+    "date": "2026-11-21",
+    "topic": "Data Structures & Algorithms: Lesson 18: Bubble Sort - Algorithm and Optimization",
+    "title": "Why Bubble Sort Is Actually Inefficient: The Optimization That Changes Everything",
+    "youtube_id": "f6FaGQc5TvQ"
   }
 ]
