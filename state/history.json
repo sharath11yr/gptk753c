@@ -502,5 +502,11 @@
     "topic": "Data Structures & Algorithms: Lesson 18: Bubble Sort - Algorithm and Optimization",
     "title": "Why Bubble Sort Is Actually Inefficient: The Optimization That Changes Everything",
     "youtube_id": "f6FaGQc5TvQ"
+  },
+  {
+    "date": "2026-11-21",
+    "topic": "Data Structures & Algorithms: Lesson 19: Selection and Insertion Sort",
+    "title": "How Selection and Insertion Sort REALLY Work (The Librarian Problem)",
+    "youtube_id": "oiefY40Fxi8"
   }
 ]
