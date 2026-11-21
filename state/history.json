@@ -490,5 +490,11 @@
     "topic": "Data Structures & Algorithms: Lesson 16: Recursion - Backtracking and N-Queens",
     "title": "How Computers Solve the N-Queens Puzzle: Backtracking Algorithm",
     "youtube_id": "H9BDtvLSGmA"
+  },
+  {
+    "date": "2026-11-21",
+    "topic": "Data Structures & Algorithms: Lesson 17: Binary Search - Algorithm and Applications",
+    "title": "Binary Search: Why Linear Search Fails on 1 Million Items",
+    "youtube_id": "PA92Q7gS74w"
   }
 ]
