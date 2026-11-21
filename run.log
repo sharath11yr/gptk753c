@@ -1,0 +1,130 @@
+2026-11-21 17:02:15,471 INFO Already scheduled: ['2026-11-09T12:00:00+05:30', '2026-11-09T15:00:00+05:30', '2026-11-09T18:00:00+05:30', '2026-11-10T12:00:00+05:30', '2026-11-10T15:00:00+05:30', '2026-11-10T18:00:00+05:30', '2026-11-11T12:00:00+05:30', '2026-11-11T18:00:00+05:30', '2026-11-12T12:00:00+05:30', '2026-11-12T18:00:00+05:30', '2026-11-13T12:00:00+05:30', '2026-11-13T18:00:00+05:30', '2026-11-14T12:00:00+05:30', '2026-11-14T18:00:00+05:30', '2026-11-15T12:00:00+05:30', '2026-11-15T18:00:00+05:30', '2026-11-16T12:00:00+05:30']
+2026-11-21 17:02:15,474 INFO Next lesson: Data Structures & Algorithms #19 - Lesson 19: Selection and Insertion Sort
+2026-11-21 17:02:35,743 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-21 17:03:02,368 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-21 17:03:31,511 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-21 17:03:31,511 INFO Review fix: {'line_range': '24-26', 'issue': "The code snippet sets `min_index = i` inside the outer for loop but does not reset it before the inner loop's first comparison in a way that matches the described logic if the loop structure changes. More importantly, the swap logic description says 'swap the element at the starting position with the element at min_index', but the code provided performs a standard three-step swap. The explanation should clarify that the swap happens *after* the inner loop completes, not during.", 'fix': 'Ensure the explanation explicitly states that `min_index` is updated *during* the inner loop scan, and the swap occurs *once* after the inner loop finishes. The code structure `for i in range(n): min_index = i; for j in range(i+1, n): if arr[j] < arr[min_index]: min_index = j; swap(arr[i], arr[min_index])` is correct, but the narration should match this exact flow.'}
+2026-11-21 17:03:31,511 INFO Review fix: {'line_range': '54-57', 'issue': "The Insertion Sort code description says 'While j is greater than or equal to 0 and the element at j is greater than key'. The standard loop condition for Insertion Sort is typically `j >= 0 and arr[j] > key`. The script says 'While j is greater than or equal to 0 and the element at j is greater than key'. This is correct, but the subsequent step 'We decrement j' is slightly ambiguous. Usually, the shift happens inside the loop, and j is decremented at the end of the loop iteration or as part of the while condition check. The description 'We decrement j' might make a student think j is decremented *after* the shift, which is correct, but the phrasing could be tighter.", 'fix': 'Clarify that the element at index `j` is shifted to `j+1`, and then `j` is decremented to check the next element. The standard Pythonic while loop structure `while j >= 0 and arr[j] > key: arr[j+1] = arr[j]; j -= 1` should be the model.'}
+2026-11-21 17:03:31,511 INFO Review fix: {'line_range': '78-81', 'issue': "The script states: 'Both algorithms have a time complexity of O(n squared) in the worst and average cases.' Then it says for Insertion Sort, 'If the data is already sorted, Insertion Sort is very fast, with a best-case time complexity of O(n).' This is technically correct, but the placement implies that the 'worst and average cases' sentence applies to both uniformly. For Selection Sort, the best case is also O(n²). The script does not explicitly state that Selection Sort's best case is O(n²), which is a common point of confusion.", 'fix': "Add a specific note: 'For Selection Sort, the best-case time complexity is also O(n²) because it always scans the unsorted portion regardless of initial order. For Insertion Sort, the best case is O(n) if the array is already sorted.'"}
+2026-11-21 17:03:31,511 INFO Review fix: {'line_range': '86-88', 'issue': "The script says: 'A common misconception students have is that Insertion Sort is always faster than Selection Sort because it only shifts elements when necessary. However, in the worst case, both have the same Big O notation.' This is correct, but the phrasing 'always faster' is a strong claim. A better framing is that Insertion Sort is generally faster in practice for small or nearly sorted datasets, but Selection Sort makes fewer writes (swaps).", 'fix': "Refine the text to: 'A common misconception is that Insertion Sort is significantly faster. While it can be faster for nearly sorted data, both have O(n²) worst-case complexity. The key difference is that Selection Sort performs exactly n-1 swaps, making it better when write operations are expensive.'"}
+2026-11-21 17:03:31,511 INFO Review fix: {'line_range': '95-96', 'issue': "The script says: 'Selection Sort is useful when memory write operations are very expensive, as it makes the minimum number of swaps, exactly n minus 1 swaps for an array of n elements.' This is correct. However, the script earlier stated both are 'in-place'. While technically true, Insertion Sort also shifts elements. The distinction of 'minimum number of swaps' is the key differentiator here, and the script handles it well, but it's worth ensuring the student doesn't think Insertion Sort doesn't modify memory (it shifts, which is a write operation).", 'fix': "Add a small clarifying sentence: 'Note: While both are in-place, Insertion Sort shifts elements (which are also write operations), but Selection Sort minimizes the number of element swaps to exactly n-1.'"}
+2026-11-21 17:03:31,511 INFO Review fix: {'line_range': '30-35', 'issue': "In the Selection Sort example, the script says: 'In the first pass, we assume 64 is the minimum. We compare it with 25. 25 is smaller, so min_index becomes 1. We compare 25 with 12. 12 is smaller, so min_index becomes 2. We compare 12 with 22. 12 stays. We compare 12 with 11. 11 is smaller, so min_index becomes 4.' The logic is correct. However, the narration says 'We compare 25 with 12' immediately after updating min_index to 1. A student might think we are comparing the *original* 64 with 12, but we are comparing the element at min_index (which is now 25) with 12. The narration should make it clear that we are always comparing against the current 'candidate' minimum.", 'fix': "Adjust the narration to: 'We compare the element at min_index (currently 25) with 12.' This clarifies that min_index tracks the position of the smallest found so far."}
+2026-11-21 17:05:17,058 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-21 17:05:17,436 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-21 17:05:17,436 INFO Title polished: Selection and Insertion Sort Explained | Data Structures & Algorithms Course #19 -> How Selection and Insertion Sort REALLY Work (The Librarian Problem)
+2026-11-21 17:05:17,436 INFO YouTube title: How Selection and Insertion Sort REALLY Work (The Librarian Problem)
+2026-11-21 17:05:18,274 INFO Created notebook 9f674d88-d183-41aa-9c12-d1a35d78b668
+2026-11-21 17:05:20,449 INFO Script added as source
+2026-11-21 17:05:22,143 INFO Started cinematic video generation (task 05cc734d-2f39-444b-84e6-281503b53956)
+2026-11-21 17:05:22,144 INFO Waiting for cinematic video (can take 30+ minutes)
+2026-11-21 17:30:35,686 INFO Downloaded cinematic video to output/video_raw.mp4
+2026-11-21 17:30:37,483 INFO Started NotebookLM Short (task 195f97e1-e4fa-4c6f-bddb-3c31f7248849)
+2026-11-21 17:40:35,563 INFO Downloaded NotebookLM Short to output/short_raw.mp4
+2026-11-21 17:40:38,715 INFO Video selected on https://notebooklmremover.com/en, waiting for processing
+2026-11-21 17:40:40,407 INFO Chose site mode 'Quality Priority (Original FPS, Slow)'
+2026-11-21 17:40:41,412 INFO Clicking '🚀 Start Removing Watermark'
+2026-11-21 17:40:59,894 INFO Watermark removal: 0%
+2026-11-21 17:41:04,901 INFO Watermark removal: 2%
+2026-11-21 17:41:09,906 INFO Watermark removal: 4%
+2026-11-21 17:41:14,912 INFO Watermark removal: 6%
+2026-11-21 17:41:19,918 INFO Watermark removal: 7%
+2026-11-21 17:41:24,925 INFO Watermark removal: 9%
+2026-11-21 17:41:29,931 INFO Watermark removal: 11%
+2026-11-21 17:41:34,938 INFO Watermark removal: 12%
+2026-11-21 17:41:39,945 INFO Watermark removal: 14%
+2026-11-21 17:41:44,951 INFO Watermark removal: 15%
+2026-11-21 17:41:50,352 INFO Watermark removal: 17%
+2026-11-21 17:41:55,358 INFO Watermark removal: 19%
+2026-11-21 17:42:00,364 INFO Watermark removal: 21%
+2026-11-21 17:42:05,371 INFO Watermark removal: 22%
+2026-11-21 17:42:10,376 INFO Watermark removal: 24%
+2026-11-21 17:42:15,381 INFO Watermark removal: 26%
+2026-11-21 17:42:20,387 INFO Watermark removal: 27%
+2026-11-21 17:42:25,394 INFO Watermark removal: 29%
+2026-11-21 17:42:30,399 INFO Watermark removal: 31%
+2026-11-21 17:42:35,405 INFO Watermark removal: 33%
+2026-11-21 17:42:40,412 INFO Watermark removal: 34%
+2026-11-21 17:42:45,417 INFO Watermark removal: 36%
+2026-11-21 17:42:50,828 INFO Watermark removal: 38%
+2026-11-21 17:42:55,833 INFO Watermark removal: 40%
+2026-11-21 17:43:00,839 INFO Watermark removal: 41%
+2026-11-21 17:43:05,845 INFO Watermark removal: 43%
+2026-11-21 17:43:10,850 INFO Watermark removal: 45%
+2026-11-21 17:43:15,857 INFO Watermark removal: 47%
+2026-11-21 17:43:20,863 INFO Watermark removal: 48%
+2026-11-21 17:43:25,869 INFO Watermark removal: 50%
+2026-11-21 17:43:30,876 INFO Watermark removal: 52%
+2026-11-21 17:43:35,883 INFO Watermark removal: 54%
+2026-11-21 17:43:40,888 INFO Watermark removal: 56%
+2026-11-21 17:43:45,893 INFO Watermark removal: 57%
+2026-11-21 17:43:51,311 INFO Watermark removal: 59%
+2026-11-21 17:43:56,317 INFO Watermark removal: 61%
+2026-11-21 17:44:01,324 INFO Watermark removal: 63%
+2026-11-21 17:44:06,330 INFO Watermark removal: 65%
+2026-11-21 17:44:11,336 INFO Watermark removal: 66%
+2026-11-21 17:44:16,343 INFO Watermark removal: 68%
+2026-11-21 17:44:21,350 INFO Watermark removal: 70%
+2026-11-21 17:44:26,357 INFO Watermark removal: 72%
+2026-11-21 17:44:31,363 INFO Watermark removal: 73%
+2026-11-21 17:44:36,369 INFO Watermark removal: 76%
+2026-11-21 17:44:41,375 INFO Watermark removal: 78%
+2026-11-21 17:44:46,381 INFO Watermark removal: 80%
+2026-11-21 17:44:51,790 INFO Watermark removal: 82%
+2026-11-21 17:44:56,796 INFO Watermark removal: 84%
+2026-11-21 17:45:01,803 INFO Watermark removal: 86%
+2026-11-21 17:45:06,809 INFO Watermark removal: 88%
+2026-11-21 17:45:11,815 INFO Watermark removal: 90%
+2026-11-21 17:45:16,821 INFO Watermark removal: 92%
+2026-11-21 17:45:21,826 INFO Watermark removal: 94%
+2026-11-21 17:45:26,833 INFO Watermark removal: 95%
+2026-11-21 17:45:31,838 INFO Watermark removal: 97%
+2026-11-21 17:45:36,844 INFO Watermark removal: 99%
+2026-11-21 17:45:41,848 INFO Clicking 'Download Clean Video'
+2026-11-21 17:45:50,350 INFO Downloaded clean video after 308s
+2026-11-21 17:45:50,532 INFO Website result: {'width': 1280, 'height': 720, 'fps': 30.0, 'duration': 361.720454, 'has_audio': True} (original {'width': 1280, 'height': 720, 'fps': 30.0, 'duration': 364.762268, 'has_audio': True})
+2026-11-21 17:45:50,586 INFO Adding channel name watermark: GetYr_CSE
+2026-11-21 17:48:24,644 INFO Added intro + video_final_main + outro
+2026-11-21 17:48:24,644 INFO Edited video saved to output/video_final.mp4
+2026-11-21 17:48:24,874 INFO Thumbnail candidate at 0.5s: detail 46.9
+2026-11-21 17:48:25,106 INFO Thumbnail candidate at 1.0s: detail 46.9
+2026-11-21 17:48:25,348 INFO Thumbnail candidate at 1.5s: detail 46.9
+2026-11-21 17:48:25,597 INFO Thumbnail candidate at 2.0s: detail 46.9
+2026-11-21 17:48:25,861 INFO Thumbnail candidate at 2.5s: detail 46.9
+2026-11-21 17:48:26,131 INFO Thumbnail candidate at 3.0s: detail 46.9
+2026-11-21 17:48:26,410 INFO Thumbnail candidate at 3.5s: detail 46.9
+2026-11-21 17:48:26,698 INFO Thumbnail candidate at 4.0s: detail 46.9
+2026-11-21 17:48:26,956 INFO Thumbnail candidate at 5.0s: detail 45.9
+2026-11-21 17:48:27,012 INFO Thumbnail taken from the video at 2.0s -> output/thumbnail.jpg
+2026-11-21 17:48:28,538 INFO Upload 27%
+2026-11-21 17:48:28,827 INFO Upload 54%
+2026-11-21 17:48:29,133 INFO Upload 81%
+2026-11-21 17:48:29,658 INFO Uploaded: https://youtu.be/oiefY40Fxi8 (public)
+2026-11-21 17:48:32,034 INFO Thumbnail set
+2026-11-21 17:48:32,716 INFO Added to playlist: Data Structures & Algorithms Course - Beginner to Advanced
+2026-11-21 17:48:35,599 INFO Video selected on https://notebooklmremover.com/en, waiting for processing
+2026-11-21 17:48:37,279 INFO Chose site mode 'Quality Priority (Original FPS, Slow)'
+2026-11-21 17:48:38,284 INFO Clicking '🚀 Start Removing Watermark'
+2026-11-21 17:48:46,650 INFO Watermark removal: 5%
+2026-11-21 17:48:51,656 INFO Watermark removal: 11%
+2026-11-21 17:48:56,662 INFO Watermark removal: 19%
+2026-11-21 17:49:01,667 INFO Watermark removal: 25%
+2026-11-21 17:49:06,673 INFO Watermark removal: 32%
+2026-11-21 17:49:11,678 INFO Watermark removal: 38%
+2026-11-21 17:49:16,684 INFO Watermark removal: 45%
+2026-11-21 17:49:21,690 INFO Watermark removal: 51%
+2026-11-21 17:49:26,697 INFO Watermark removal: 58%
+2026-11-21 17:49:31,702 INFO Watermark removal: 65%
+2026-11-21 17:49:36,708 INFO Watermark removal: 71%
+2026-11-21 17:49:41,714 INFO Watermark removal: 78%
+2026-11-21 17:49:47,022 INFO Watermark removal: 85%
+2026-11-21 17:49:52,028 INFO Watermark removal: 91%
+2026-11-21 17:49:57,033 INFO Clicking 'Download Clean Video'
+2026-11-21 17:50:05,105 INFO Downloaded clean video after 86s
+2026-11-21 17:50:05,291 INFO Website result: {'width': 720, 'height': 1280, 'fps': 30.0, 'duration': 78.645986, 'has_audio': True} (original {'width': 720, 'height': 1280, 'fps': 30.0, 'duration': 81.6878, 'has_audio': True})
+2026-11-21 17:50:26,920 INFO Using NotebookLM's Short (watermark removed)
+2026-11-21 17:50:28,316 INFO Uploaded: https://youtu.be/LLuHtZBOJMg (public)
+2026-11-21 17:50:28,317 INFO Short uploaded: https://youtu.be/LLuHtZBOJMg
+2026-11-21 17:51:47,482 WARNING Instagram direct upload failed: Instagram upload failed (400): {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}} - trying the public-link method
+2026-11-21 17:52:51,589 INFO Instagram Reel posted via link (id 17928120669439060)
+2026-11-21 17:52:52,992 INFO Done: How Selection and Insertion Sort REALLY Work (The Librarian Problem)
+2026-11-21 17:52:54,268 INFO Deleted old NotebookLM notebook 9f674d88-d183-41aa-9c12-d1a35d78b668

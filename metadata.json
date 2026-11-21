@@ -1,0 +1,29 @@
+{
+  "title": "How Selection and Insertion Sort REALLY Work (The Librarian Problem)",
+  "cover_text": "SORTING ALGORITHMS",
+  "short_hook": "Master Selection and Insertion Sort today!",
+  "description": "Learn fundamental sorting techniques to organize data efficiently. Master the mechanics of Selection and Insertion Sort in this lesson.\n\nIn this lesson:\n- How Selection Sort finds and swaps the minimum element\n- The insertion logic of Insertion Sort\n- Time complexity analysis O(n²)\n- Best vs Worst case scenarios\n- Real-world usage and stability\n\nThis is lesson 19 of our complete Data Structures & Algorithms course - watch the full playlist from the beginning.\n\nGot questions? Drop them in the comments below.\n\nAbout GetYr_CSE: complete computer science courses from beginner to advanced - Python, Java, Git, DBMS, OS, networks, ML and Gen AI - explained in depth with real examples. New lessons every day.\nSubscribe and turn on notifications so you never miss a video.\n\n#DataStructuresAlgorithms #programming #computerscience #DataStructures #algorithms #SelectionSort #InsertionSort #PythonProgramming #SortingAlgorithms #BigONotation #TimeComplexity #CodingInterview #educational #ComputerProgramming #DataOrganization",
+  "hashtags": [
+    "#DataStructuresAlgorithms",
+    "#programming",
+    "#computerscience"
+  ],
+  "tags": [
+    "data structures",
+    "algorithms",
+    "selection sort",
+    "insertion sort",
+    "python programming",
+    "computer science",
+    "sorting algorithms",
+    "big o notation",
+    "time complexity",
+    "coding interview",
+    "educational",
+    "computer programming",
+    "data organization",
+    "algorithm analysis",
+    "software development"
+  ],
+  "playlist": "Data Structures & Algorithms Course - Beginner to Advanced"
+}
