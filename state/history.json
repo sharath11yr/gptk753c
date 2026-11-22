@@ -532,5 +532,11 @@
     "topic": "Data Structures & Algorithms: Lesson 23: Binary Search Tree - Insertion and Search",
     "title": "How Binary Search Trees Actually Work: Insertion and Search Step-by-Step",
     "youtube_id": "Ngee5iWiKd0"
+  },
+  {
+    "date": "2026-11-23",
+    "topic": "Data Structures & Algorithms: Lesson 24: Heaps - Min Heap and Max Heap Operations",
+    "title": "Min Heap vs Max Heap: The Hidden Data Structure Powering Your OS",
+    "youtube_id": "ZFqcdwQhj8U"
   }
 ]
