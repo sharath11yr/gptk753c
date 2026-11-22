@@ -526,5 +526,11 @@
     "topic": "Data Structures & Algorithms: Lesson 22: Trees - Binary Tree Structure and Properties",
     "title": "Why Binary Search Trees Are Faster Than Lists (And How They Work)",
     "youtube_id": "ljS5J41hjxY"
+  },
+  {
+    "date": "2026-11-22",
+    "topic": "Data Structures & Algorithms: Lesson 23: Binary Search Tree - Insertion and Search",
+    "title": "How Binary Search Trees Actually Work: Insertion and Search Step-by-Step",
+    "youtube_id": "Ngee5iWiKd0"
   }
 ]
