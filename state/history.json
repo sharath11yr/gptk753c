@@ -514,5 +514,11 @@
     "topic": "Data Structures & Algorithms: Lesson 20: Merge Sort - Divide and Conquer",
     "title": "Merge Sort: Why It's The Fastest Sorting Algorithm",
     "youtube_id": "uR4mAHbE_4U"
+  },
+  {
+    "date": "2026-11-22",
+    "topic": "Data Structures & Algorithms: Lesson 21: Quick Sort - Pivot and Partitioning",
+    "title": "How Quick Sort Picks a Pivot: The Hidden Logic Behind Fast Sorting",
+    "youtube_id": "y0GEv5hlD14"
   }
 ]
