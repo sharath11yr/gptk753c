@@ -520,5 +520,11 @@
     "topic": "Data Structures & Algorithms: Lesson 21: Quick Sort - Pivot and Partitioning",
     "title": "How Quick Sort Picks a Pivot: The Hidden Logic Behind Fast Sorting",
     "youtube_id": "y0GEv5hlD14"
+  },
+  {
+    "date": "2026-11-22",
+    "topic": "Data Structures & Algorithms: Lesson 22: Trees - Binary Tree Structure and Properties",
+    "title": "Why Binary Search Trees Are Faster Than Lists (And How They Work)",
+    "youtube_id": "ljS5J41hjxY"
   }
 ]
