@@ -550,5 +550,11 @@
     "topic": "Data Structures & Algorithms: Linked Lists - Detecting and Removing Loops (Floyd's Cycle Detection)",
     "title": "Detecting Loops in Linked Lists: The Algorithm That Saves Systems",
     "youtube_id": "12K_7dzszII"
+  },
+  {
+    "date": "2026-11-23",
+    "topic": "Data Structures & Algorithms: Linked Lists - Merging Two Sorted Lists and Intersection",
+    "title": "Merge Two Sorted Lists & Find Intersection: Uber-Style Problem Solving",
+    "youtube_id": "Gd2SaVWrnas"
   }
 ]
