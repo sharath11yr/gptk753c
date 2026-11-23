@@ -538,5 +538,11 @@
     "topic": "Data Structures & Algorithms: Lesson 24: Heaps - Min Heap and Max Heap Operations",
     "title": "Min Heap vs Max Heap: The Hidden Data Structure Powering Your OS",
     "youtube_id": "ZFqcdwQhj8U"
+  },
+  {
+    "date": "2026-11-23",
+    "topic": "Data Structures & Algorithms: Lesson 25: Graphs - Representation: Adjacency Matrix and List",
+    "title": "Why Graphs? The Matrix vs. The List | Data Structures & Algorithms",
+    "youtube_id": "i-bZI4LM7qI"
   }
 ]
