@@ -568,5 +568,11 @@
     "topic": "Data Structures & Algorithms: Queues - Priority Queue and Real-world Scheduling Scenarios",
     "title": "Binary Search Algorithm Explained: The Phone Book Trick & O(log n) Mystery",
     "youtube_id": "Hh2nBlgsKfc"
+  },
+  {
+    "date": "2026-11-24",
+    "topic": "Data Structures & Algorithms: Hashing - Load Factor, Rehashing Triggers, and Performance Tuning",
+    "title": "How Hash Tables REALLY Work: The Load Factor Secret",
+    "youtube_id": "uSNl63pUkbE"
   }
 ]
