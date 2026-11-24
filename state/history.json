@@ -580,5 +580,11 @@
     "topic": "Data Structures & Algorithms: Recursion - Tree Traversals (Preorder, Inorder, Postorder) and Tail Recursion",
     "title": "Why We Recurse: The Hidden Logic Behind Tree Traversals",
     "youtube_id": "ay6eyMuJ7SM"
+  },
+  {
+    "date": "2026-11-25",
+    "topic": "Data Structures & Algorithms: Binary Search - Binary Search on Answer (Parametric Search) and Variants",
+    "title": "Inside the Stack: How Functions Call & Buffer Overflows Really Work",
+    "youtube_id": "6P9GbNgxV8g"
   }
 ]
