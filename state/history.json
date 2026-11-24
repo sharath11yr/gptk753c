@@ -562,5 +562,11 @@
     "topic": "Data Structures & Algorithms: Stacks - Expression Evaluation (Infix to Postfix) and Function Call Stack",
     "title": "Infix to Postfix: How Stacks Power Function Calls",
     "youtube_id": "WcFXLY_GJjw"
+  },
+  {
+    "date": "2026-11-24",
+    "topic": "Data Structures & Algorithms: Queues - Priority Queue and Real-world Scheduling Scenarios",
+    "title": "Binary Search Algorithm Explained: The Phone Book Trick & O(log n) Mystery",
+    "youtube_id": "Hh2nBlgsKfc"
   }
 ]
