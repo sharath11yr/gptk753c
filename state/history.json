@@ -556,5 +556,11 @@
     "topic": "Data Structures & Algorithms: Linked Lists - Merging Two Sorted Lists and Intersection",
     "title": "Merge Two Sorted Lists & Find Intersection: Uber-Style Problem Solving",
     "youtube_id": "Gd2SaVWrnas"
+  },
+  {
+    "date": "2026-11-24",
+    "topic": "Data Structures & Algorithms: Stacks - Expression Evaluation (Infix to Postfix) and Function Call Stack",
+    "title": "Infix to Postfix: How Stacks Power Function Calls",
+    "youtube_id": "WcFXLY_GJjw"
   }
 ]
