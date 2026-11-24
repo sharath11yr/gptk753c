@@ -574,5 +574,11 @@
     "topic": "Data Structures & Algorithms: Hashing - Load Factor, Rehashing Triggers, and Performance Tuning",
     "title": "How Hash Tables REALLY Work: The Load Factor Secret",
     "youtube_id": "uSNl63pUkbE"
+  },
+  {
+    "date": "2026-11-24",
+    "topic": "Data Structures & Algorithms: Recursion - Tree Traversals (Preorder, Inorder, Postorder) and Tail Recursion",
+    "title": "Why We Recurse: The Hidden Logic Behind Tree Traversals",
+    "youtube_id": "ay6eyMuJ7SM"
   }
 ]
