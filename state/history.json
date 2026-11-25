@@ -604,5 +604,11 @@
     "topic": "Data Structures & Algorithms: Merge Sort - Bottom-Up Iterative Implementation",
     "title": "Merge Sort Bottom-Up: How It Works Without Recursion",
     "youtube_id": "M4_bMMoyinQ"
+  },
+  {
+    "date": "2026-11-26",
+    "topic": "Data Structures & Algorithms: Quick Sort - Randomized Pivot and 3-Way Partitioning for Duplicates",
+    "title": "Why Quick Sort Fails on Sorted Data + How Random Pivot Fixes It",
+    "youtube_id": "O63ubb4Al0I"
   }
 ]
