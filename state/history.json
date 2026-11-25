@@ -598,5 +598,11 @@
     "topic": "Data Structures & Algorithms: Selection and Insertion Sort - Comparative Analysis and Use Cases",
     "title": "Selection vs Insertion Sort: Which One Actually Wins? | Data Structures #34",
     "youtube_id": "eeOBZ3WHqj4"
+  },
+  {
+    "date": "2026-11-25",
+    "topic": "Data Structures & Algorithms: Merge Sort - Bottom-Up Iterative Implementation",
+    "title": "Merge Sort Bottom-Up: How It Works Without Recursion",
+    "youtube_id": "M4_bMMoyinQ"
   }
 ]
