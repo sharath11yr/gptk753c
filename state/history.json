@@ -592,5 +592,11 @@
     "topic": "Data Structures & Algorithms: Bubble Sort - Optimized Version with Flag and Time Complexity Analysis",
     "title": "The Math Behind Bubble Sort: Why O(n²) Actually Matters",
     "youtube_id": "orxSMJ86ODA"
+  },
+  {
+    "date": "2026-11-25",
+    "topic": "Data Structures & Algorithms: Selection and Insertion Sort - Comparative Analysis and Use Cases",
+    "title": "Selection vs Insertion Sort: Which One Actually Wins? | Data Structures #34",
+    "youtube_id": "eeOBZ3WHqj4"
   }
 ]
