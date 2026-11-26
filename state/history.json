@@ -616,5 +616,11 @@
     "topic": "Data Structures & Algorithms: Trees - Tree Traversal Algorithms (Level-order, Spiral)",
     "title": "Level-Order & Spiral Tree Traversal: The Social Media Feed Problem",
     "youtube_id": "6jYxpNKvoJI"
+  },
+  {
+    "date": "2026-11-26",
+    "topic": "Data Structures & Algorithms: Binary Search Tree - Deletion Operation and Rebalancing Concepts",
+    "title": "How BST Deletion Breaks Your Tree: The Rebalancing Problem",
+    "youtube_id": "rGhAiTyfBis"
   }
 ]
