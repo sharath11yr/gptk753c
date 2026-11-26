@@ -628,5 +628,11 @@
     "topic": "Data Structures & Algorithms: Heaps - Heap Sort Algorithm and Complexity Analysis",
     "title": "How Heap Sort Actually Works (Priority Queue Secrets)",
     "youtube_id": "mfUxNfadUKs"
+  },
+  {
+    "date": "2026-11-27",
+    "topic": "Data Structures & Algorithms: Graphs - BFS (Breadth-First Search) Algorithm and Steps",
+    "title": "BFS Algorithm Explained: How It Actually Finds The Shortest Path",
+    "youtube_id": "u8OuSdqYrzk"
   }
 ]
