@@ -610,5 +610,11 @@
     "topic": "Data Structures & Algorithms: Quick Sort - Randomized Pivot and 3-Way Partitioning for Duplicates",
     "title": "Why Quick Sort Fails on Sorted Data + How Random Pivot Fixes It",
     "youtube_id": "O63ubb4Al0I"
+  },
+  {
+    "date": "2026-11-26",
+    "topic": "Data Structures & Algorithms: Trees - Tree Traversal Algorithms (Level-order, Spiral)",
+    "title": "Level-Order & Spiral Tree Traversal: The Social Media Feed Problem",
+    "youtube_id": "6jYxpNKvoJI"
   }
 ]
