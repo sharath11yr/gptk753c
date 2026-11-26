@@ -622,5 +622,11 @@
     "topic": "Data Structures & Algorithms: Binary Search Tree - Deletion Operation and Rebalancing Concepts",
     "title": "How BST Deletion Breaks Your Tree: The Rebalancing Problem",
     "youtube_id": "rGhAiTyfBis"
+  },
+  {
+    "date": "2026-11-26",
+    "topic": "Data Structures & Algorithms: Heaps - Heap Sort Algorithm and Complexity Analysis",
+    "title": "How Heap Sort Actually Works (Priority Queue Secrets)",
+    "youtube_id": "mfUxNfadUKs"
   }
 ]
