@@ -634,5 +634,11 @@
     "topic": "Data Structures & Algorithms: Graphs - BFS (Breadth-First Search) Algorithm and Steps",
     "title": "BFS Algorithm Explained: How It Actually Finds The Shortest Path",
     "youtube_id": "u8OuSdqYrzk"
+  },
+  {
+    "date": "2026-11-27",
+    "topic": "Data Structures & Algorithms: Graphs - DFS (Depth-First Search) Algorithm and Backtracking",
+    "title": "The Maze Strategy: Why DFS Goes Deeper Than BFS",
+    "youtube_id": "luTxl_7Xrqg"
   }
 ]
