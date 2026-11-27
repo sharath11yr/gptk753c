@@ -640,5 +640,11 @@
     "topic": "Data Structures & Algorithms: Graphs - DFS (Depth-First Search) Algorithm and Backtracking",
     "title": "The Maze Strategy: Why DFS Goes Deeper Than BFS",
     "youtube_id": "luTxl_7Xrqg"
+  },
+  {
+    "date": "2026-11-27",
+    "topic": "Data Structures & Algorithms: Graphs - Shortest Path: Dijkstra's Algorithm Intuition and Code",
+    "title": "How Google Maps Finds Your Route: The Dijkstra Algorithm",
+    "youtube_id": "xzOQSnd62Qo"
   }
 ]
