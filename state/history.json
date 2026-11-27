@@ -646,5 +646,11 @@
     "topic": "Data Structures & Algorithms: Graphs - Shortest Path: Dijkstra's Algorithm Intuition and Code",
     "title": "How Google Maps Finds Your Route: The Dijkstra Algorithm",
     "youtube_id": "xzOQSnd62Qo"
+  },
+  {
+    "date": "2026-11-27",
+    "topic": "Data Structures & Algorithms: Graphs - Minimum Spanning Tree: Prim's Algorithm",
+    "title": "Prim's Algorithm: How ISPs Connect Cities With Minimum Cable",
+    "youtube_id": "QnQxq9OiGX0"
   }
 ]
