@@ -652,5 +652,11 @@
     "topic": "Data Structures & Algorithms: Graphs - Minimum Spanning Tree: Prim's Algorithm",
     "title": "Prim's Algorithm: How ISPs Connect Cities With Minimum Cable",
     "youtube_id": "QnQxq9OiGX0"
+  },
+  {
+    "date": "2026-11-28",
+    "topic": "Data Structures & Algorithms: Graphs - Minimum Spanning Tree: Kruskal's Algorithm with Union-Find",
+    "title": "Kruskal's Algorithm: Why This Beats Prim's for Networks",
+    "youtube_id": "jNLb2ClVzwY"
   }
 ]
