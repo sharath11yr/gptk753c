@@ -658,5 +658,11 @@
     "topic": "Data Structures & Algorithms: Graphs - Minimum Spanning Tree: Kruskal's Algorithm with Union-Find",
     "title": "Kruskal's Algorithm: Why This Beats Prim's for Networks",
     "youtube_id": "jNLb2ClVzwY"
+  },
+  {
+    "date": "2026-11-28",
+    "topic": "Data Structures & Algorithms: Tries - Introduction and Insert Operation",
+    "title": "Tries: How Search Engines Store Millions of Words Fast",
+    "youtube_id": "JN6s65LnQY8"
   }
 ]
