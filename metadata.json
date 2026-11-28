@@ -1,0 +1,29 @@
+{
+  "title": "Search and Delete in a Trie: The Hidden Logic Behind Predictive Text",
+  "cover_text": "TRIES SEARCH DELETE",
+  "short_hook": "Master Trie search and recursive deletion logic.",
+  "description": "Learn how to efficiently search for words and safely remove them from a Trie structure. Master the recursive cleanup process to preserve shared paths for other words like 'carpet' when deleting 'car'. In this lesson: Understanding the isEnd flag, Searching for a word by traversing the path, The recursive Delete algorithm and node removal rules, Handling shared nodes and prefixes, Real-world applications in autocomplete and IP routing. This is lesson 46 of our complete Data Structures & Algorithms course - watch the full playlist from the beginning.\n\nAbout GetYr_CSE: complete computer science courses from beginner to advanced - Python, Java, Git, DBMS, OS, networks, ML and Gen AI - explained in depth with real examples. New lessons every day.\nSubscribe and turn on notifications so you never miss a video.\n\n#DataStructuresAlgorithms #programming #computerscience #DataStructures #Algorithms #Trie #SearchOperation #DeleteOperation #TechnicalInterview #TreeDataStructure #StringAlgorithms #DSA #Educational #CodingTutorial #PythonImplementation",
+  "hashtags": [
+    "#DataStructuresAlgorithms",
+    "#programming",
+    "#computerscience"
+  ],
+  "tags": [
+    "Data Structures",
+    "Algorithms",
+    "Trie",
+    "Search Operation",
+    "Delete Operation",
+    "Computer Science",
+    "Programming",
+    "Technical Interview",
+    "Tree Data Structure",
+    "String Algorithms",
+    "DSA",
+    "Educational",
+    "Coding Tutorial",
+    "Python Implementation",
+    "Algorithm Complexity"
+  ],
+  "playlist": "Data Structures & Algorithms Course - Beginner to Advanced"
+}

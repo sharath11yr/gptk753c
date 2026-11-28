@@ -1,0 +1,119 @@
+2026-11-28 11:03:59,914 INFO Already scheduled: ['2026-11-09T12:00:00+05:30', '2026-11-09T15:00:00+05:30', '2026-11-09T18:00:00+05:30', '2026-11-10T12:00:00+05:30', '2026-11-10T15:00:00+05:30', '2026-11-10T18:00:00+05:30', '2026-11-11T12:00:00+05:30', '2026-11-11T18:00:00+05:30', '2026-11-12T12:00:00+05:30', '2026-11-12T18:00:00+05:30', '2026-11-13T12:00:00+05:30', '2026-11-13T18:00:00+05:30', '2026-11-14T12:00:00+05:30', '2026-11-14T18:00:00+05:30', '2026-11-15T12:00:00+05:30', '2026-11-15T18:00:00+05:30', '2026-11-16T12:00:00+05:30']
+2026-11-28 11:03:59,918 INFO Next lesson: Data Structures & Algorithms #46 - Tries - Search and Delete Operation
+2026-11-28 11:04:16,623 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-28 11:04:32,981 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-28 11:04:32,981 INFO Review fix: {'line_range': '31-33', 'issue': "The explanation for searching 'cd' contains a logical error in the reasoning. The script states: 'Why? Because 'cd' was never inserted; only 'cat' and 'car' had the 'c-d' path for other reasons'. This is incorrect. In a standard Trie, 'cat' and 'car' share the 'c' node, but their second characters are 'a' and 'a' respectively. There is no 'c-d' path for 'cat' or 'car'. The script incorrectly implies that 'cd' shares nodes with existing words in a way that isn't explained or is factually wrong regarding the structure.", 'fix': "Correct the example. If searching for 'cd' returns false, it should simply be because the path 'c' -> 'd' was never created or marked as a word. The reasoning should focus on the distinction between a path existing and a word being marked, rather than incorrectly attributing the path to other words."}
+2026-11-28 11:04:32,981 INFO Review fix: {'line_range': '58-61', 'issue': "The deletion algorithm description is slightly ambiguous regarding the recursive check for 'isEnd'. The text says: 'If a node is the end of another word, we must stop and simply set the isEnd flag to false.' Then it says: 'If a node has multiple children, it means other words depend on this path, so we stop and set the flag to false.' These two rules are presented as separate stopping conditions, but the logic should clarify that if a node IS the end of another word, we stop regardless of children. The current phrasing might lead a student to think that a node with children but also being an end-of-word for another word requires a different check than a node that is NOT an end but has children.", 'fix': 'Refine the deletion logic to be precise: The recursion stops and sets `isEnd` to false if the current node is the end of another word (`isEnd == true`). If the current node is NOT the end of another word, then we check for children. If it has children, we stop and set `isEnd` to false. We only remove the node if it has no children AND is not an end.'}
+2026-11-28 11:04:32,981 INFO Review fix: {'line_range': '73-78', 'issue': "The worked example of deleting 'car' contains a minor logical gap in the recursive step description. The script says: 'We look at the r node. It has a child p, so it has children. It is also the end of car. According to our rule, we cannot delete this node. We simply set the isEnd flag of the r node to false.' This is correct, but the transition to the 'what if we delete carpet' example could confuse students about whether the 'r' node is permanently marked false or if it gets deleted later. The script needs to make it explicit that setting `isEnd` to false is the only action taken for shared nodes, and node removal only happens for truly orphaned leaves.", 'fix': "Clarify that when deleting 'car', since 'r' has children (for 'carpet'), we only set the `isEnd` flag to false. We do not delete the 'r' node. The example should explicitly state that the path remains intact for 'carpet'."}
+2026-11-28 11:04:32,981 INFO Review fix: {'line_range': '82-88', 'issue': "The deletion of 'carpet' example describes removing nodes 'e', 't', 'p', and 'a'. However, it fails to address the 'r' node correctly. The script says: 'Eventually, the r node might also be removed if it has no other children and is not an end.' This is misleading. After deleting 'carpet', the 'r' node still has the `isEnd` flag set to true (because 'car' was inserted and not deleted in this scenario) or, if 'car' was also deleted previously, it depends on the order. The script implies the 'r' node becomes a candidate for removal, but doesn't clarify the state of the `isEnd` flag on 'r'. If 'car' exists, 'r' cannot be removed.", 'fix': "Clarify the state of the 'r' node. If 'car' is still in the Trie, the 'r' node cannot be removed because it is the end of 'car'. The example should assume 'car' remains, or explicitly state that we are considering the scenario where 'car' was already deleted or is not present."}
+2026-11-28 11:04:32,981 INFO Review fix: {'line_range': '93-95', 'issue': "The 'real-world applications' section lists IP routing and autocomplete. While correct, the explanation of autocomplete is slightly vague. It says 'when you type, the system searches for prefixes.' A student might not understand *how* the Trie helps here beyond the basic search. The script could link the deletion logic back to why we might want to remove stale suggestions.", 'fix': 'Briefly explain that autocomplete often relies on the Trie to store popular prefixes, and deletion might be used to remove rarely used or outdated suggestions to keep the list relevant.'}
+2026-11-28 11:04:34,933 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-28 11:04:35,321 INFO Using NVIDIA model: nvidia/nemotron-3.5-lightning-30b-a3b
+2026-11-28 11:04:35,322 INFO Title polished: Tries - Search and Delete Operation | Data Structures & Algorithms Course #46 -> Search and Delete in a Trie: The Hidden Logic Behind Predictive Text
+2026-11-28 11:04:35,322 INFO YouTube title: Search and Delete in a Trie: The Hidden Logic Behind Predictive Text
+2026-11-28 11:04:36,362 INFO Created notebook 5853bb60-ba5f-4b67-8adc-c5eed4824ea3
+2026-11-28 11:04:38,661 INFO Script added as source
+2026-11-28 11:04:40,559 INFO Started cinematic video generation (task 22ca13c4-57e7-46d5-b8fe-ddbf1e49c6bf)
+2026-11-28 11:04:40,560 INFO Waiting for cinematic video (can take 30+ minutes)
+2026-11-28 11:27:26,187 INFO Downloaded cinematic video to output/video_raw.mp4
+2026-11-28 11:27:28,173 INFO Started NotebookLM Short (task f9d2a5f6-14fe-462f-8338-b6e5f66d7f36)
+2026-11-28 11:36:06,835 INFO Downloaded NotebookLM Short to output/short_raw.mp4
+2026-11-28 11:36:09,895 INFO Video selected on https://notebooklmremover.com/en, waiting for processing
+2026-11-28 11:36:11,573 INFO Chose site mode 'Quality Priority (Original FPS, Slow)'
+2026-11-28 11:36:12,578 INFO Clicking '🚀 Start Removing Watermark'
+2026-11-28 11:36:30,930 INFO Watermark removal: 1%
+2026-11-28 11:36:35,937 INFO Watermark removal: 4%
+2026-11-28 11:36:40,944 INFO Watermark removal: 6%
+2026-11-28 11:36:45,950 INFO Watermark removal: 8%
+2026-11-28 11:36:50,957 INFO Watermark removal: 10%
+2026-11-28 11:36:55,964 INFO Watermark removal: 11%
+2026-11-28 11:37:00,970 INFO Watermark removal: 13%
+2026-11-28 11:37:05,977 INFO Watermark removal: 15%
+2026-11-28 11:37:10,985 INFO Watermark removal: 16%
+2026-11-28 11:37:15,991 INFO Watermark removal: 19%
+2026-11-28 11:37:21,259 INFO Watermark removal: 21%
+2026-11-28 11:37:26,265 INFO Watermark removal: 22%
+2026-11-28 11:37:31,272 INFO Watermark removal: 24%
+2026-11-28 11:37:36,279 INFO Watermark removal: 26%
+2026-11-28 11:37:41,286 INFO Watermark removal: 28%
+2026-11-28 11:37:46,293 INFO Watermark removal: 30%
+2026-11-28 11:37:51,299 INFO Watermark removal: 31%
+2026-11-28 11:37:56,305 INFO Watermark removal: 33%
+2026-11-28 11:38:01,313 INFO Watermark removal: 35%
+2026-11-28 11:38:06,319 INFO Watermark removal: 37%
+2026-11-28 11:38:11,326 INFO Watermark removal: 38%
+2026-11-28 11:38:16,332 INFO Watermark removal: 41%
+2026-11-28 11:38:21,610 INFO Watermark removal: 43%
+2026-11-28 11:38:26,618 INFO Watermark removal: 44%
+2026-11-28 11:38:31,624 INFO Watermark removal: 46%
+2026-11-28 11:38:36,632 INFO Watermark removal: 48%
+2026-11-28 11:38:41,639 INFO Watermark removal: 49%
+2026-11-28 11:38:46,645 INFO Watermark removal: 51%
+2026-11-28 11:38:51,652 INFO Watermark removal: 54%
+2026-11-28 11:38:56,658 INFO Watermark removal: 55%
+2026-11-28 11:39:01,665 INFO Watermark removal: 57%
+2026-11-28 11:39:06,673 INFO Watermark removal: 59%
+2026-11-28 11:39:11,680 INFO Watermark removal: 61%
+2026-11-28 11:39:16,687 INFO Watermark removal: 63%
+2026-11-28 11:39:21,966 INFO Watermark removal: 65%
+2026-11-28 11:39:26,973 INFO Watermark removal: 67%
+2026-11-28 11:39:31,979 INFO Watermark removal: 69%
+2026-11-28 11:39:36,984 INFO Watermark removal: 71%
+2026-11-28 11:39:41,992 INFO Watermark removal: 72%
+2026-11-28 11:39:46,999 INFO Watermark removal: 74%
+2026-11-28 11:39:52,006 INFO Watermark removal: 76%
+2026-11-28 11:39:57,012 INFO Watermark removal: 78%
+2026-11-28 11:40:02,020 INFO Watermark removal: 80%
+2026-11-28 11:40:07,028 INFO Watermark removal: 82%
+2026-11-28 11:40:12,035 INFO Watermark removal: 83%
+2026-11-28 11:40:17,042 INFO Watermark removal: 85%
+2026-11-28 11:40:22,343 INFO Watermark removal: 88%
+2026-11-28 11:40:27,350 INFO Watermark removal: 90%
+2026-11-28 11:40:32,356 INFO Watermark removal: 92%
+2026-11-28 11:40:37,362 INFO Watermark removal: 95%
+2026-11-28 11:40:42,369 INFO Watermark removal: 96%
+2026-11-28 11:40:47,376 INFO Watermark removal: 98%
+2026-11-28 11:40:52,382 INFO Clicking 'Download Clean Video'
+2026-11-28 11:41:00,862 INFO Downloaded clean video after 288s
+2026-11-28 11:41:01,028 INFO Website result: {'width': 1280, 'height': 720, 'fps': 30.0, 'duration': 359.050159, 'has_audio': True} (original {'width': 1280, 'height': 720, 'fps': 30.0, 'duration': 362.091973, 'has_audio': True})
+2026-11-28 11:41:01,076 INFO Adding channel name watermark: GetYr_CSE
+2026-11-28 11:43:29,511 INFO Added intro + video_final_main + outro
+2026-11-28 11:43:29,511 INFO Edited video saved to output/video_final.mp4
+2026-11-28 11:43:29,663 INFO Thumbnail candidate at 0.5s: detail 34.8
+2026-11-28 11:43:29,816 INFO Thumbnail candidate at 1.0s: detail 34.8
+2026-11-28 11:43:29,978 INFO Thumbnail candidate at 1.5s: detail 34.8
+2026-11-28 11:43:30,145 INFO Thumbnail candidate at 2.0s: detail 34.8
+2026-11-28 11:43:30,325 INFO Thumbnail candidate at 2.5s: detail 34.8
+2026-11-28 11:43:30,512 INFO Thumbnail candidate at 3.0s: detail 34.8
+2026-11-28 11:43:30,703 INFO Thumbnail candidate at 3.5s: detail 34.8
+2026-11-28 11:43:30,906 INFO Thumbnail candidate at 4.0s: detail 34.8
+2026-11-28 11:43:31,121 INFO Thumbnail candidate at 5.0s: detail 34.9
+2026-11-28 11:43:31,166 INFO Thumbnail taken from the video at 5.0s -> output/thumbnail.jpg
+2026-11-28 11:43:33,272 INFO Upload 28%
+2026-11-28 11:43:33,531 INFO Upload 56%
+2026-11-28 11:43:33,767 INFO Upload 84%
+2026-11-28 11:43:34,227 INFO Uploaded: https://youtu.be/6rJGl65EJdg (public)
+2026-11-28 11:43:36,683 INFO Thumbnail set
+2026-11-28 11:43:37,732 INFO Added to playlist: Data Structures & Algorithms Course - Beginner to Advanced
+2026-11-28 11:43:40,556 INFO Video selected on https://notebooklmremover.com/en, waiting for processing
+2026-11-28 11:43:42,221 INFO Chose site mode 'Quality Priority (Original FPS, Slow)'
+2026-11-28 11:43:43,226 INFO Clicking '🚀 Start Removing Watermark'
+2026-11-28 11:43:51,687 INFO Watermark removal: 9%
+2026-11-28 11:43:56,694 INFO Watermark removal: 19%
+2026-11-28 11:44:01,701 INFO Watermark removal: 30%
+2026-11-28 11:44:06,709 INFO Watermark removal: 38%
+2026-11-28 11:44:11,716 INFO Watermark removal: 48%
+2026-11-28 11:44:16,722 INFO Watermark removal: 58%
+2026-11-28 11:44:21,729 INFO Watermark removal: 68%
+2026-11-28 11:44:26,736 INFO Watermark removal: 78%
+2026-11-28 11:44:31,743 INFO Watermark removal: 87%
+2026-11-28 11:44:36,748 INFO Clicking 'Download Clean Video'
+2026-11-28 11:44:44,992 INFO Downloaded clean video after 61s
+2026-11-28 11:44:45,148 INFO Website result: {'width': 720, 'height': 1280, 'fps': 30.0, 'duration': 53.545215, 'has_audio': True} (original {'width': 720, 'height': 1280, 'fps': 30.0, 'duration': 56.587029, 'has_audio': True})
+2026-11-28 11:44:59,555 INFO Using NotebookLM's Short (watermark removed)
+2026-11-28 11:45:00,838 INFO Uploaded: https://youtu.be/MeP43vOfXrQ (public)
+2026-11-28 11:45:00,839 INFO Short uploaded: https://youtu.be/MeP43vOfXrQ
+2026-11-28 11:46:06,399 WARNING Instagram direct upload failed: Instagram upload failed (400): {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}} - trying the public-link method
+2026-11-28 11:47:02,180 INFO Instagram Reel posted via link (id 18132086707890501)
+2026-11-28 11:47:03,595 INFO Done: Search and Delete in a Trie: The Hidden Logic Behind Predictive Text
+2026-11-28 11:47:04,814 INFO Deleted old NotebookLM notebook 5853bb60-ba5f-4b67-8adc-c5eed4824ea3
