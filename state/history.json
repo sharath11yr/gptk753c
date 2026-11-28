@@ -664,5 +664,11 @@
     "topic": "Data Structures & Algorithms: Tries - Introduction and Insert Operation",
     "title": "Tries: How Search Engines Store Millions of Words Fast",
     "youtube_id": "JN6s65LnQY8"
+  },
+  {
+    "date": "2026-11-28",
+    "topic": "Data Structures & Algorithms: Tries - Search and Delete Operation",
+    "title": "Search and Delete in a Trie: The Hidden Logic Behind Predictive Text",
+    "youtube_id": "6rJGl65EJdg"
   }
 ]
